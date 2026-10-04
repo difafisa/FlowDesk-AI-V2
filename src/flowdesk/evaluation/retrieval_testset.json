@@ -1,0 +1,313 @@
+[
+  {
+    "id": "ret-001",
+    "question": "Does the Pro plan support webhooks for ticket.created?",
+    "expected_sources": [
+      "api/webhooks.md",
+      "structured/pricing-plans.csv"
+    ],
+    "lang": "en",
+    "type": "multi-source",
+    "category": "cross-category (api + structured)"
+  },
+  {
+    "id": "ret-002",
+    "question": "Apakah paket Pro mendukung webhook dan berapa batas request API per menitnya?",
+    "expected_sources": [
+      "structured/pricing-plans.csv",
+      "api/rate-limits.md"
+    ],
+    "lang": "id",
+    "type": "multi-source",
+    "category": "cross-category (structured + api)"
+  },
+  {
+    "id": "ret-003",
+    "question": "Why am I not getting webhook deliveries to my configured server endpoint?",
+    "expected_sources": [
+      "troubleshooting/webhook-failures.md"
+    ],
+    "lang": "en",
+    "type": "paraphrased",
+    "category": "troubleshooting"
+  },
+  {
+    "id": "ret-004",
+    "question": "Bagaimana cara melakukan autentikasi pada FlowDesk API dan format header apa yang wajib disertakan?",
+    "expected_sources": [
+      "api/authentication.md"
+    ],
+    "lang": "id",
+    "type": "direct",
+    "category": "api"
+  },
+  {
+    "id": "ret-005",
+    "question": "What are the four supported ticket statuses and four ticket priorities in FlowDesk Ticket API?",
+    "expected_sources": [
+      "api/tickets.md"
+    ],
+    "lang": "en",
+    "type": "direct",
+    "category": "api"
+  },
+  {
+    "id": "ret-006",
+    "question": "Kenapa akun FlowDesk saya tiba-tiba terkunci dan apa yang harus saya lakukan untuk membukanya kembali?",
+    "expected_sources": [
+      "troubleshooting/login-issues.md"
+    ],
+    "lang": "id",
+    "type": "paraphrased",
+    "category": "troubleshooting"
+  },
+  {
+    "id": "ret-007",
+    "question": "Berapa lama batas waktu pengajuan pengembalian dana (refund) untuk pembelian awal paket langganan?",
+    "expected_sources": [
+      "policy/refund-policy.md"
+    ],
+    "lang": "id",
+    "type": "direct",
+    "category": "policy"
+  },
+  {
+    "id": "ret-008",
+    "question": "What is FlowDesk's standard data retention policy for customer support records after an account is terminated?",
+    "expected_sources": [
+      "policy/data-retention.md"
+    ],
+    "lang": "en",
+    "type": "direct",
+    "category": "policy"
+  },
+  {
+    "id": "ret-009",
+    "question": "Email reset password akun FlowDesk saya kok belum masuk ke inbox juga ya, harus cek ke mana?",
+    "expected_sources": [
+      "troubleshooting/email-not-received.md"
+    ],
+    "lang": "id",
+    "type": "paraphrased",
+    "category": "troubleshooting"
+  },
+  {
+    "id": "ret-010",
+    "question": "Which subscription tier supports Single Sign-On (SSO) and does FlowDesk provide role-based access control across all tiers?",
+    "expected_sources": [
+      "policy/security-policy.md",
+      "structured/feature-comparison.csv"
+    ],
+    "lang": "en",
+    "type": "multi-source",
+    "category": "cross-category (policy + structured)"
+  },
+  {
+    "id": "ret-011",
+    "question": "Berapa kuota maksimal agen dan tiket bulanan di paket Free, serta apakah paket Free mendapatkan akses REST API?",
+    "expected_sources": [
+      "structured/pricing-plans.csv",
+      "structured/feature-comparison.csv"
+    ],
+    "lang": "id",
+    "type": "multi-source",
+    "category": "cross-category (structured + structured)"
+  },
+  {
+    "id": "ret-012",
+    "question": "What fields make up a FlowDesk customer profile and what procedure should authorized users follow to create a customer?",
+    "expected_sources": [
+      "api/customers.md"
+    ],
+    "lang": "en",
+    "type": "direct",
+    "category": "api"
+  },
+  {
+    "id": "ret-013",
+    "question": "Koneksi API saya kena error 429 Too Many Requests pas jam sibuk, ini kenapa dan gimana strategi retry yang direkomendasikan?",
+    "expected_sources": [
+      "troubleshooting/api-errors.md"
+    ],
+    "lang": "id",
+    "type": "paraphrased",
+    "category": "troubleshooting"
+  },
+  {
+    "id": "ret-014",
+    "question": "What HTTP status code and error code are returned when an API request lacks an authentication token, and how should the client fix it?",
+    "expected_sources": [
+      "structured/error-codes.csv",
+      "api/authentication.md"
+    ],
+    "lang": "en",
+    "type": "multi-source",
+    "category": "cross-category (structured + api)"
+  },
+  {
+    "id": "ret-015",
+    "question": "Bagaimana alur dan langkah-langkah awal untuk membuat workspace baru di FlowDesk menurut panduan onboarding?",
+    "expected_sources": [
+      "product/getting-started.pdf"
+    ],
+    "lang": "id",
+    "type": "direct",
+    "category": "product"
+  },
+  {
+    "id": "ret-016",
+    "question": "How can I automatically assign newly created tickets to specific agents using workflow automation?",
+    "expected_sources": [
+      "product/automation.pdf"
+    ],
+    "lang": "en",
+    "type": "direct",
+    "category": "product"
+  },
+  {
+    "id": "ret-017",
+    "question": "Apakah tagihan perpanjangan langganan bulanan (subscription renewal) bisa di-refund jika saya lupa membatalkan?",
+    "expected_sources": [
+      "policy/refund-policy.md"
+    ],
+    "lang": "id",
+    "type": "paraphrased",
+    "category": "policy"
+  },
+  {
+    "id": "ret-018",
+    "question": "Bagaimana cara kerja aksi send_webhook pada automasi FlowDesk dan paket langganan minimal apa yang dibutuhkan?",
+    "expected_sources": [
+      "product/automation.pdf",
+      "structured/feature-comparison.csv"
+    ],
+    "lang": "id",
+    "type": "multi-source",
+    "category": "cross-category (product + structured)"
+  },
+  {
+    "id": "ret-019",
+    "question": "What are the key performance metrics tracked in FlowDesk Analytics and Reporting?",
+    "expected_sources": [
+      "product/analytics_and_reporting.pdf"
+    ],
+    "lang": "en",
+    "type": "direct",
+    "category": "product"
+  },
+  {
+    "id": "ret-020",
+    "question": "When making an API request to GET /v1/tickets/{ticket_id}, I receive a 404 Not Found with error code resource_not_found—what causes this and how can I resolve it?",
+    "expected_sources": [
+      "troubleshooting/api-errors.md"
+    ],
+    "lang": "en",
+    "type": "paraphrased",
+    "category": "troubleshooting"
+  },
+  {
+    "id": "ret-021",
+    "question": "Can support teams use custom ticket statuses like 'in_progress' or 'escalated' in FlowDesk, and how should tickets be assigned to agents?",
+    "expected_sources": [
+      "product/ticket-management.pdf"
+    ],
+    "lang": "en",
+    "type": "paraphrased",
+    "category": "product"
+  },
+  {
+    "id": "ret-022",
+    "question": "When a webhook delivery fails with a 502 Bad Gateway response, how many times does FlowDesk retry before giving up and which error code represents this failure?",
+    "expected_sources": [
+      "api/webhooks.md",
+      "structured/error-codes.csv",
+      "troubleshooting/webhook-failures.md"
+    ],
+    "lang": "en",
+    "type": "multi-source",
+    "category": "cross-category (api + structured + troubleshooting)"
+  },
+  {
+    "id": "ret-023",
+    "question": "Apa rekomendasi terbaik dalam penamaan tag profil pelanggan dan penggunaan custom field agar data tidak duplikat?",
+    "expected_sources": [
+      "product/customer-management.pdf"
+    ],
+    "lang": "id",
+    "type": "direct",
+    "category": "product"
+  },
+  {
+    "id": "ret-024",
+    "question": "Browser saya mental terus balik ke halaman login setiap habis masukin email dan password, solusinya apa?",
+    "expected_sources": [
+      "troubleshooting/login-issues.md"
+    ],
+    "lang": "id",
+    "type": "paraphrased",
+    "category": "troubleshooting"
+  },
+  {
+    "id": "ret-025",
+    "question": "What HTTP method and endpoint should be called to list all configured webhooks, and what plan is required?",
+    "expected_sources": [
+      "structured/api-endpoints.json",
+      "api/webhooks.md"
+    ],
+    "lang": "en",
+    "type": "multi-source",
+    "category": "cross-category (structured + api)"
+  },
+  {
+    "id": "ret-026",
+    "question": "Saya baru upgrade ke Pro 5 hari lalu dan ingin membatalkan langganan, apakah saya berhak mendapat refund dan bagaimana akun saya berubah setelah dibatalkan?",
+    "expected_sources": [
+      "policy/refund-policy.md",
+      "policy/subscription-policy.md"
+    ],
+    "lang": "id",
+    "type": "multi-source",
+    "category": "cross-category (policy + policy)"
+  },
+  {
+    "id": "ret-027",
+    "question": "Why does my automation rule appear to execute repeatedly on ticket updates and how can I prevent it?",
+    "expected_sources": [
+      "product/automation.pdf"
+    ],
+    "lang": "en",
+    "type": "paraphrased",
+    "category": "product"
+  },
+  {
+    "id": "ret-028",
+    "question": "Apa saja empat status tiket yang valid di FlowDesk dan kapan status 'pending' sebaiknya digunakan?",
+    "expected_sources": [
+      "product/ticket-management.pdf"
+    ],
+    "lang": "id",
+    "type": "direct",
+    "category": "product"
+  },
+  {
+    "id": "ret-029",
+    "question": "We are getting throttled during high traffic on the Pro tier—what is the exact requests per minute limit and how do we monitor the reset window?",
+    "expected_sources": [
+      "api/rate-limits.md"
+    ],
+    "lang": "en",
+    "type": "paraphrased",
+    "category": "api"
+  },
+  {
+    "id": "ret-030",
+    "question": "Apa perbedaan fitur pelaporan antara Standard Reporting dan Advanced Analytics, serta paket mana saja yang memiliki Advanced Analytics?",
+    "expected_sources": [
+      "product/analytics_and_reporting.pdf",
+      "structured/feature-comparison.csv"
+    ],
+    "lang": "id",
+    "type": "multi-source",
+    "category": "cross-category (product + structured)"
+  }
+]

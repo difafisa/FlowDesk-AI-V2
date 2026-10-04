@@ -1,0 +1,465 @@
+[
+    {
+        "endpoint": "/auth/me",
+        "method": "GET",
+        "operation": "Get authenticated account",
+        "description": "Returns the account associated with the authenticated Bearer token.",
+        "required_plan": "Pro",
+        "authentication_required": true,
+        "parameters": {},
+        "example_response": {
+            "account_id": "acct_12345",
+            "plan": "Pro"
+        }
+    },
+    {
+        "endpoint": "/tickets",
+        "method": "POST",
+        "operation": "Create ticket",
+        "description": "Creates a new support ticket.",
+        "required_plan": "Pro",
+        "authentication_required": true,
+        "parameters": {
+            "customer_id": {
+                "type": "string",
+                "required": true
+            },
+            "subject": {
+                "type": "string",
+                "required": true
+            },
+            "description": {
+                "type": "string",
+                "required": true
+            },
+            "priority": {
+                "type": "string",
+                "required": false,
+                "allowed_values": ["low", "medium", "high", "urgent"]
+            }
+        },
+        "example_response": {
+            "ticket_id": "tkt_12345",
+            "customer_id": "cus_12345",
+            "subject": "Unable to access account",
+            "description": "Customer cannot access their account.",
+            "status": "open",
+            "priority": "medium",
+            "assigned_agent": null,
+            "created_at": "2026-09-09T08:00:00Z",
+            "updated_at": "2026-09-09T08:00:00Z"
+        }
+    },
+    {
+        "endpoint": "/tickets/{ticket_id}",
+        "method": "GET",
+        "operation": "Get ticket",
+        "description": "Retrieves a ticket by ticket ID.",
+        "required_plan": "Pro",
+        "authentication_required": true,
+        "parameters": {
+            "ticket_id": {
+                "type": "string",
+                "required": true,
+                "location": "path"
+            }
+        },
+        "example_response": {
+            "ticket_id": "tkt_12345",
+            "customer_id": "cus_12345",
+            "subject": "Unable to access account",
+            "description": "Customer cannot access their account.",
+            "status": "open",
+            "priority": "medium",
+            "assigned_agent": "agent_123",
+            "created_at": "2026-09-09T08:00:00Z",
+            "updated_at": "2026-09-09T08:10:00Z"
+        }
+    },
+    {
+        "endpoint": "/tickets/{ticket_id}",
+        "method": "PATCH",
+        "operation": "Update ticket",
+        "description": "Updates one or more fields on an existing ticket.",
+        "required_plan": "Pro",
+        "authentication_required": true,
+        "parameters": {
+            "ticket_id": {
+                "type": "string",
+                "required": true,
+                "location": "path"
+            },
+            "subject": {
+                "type": "string",
+                "required": false
+            },
+            "description": {
+                "type": "string",
+                "required": false
+            },
+            "status": {
+                "type": "string",
+                "required": false,
+                "allowed_values": ["open", "pending", "resolved", "closed"]
+            },
+            "priority": {
+                "type": "string",
+                "required": false,
+                "allowed_values": ["low", "medium", "high", "urgent"]
+            },
+            "assigned_agent": {
+                "type": "string",
+                "required": false
+            }
+        },
+        "example_response": {
+            "ticket_id": "tkt_12345",
+            "customer_id": "cus_12345",
+            "subject": "Unable to access account",
+            "description": "Customer cannot access their account.",
+            "status": "resolved",
+            "priority": "high",
+            "assigned_agent": "agent_123",
+            "created_at": "2026-09-09T08:00:00Z",
+            "updated_at": "2026-09-09T08:30:00Z"
+        }
+    },
+    {
+        "endpoint": "/tickets",
+        "method": "GET",
+        "operation": "List tickets",
+        "description": "Returns a paginated list of support tickets.",
+        "required_plan": "Pro",
+        "authentication_required": true,
+        "parameters": {
+            "status": {
+                "type": "string",
+                "required": false,
+                "allowed_values": ["open", "pending", "resolved", "closed"]
+            },
+            "priority": {
+                "type": "string",
+                "required": false,
+                "allowed_values": ["low", "medium", "high", "urgent"]
+            },
+            "customer_id": {
+                "type": "string",
+                "required": false
+            },
+            "page": {
+                "type": "integer",
+                "required": false
+            },
+            "limit": {
+                "type": "integer",
+                "required": false
+            }
+        },
+        "example_response": {
+            "data": [
+                {
+                    "ticket_id": "tkt_12345",
+                    "customer_id": "cus_12345",
+                    "subject": "Unable to access account",
+                    "description": "Customer cannot access their account.",
+                    "status": "open",
+                    "priority": "medium",
+                    "assigned_agent": "agent_123",
+                    "created_at": "2026-09-09T08:00:00Z",
+                    "updated_at": "2026-09-09T08:10:00Z"
+                }
+            ],
+            "page": 1,
+            "limit": 20,
+            "total": 1
+        }
+    },
+    {
+        "endpoint": "/tickets/{ticket_id}",
+        "method": "DELETE",
+        "operation": "Delete ticket",
+        "description": "Deletes an existing ticket by ticket ID.",
+        "required_plan": "Pro",
+        "authentication_required": true,
+        "parameters": {
+            "ticket_id": {
+                "type": "string",
+                "required": true,
+                "location": "path"
+            }
+        },
+        "example_response": {
+            "deleted": true,
+            "ticket_id": "tkt_12345"
+        }
+    },
+    {
+        "endpoint": "/customers",
+        "method": "POST",
+        "operation": "Create customer",
+        "description": "Creates a new customer profile.",
+        "required_plan": "Pro",
+        "authentication_required": true,
+        "parameters": {
+            "name": {
+                "type": "string",
+                "required": true
+            },
+            "email": {
+                "type": "string",
+                "required": true
+            },
+            "company": {
+                "type": "string",
+                "required": false
+            },
+            "tags": {
+                "type": "array",
+                "required": false
+            },
+            "custom_fields": {
+                "type": "object",
+                "required": false
+            }
+        },
+        "example_response": {
+            "customer_id": "cus_12345",
+            "name": "Alex Morgan",
+            "email": "[alex@example.com](mailto:alex@example.com)",
+            "company": "Example Corp",
+            "tags": ["priority"],
+            "custom_fields": {}
+        }
+    },
+    {
+        "endpoint": "/customers/{customer_id}",
+        "method": "GET",
+        "operation": "Get customer",
+        "description": "Retrieves a customer profile by customer ID.",
+        "required_plan": "Pro",
+        "authentication_required": true,
+        "parameters": {
+            "customer_id": {
+                "type": "string",
+                "required": true,
+                "location": "path"
+            }
+        },
+        "example_response": {
+            "customer_id": "cus_12345",
+            "name": "Alex Morgan",
+            "email": "[alex@example.com](mailto:alex@example.com)",
+            "company": "Example Corp",
+            "tags": ["priority"],
+            "custom_fields": {}
+        }
+    },
+    {
+        "endpoint": "/customers/{customer_id}",
+        "method": "PATCH",
+        "operation": "Update customer",
+        "description": "Updates an existing customer profile.",
+        "required_plan": "Pro",
+        "authentication_required": true,
+        "parameters": {
+            "customer_id": {
+                "type": "string",
+                "required": true,
+                "location": "path"
+            },
+            "name": {
+                "type": "string",
+                "required": false
+            },
+            "email": {
+                "type": "string",
+                "required": false
+            },
+            "company": {
+                "type": "string",
+                "required": false
+            },
+            "tags": {
+                "type": "array",
+                "required": false
+            },
+            "custom_fields": {
+                "type": "object",
+                "required": false
+            }
+        },
+        "example_response": {
+            "customer_id": "cus_12345",
+            "name": "Alex Morgan",
+            "email": "[alex.morgan@example.com](mailto:alex.morgan@example.com)",
+            "company": "Example Corp",
+            "tags": ["priority", "vip"],
+            "custom_fields": {}
+        }
+    },
+    {
+        "endpoint": "/customers",
+        "method": "GET",
+        "operation": "List customers",
+        "description": "Returns a paginated list of customer profiles.",
+        "required_plan": "Pro",
+        "authentication_required": true,
+        "parameters": {
+            "page": {
+                "type": "integer",
+                "required": false
+            },
+            "limit": {
+                "type": "integer",
+                "required": false
+            },
+            "email": {
+                "type": "string",
+                "required": false
+            }
+        },
+        "example_response": {
+            "data": [
+                {
+                    "customer_id": "cus_12345",
+                    "name": "Alex Morgan",
+                    "email": "[alex@example.com](mailto:alex@example.com)",
+                    "company": "Example Corp",
+                    "tags": ["priority"],
+                    "custom_fields": {}
+                }
+            ],
+            "page": 1,
+            "limit": 20,
+            "total": 1
+        }
+    },
+    {
+        "endpoint": "/customers/{customer_id}",
+        "method": "DELETE",
+        "operation": "Delete customer",
+        "description": "Deletes an existing customer profile by customer ID.",
+        "required_plan": "Pro",
+        "authentication_required": true,
+        "parameters": {
+            "customer_id": {
+                "type": "string",
+                "required": true,
+                "location": "path"
+            }
+        },
+        "example_response": {
+            "deleted": true,
+            "customer_id": "cus_12345"
+        }
+    },
+    {
+        "endpoint": "/webhooks",
+        "method": "POST",
+        "operation": "Create webhook",
+        "description": "Creates a webhook configuration for a supported FlowDesk event.",
+        "required_plan": "Pro",
+        "authentication_required": true,
+        "parameters": {
+            "event": {
+                "type": "string",
+                "required": true,
+                "allowed_values": [
+                    "ticket.created",
+                    "ticket.updated",
+                    "ticket.resolved",
+                    "customer.created"
+                ]
+            },
+            "url": {
+                "type": "string",
+                "required": true,
+                "description": "HTTPS endpoint that receives POST requests."
+            }
+        },
+        "example_response": {
+            "webhook_id": "wh_12345",
+            "event": "ticket.created",
+            "url": "[https://example.com/flowdesk/webhook](https://example.com/flowdesk/webhook)",
+            "active": true
+        }
+    },
+    {
+        "endpoint": "/webhooks",
+        "method": "GET",
+        "operation": "List webhooks",
+        "description": "Returns configured webhooks for the account.",
+        "required_plan": "Pro",
+        "authentication_required": true,
+        "parameters": {},
+        "example_response": {
+            "data": [
+                {
+                    "webhook_id": "wh_12345",
+                    "event": "ticket.created",
+                    "url": "[https://example.com/flowdesk/webhook](https://example.com/flowdesk/webhook)",
+                    "active": true
+                }
+            ]
+        }
+    },
+    {
+        "endpoint": "/webhooks/{webhook_id}",
+        "method": "PATCH",
+        "operation": "Update webhook",
+        "description": "Updates an existing webhook configuration.",
+        "required_plan": "Pro",
+        "authentication_required": true,
+        "parameters": {
+            "webhook_id": {
+                "type": "string",
+                "required": true,
+                "location": "path"
+            },
+            "event": {
+                "type": "string",
+                "required": false,
+                "allowed_values": [
+                    "ticket.created",
+                    "ticket.updated",
+                    "ticket.resolved",
+                    "customer.created"
+                ]
+            },
+            "url": {
+                "type": "string",
+                "required": false,
+                "description": "HTTPS endpoint that receives POST requests."
+            },
+            "active": {
+                "type": "boolean",
+                "required": false
+            }
+        },
+        "example_response": {
+            "webhook_id": "wh_12345",
+            "event": "ticket.resolved",
+            "url": "[https://example.com/flowdesk/webhook](https://example.com/flowdesk/webhook)",
+            "active": true
+        }
+    },
+    {
+        "endpoint": "/webhooks/{webhook_id}",
+        "method": "DELETE",
+        "operation": "Delete webhook",
+        "description": "Deletes a webhook configuration.",
+        "required_plan": "Pro",
+        "authentication_required": true,
+        "parameters": {
+            "webhook_id": {
+                "type": "string",
+                "required": true,
+                "location": "path"
+            }
+        },
+        "example_response": {
+            "deleted": true,
+            "webhook_id": "wh_12345"
+        }
+    }
+]

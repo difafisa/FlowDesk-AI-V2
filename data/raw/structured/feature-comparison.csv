@@ -1,0 +1,11 @@
+feature,free,pro,enterprise
+Ticket Management,true,true,true
+Customer Management,true,true,true
+Automation,true,true,true
+Analytics,true,true,true
+Advanced Analytics,false,true,true
+API Access,false,true,true
+Webhooks,false,true,true
+SSO,false,false,true
+SLA,false,false,true
+Audit Logs,true,true,true

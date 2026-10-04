@@ -1,0 +1,4 @@
+plan,max_agents,max_tickets_per_month,api_access,webhooks,advanced_analytics,sso,sla,api_rate_limit
+Free,3,1000,false,false,false,false,false,api unavailable
+Pro,20,10000,true,true,true,false,false,60 requests per minute
+Enterprise,unlimited,unlimited,true,true,true,true,true,300 requests per minute

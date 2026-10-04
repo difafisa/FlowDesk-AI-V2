@@ -1,0 +1,33 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+
+# --- Virtual environment ---
+.venv/
+venv/
+
+# --- Environment & secrets ---
+.env
+.env.*
+*.key
+
+# --- AutoClaw workspace artifacts  ---
+.zwork/
+
+# --- Data yang bisa di-regenerate ---
+data/processed/
+
+# --- Model/cache  ---
+models/
+*.safetensors
+*.bin
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

@@ -1,0 +1,33 @@
+ret-001	en	N	ranks=N/A	recall=0/2
+ret-002	id	Y	ranks=pricing-plans.csv=1,rate-limits.md=3	recall=2/2
+ret-003	en	Y	ranks=webhook-failures.md=1	recall=1/1
+ret-004	id	Y	ranks=authentication.md=1	recall=1/1
+ret-005	en	Y	ranks=tickets.md=2	recall=1/1
+ret-006	id	Y	ranks=login-issues.md=3	recall=1/1
+ret-007	id	Y	ranks=refund-policy.md=1	recall=1/1
+ret-008	en	Y	ranks=data-retention.md=1	recall=1/1
+ret-009	id	Y	ranks=email-not-received.md=5	recall=1/1
+ret-010	en	Y	ranks=security-policy.md=1	recall=1/2
+ret-011	id	Y	ranks=pricing-plans.csv=1	recall=1/2
+ret-012	en	Y	ranks=customers.md=1	recall=1/1
+ret-013	id	Y	ranks=api-errors.md=1	recall=1/1
+ret-014	en	Y	ranks=error-codes.csv=1,authentication.md=4	recall=2/2
+ret-015	id	Y	ranks=getting-started.pdf=1	recall=1/1
+ret-016	en	Y	ranks=automation.pdf=5	recall=1/1
+ret-017	id	Y	ranks=refund-policy.md=2	recall=1/1
+ret-018	id	N	ranks=N/A	recall=0/2
+ret-019	en	Y	ranks=analytics_and_reporting.pdf=1	recall=1/1
+ret-020	en	Y	ranks=api-errors.md=1	recall=1/1
+ret-021	en	Y	ranks=ticket-management.pdf=1	recall=1/1
+ret-022	en	Y	ranks=webhook-failures.md=1,webhooks.md=2,error-codes.csv=5	recall=3/3
+ret-023	id	Y	ranks=customer-management.pdf=2	recall=1/1
+ret-024	id	Y	ranks=login-issues.md=1	recall=1/1
+ret-025	en	Y	ranks=api-endpoints.json=1,webhooks.md=2	recall=2/2
+ret-026	id	Y	ranks=subscription-policy.md=1,refund-policy.md=2	recall=2/2
+ret-027	en	Y	ranks=automation.pdf=2	recall=1/1
+ret-028	id	Y	ranks=ticket-management.pdf=1	recall=1/1
+ret-029	en	Y	ranks=rate-limits.md=1	recall=1/1
+ret-030	id	Y	ranks=analytics_and_reporting.pdf=1,feature-comparison.csv=2	recall=2/2
+K=5
+en: HitRate@5=93%  Recall@5=0.900  (n=15)
+id: HitRate@5=93%  Recall@5=0.900  (n=15)
