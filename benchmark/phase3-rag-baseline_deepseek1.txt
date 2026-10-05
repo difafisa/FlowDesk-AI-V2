@@ -1,0 +1,38 @@
+Phase 3 RAG baseline (RAG+LLM, SEBELUM Jev) — 2026-10-05 11:48
+model LLM: deepseek/deepseek-v4.1-flash | embedding: e5-base | top-K=5 | 30 test cases
+======================================================================
+status     : {'answered': 29, 'abstained': 1}
+answered dgn citation : 17/29 (59% dari answered)
+latensi rata2 (semua) : 5.4s
+latensi rata2 (answered, termasuk LLM): 5.4s
+======================================================================
+ret-001  [answered          ]  44.8s src=5 cited=5  Yes. Webhooks are available on Pro and Enterprise plans [1][2][5], and `ticket.created` is a supported webhook
+ret-002  [answered          ]   3.1s src=5 cited=4  Ya, paket Pro mendukung webhook [1][2].  Batas request API untuk paket Pro adalah **60 requests per minute** [
+ret-003  [answered          ]   3.0s src=5 cited=0  
+ret-004  [answered          ]   5.2s src=5 cited=4  **Autentikasi FlowDesk API menggunakan Bearer Token** [5]. Setiap request yang terautentikasi wajib menyertaka
+ret-005  [answered          ]   4.8s src=5 cited=4  The FlowDesk Ticket API supports four ticket statuses: `open`, `pending`, `resolved`, and `closed` [4]. These 
+ret-006  [abstained         ]   4.6s src=5 cited=0  Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut.
+ret-007  [answered          ]   4.2s src=5 cited=3  Batas waktu pengajuan pengembalian dana (refund) untuk pembelian awal paket langganan adalah **14 hari sejak t
+ret-008  [answered          ]   2.5s src=5 cited=3  FlowDesk’s standard data retention policy for customer support records is **12 months after account terminatio
+ret-009  [answered          ]   3.0s src=5 cited=3  Silakan cek langkah-langkah berikut:  1. **Cek folder spam atau junk-mail** di inbox Anda [2][4][5]. 2. **Past
+ret-010  [answered          ]   9.4s src=5 cited=4  **SSO:** Enterprise only. It is included in the Enterprise plan and is not available on Free or Pro [1][4]. Th
+ret-011  [answered          ]   4.1s src=5 cited=3  Paket Free memiliki kuota maksimal **3 agen** dan **1.000 tiket per bulan** [1][4]. Paket Free **tidak mendapa
+ret-012  [answered          ]   3.3s src=5 cited=4  **Fields in a FlowDesk customer profile**  A customer profile can contain `customer_id`, `name`, `email`, `com
+ret-013  [answered          ]   4.7s src=5 cited=0  **Penyebab:** Error `429 Too Many Requests` umumnya berarti aplikasi melebihi batas permintaan API yang berlak
+ret-014  [answered          ]   3.4s src=5 cited=4  **HTTP status:** `401 Unauthorized` [1][4][5]  **Error code:** `AUTH_MISSING_TOKEN` — the request does not inc
+ret-015  [answered          ]   3.4s src=5 cited=0  
+ret-016  [answered          ]   5.6s src=5 cited=0  
+ret-017  [answered          ]   5.1s src=5 cited=4  Tagihan perpanjangan langganan bulanan **umumnya tidak dapat di-refund** (non-refundable) [1][2][4]. Jendela r
+ret-018  [answered          ]   3.4s src=5 cited=0  
+ret-019  [answered          ]   3.9s src=5 cited=2  FlowDesk tracks five core support metrics in Analytics and Reporting [5][4]:  1. **Ticket volume** — the numbe
+ret-020  [answered          ]   4.8s src=5 cited=0  
+ret-021  [answered          ]   2.0s src=5 cited=0  
+ret-022  [answered          ]   2.0s src=5 cited=5  FlowDesk retries failed webhook deliveries **up to 3 times** before giving up [1][2][3][4]. The error code rep
+ret-023  [answered          ]   9.9s src=5 cited=0  
+ret-024  [answered          ]   3.9s src=5 cited=4  Masalah ini biasanya disebabkan oleh sesi browser yang sudah kedaluwarsa atau data sesi browser yang rusak/tid
+ret-025  [answered          ]   1.6s src=5 cited=1  Use **GET /webhooks** to list all configured webhooks [1]. The required plan is **Pro**, and authentication is
+ret-026  [answered          ]   2.4s src=5 cited=0  
+ret-027  [answered          ]   4.8s src=5 cited=0  
+ret-028  [answered          ]   1.9s src=5 cited=4  Empat status tiket yang valid di FlowDesk adalah **open**, **pending**, **resolved**, dan **closed** [1][2][3]
+ret-029  [answered          ]   2.5s src=5 cited=0  
+ret-030  [answered          ]   4.8s src=5 cited=0  
