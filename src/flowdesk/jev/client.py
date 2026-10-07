@@ -143,3 +143,15 @@ class JevClient:
             }},
         )
         return resp.answers["complete"].noul
+
+    def verify_claims(self, passage: str, questions: dict) -> dict:
+        """T7 — satu request: beberapa Choice atas satu passage.
+        Return {question_id: answer object} (masing-masing punya
+        .choice dan .confidence)."""
+        resp = self.inner.system_one(
+            state={"passage": passage},
+            model=JEV_MODEL,
+            questions=questions,
+        )
+        return resp.answers
+

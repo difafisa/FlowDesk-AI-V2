@@ -1,7 +1,7 @@
 {
-  "variant": "passage-gate",
+  "variant": "llm-judge",
   "meta": {
-    "timestamp": "2026-10-07T19:26:52",
+    "timestamp": "2026-10-07T20:04:56",
     "generator": "deepseek/deepseek-v4.1-flash",
     "jev_model": "jev-latest",
     "top_k": 5
@@ -13,11 +13,11 @@
     "hit_rate_5": 0.9333333333333333,
     "recall_5": 0.9,
     "citation_correctness": 1.0,
-    "citation_completeness": 0.9031904761904762,
-    "retry_rate": 0.3333333333333333,
-    "avg_jev_calls": 7.888888888888889,
-    "p50_latency": 3.472,
-    "p95_latency": 5.64
+    "citation_completeness": 0.7166666666666667,
+    "retry_rate": 0.1111111111111111,
+    "avg_jev_calls": 1.0833333333333333,
+    "p50_latency": 4.235,
+    "p95_latency": 11.758
   },
   "rows": [
     {
@@ -26,13 +26,13 @@
       "expected_decision": "answered",
       "decision": "answered",
       "match": true,
-      "latency_s": 23.285,
-      "jev_calls": 6,
+      "latency_s": 10.487,
+      "jev_calls": 1,
       "retried": false,
       "citations": {
         "correctness": 1.0,
         "completeness": 1.0,
-        "total": 8,
+        "total": 10,
         "invalid": 0
       },
       "hit@5": 0.0,
@@ -45,98 +45,8 @@
       "expected_decision": "answered",
       "decision": "answered",
       "match": true,
-      "latency_s": 3.701,
-      "jev_calls": 6,
-      "retried": false,
-      "citations": {
-        "correctness": 1.0,
-        "completeness": 1.0,
-        "total": 5,
-        "invalid": 0
-      },
-      "hit@5": 1.0,
-      "recall@5": 1.0,
-      "n_sources": 2
-    },
-    {
-      "id": "ret-003",
-      "question": "Why am I not getting webhook deliveries to my configured server endpoint?",
-      "expected_decision": "abstained",
-      "decision": "abstained",
-      "match": true,
-      "latency_s": 2.364,
-      "jev_calls": 12,
-      "retried": true,
-      "citations": null,
-      "hit@5": 1.0,
-      "recall@5": 1.0,
-      "n_sources": 9
-    },
-    {
-      "id": "ret-004",
-      "question": "Bagaimana cara melakukan autentikasi pada FlowDesk API dan format header apa yang wajib disertakan?",
-      "expected_decision": "answered",
-      "decision": "answered",
-      "match": true,
-      "latency_s": 5.217,
-      "jev_calls": 6,
-      "retried": false,
-      "citations": {
-        "correctness": 1.0,
-        "completeness": 0.8,
-        "total": 14,
-        "invalid": 0
-      },
-      "hit@5": 1.0,
-      "recall@5": 1.0,
-      "n_sources": 5
-    },
-    {
-      "id": "ret-005",
-      "question": "What are the four supported ticket statuses and four ticket priorities in FlowDesk Ticket API?",
-      "expected_decision": "answered",
-      "decision": "answered",
-      "match": true,
-      "latency_s": 3.454,
-      "jev_calls": 6,
-      "retried": false,
-      "citations": {
-        "correctness": 1.0,
-        "completeness": 1.0,
-        "total": 1,
-        "invalid": 0
-      },
-      "hit@5": 1.0,
-      "recall@5": 1.0,
-      "n_sources": 1
-    },
-    {
-      "id": "ret-006",
-      "question": "Kenapa akun FlowDesk saya tiba-tiba terkunci dan apa yang harus saya lakukan untuk membukanya kembali?",
-      "expected_decision": "escalated",
-      "decision": "answered",
-      "match": false,
-      "latency_s": 5.025,
-      "jev_calls": 12,
-      "retried": true,
-      "citations": {
-        "correctness": 1.0,
-        "completeness": 1.0,
-        "total": 14,
-        "invalid": 0
-      },
-      "hit@5": 1.0,
-      "recall@5": 1.0,
-      "n_sources": 2
-    },
-    {
-      "id": "ret-007",
-      "question": "Berapa lama batas waktu pengajuan pengembalian dana (refund) untuk pembelian awal paket langganan?",
-      "expected_decision": "answered",
-      "decision": "answered",
-      "match": true,
-      "latency_s": 5.101,
-      "jev_calls": 6,
+      "latency_s": 3.468,
+      "jev_calls": 1,
       "retried": false,
       "citations": {
         "correctness": 1.0,
@@ -149,23 +59,113 @@
       "n_sources": 5
     },
     {
+      "id": "ret-003",
+      "question": "Why am I not getting webhook deliveries to my configured server endpoint?",
+      "expected_decision": "abstained",
+      "decision": "answered",
+      "match": false,
+      "latency_s": 5.478,
+      "jev_calls": 1,
+      "retried": false,
+      "citations": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "total": 11,
+        "invalid": 0
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "n_sources": 5
+    },
+    {
+      "id": "ret-004",
+      "question": "Bagaimana cara melakukan autentikasi pada FlowDesk API dan format header apa yang wajib disertakan?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 5.164,
+      "jev_calls": 1,
+      "retried": false,
+      "citations": {
+        "correctness": 1.0,
+        "completeness": 0.8,
+        "total": 10,
+        "invalid": 0
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "n_sources": 5
+    },
+    {
+      "id": "ret-005",
+      "question": "What are the four supported ticket statuses and four ticket priorities in FlowDesk Ticket API?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 4.049,
+      "jev_calls": 1,
+      "retried": false,
+      "citations": {
+        "correctness": 1.0,
+        "completeness": 0.6,
+        "total": 3,
+        "invalid": 0
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "n_sources": 5
+    },
+    {
+      "id": "ret-006",
+      "question": "Kenapa akun FlowDesk saya tiba-tiba terkunci dan apa yang harus saya lakukan untuk membukanya kembali?",
+      "expected_decision": "escalated",
+      "decision": "escalated",
+      "match": true,
+      "latency_s": 3.025,
+      "jev_calls": 1,
+      "retried": false,
+      "citations": null,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "n_sources": 5
+    },
+    {
+      "id": "ret-007",
+      "question": "Berapa lama batas waktu pengajuan pengembalian dana (refund) untuk pembelian awal paket langganan?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 3.937,
+      "jev_calls": 1,
+      "retried": false,
+      "citations": {
+        "correctness": 1.0,
+        "completeness": 0.8,
+        "total": 6,
+        "invalid": 0
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "n_sources": 5
+    },
+    {
       "id": "ret-008",
       "question": "What is FlowDesk's standard data retention policy for customer support records after an account is terminated?",
       "expected_decision": "answered",
       "decision": "answered",
       "match": true,
-      "latency_s": 3.914,
-      "jev_calls": 6,
+      "latency_s": 3.92,
+      "jev_calls": 1,
       "retried": false,
       "citations": {
         "correctness": 1.0,
-        "completeness": 0.75,
-        "total": 8,
+        "completeness": 1.0,
+        "total": 9,
         "invalid": 0
       },
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "n_sources": 4
+      "n_sources": 5
     },
     {
       "id": "ret-009",
@@ -173,18 +173,18 @@
       "expected_decision": "answered",
       "decision": "answered",
       "match": true,
-      "latency_s": 4.102,
-      "jev_calls": 6,
+      "latency_s": 4.746,
+      "jev_calls": 1,
       "retried": false,
       "citations": {
         "correctness": 1.0,
-        "completeness": 0.75,
-        "total": 12,
+        "completeness": 0.6,
+        "total": 14,
         "invalid": 0
       },
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "n_sources": 4
+      "n_sources": 5
     },
     {
       "id": "ret-010",
@@ -192,18 +192,18 @@
       "expected_decision": "answered",
       "decision": "answered",
       "match": true,
-      "latency_s": 4.046,
-      "jev_calls": 6,
+      "latency_s": 5.349,
+      "jev_calls": 1,
       "retried": false,
       "citations": {
         "correctness": 1.0,
-        "completeness": 0.75,
-        "total": 6,
+        "completeness": 0.6,
+        "total": 5,
         "invalid": 0
       },
       "hit@5": 1.0,
       "recall@5": 0.5,
-      "n_sources": 4
+      "n_sources": 5
     },
     {
       "id": "ret-011",
@@ -211,18 +211,18 @@
       "expected_decision": "answered",
       "decision": "answered",
       "match": true,
-      "latency_s": 4.262,
-      "jev_calls": 6,
+      "latency_s": 5.037,
+      "jev_calls": 1,
       "retried": false,
       "citations": {
         "correctness": 1.0,
-        "completeness": 1.0,
+        "completeness": 0.6,
         "total": 5,
         "invalid": 0
       },
       "hit@5": 1.0,
       "recall@5": 0.5,
-      "n_sources": 2
+      "n_sources": 5
     },
     {
       "id": "ret-012",
@@ -230,18 +230,18 @@
       "expected_decision": "answered",
       "decision": "answered",
       "match": true,
-      "latency_s": 2.226,
-      "jev_calls": 6,
+      "latency_s": 3.56,
+      "jev_calls": 1,
       "retried": false,
       "citations": {
         "correctness": 1.0,
-        "completeness": 1.0,
-        "total": 4,
+        "completeness": 0.6,
+        "total": 5,
         "invalid": 0
       },
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "n_sources": 2
+      "n_sources": 5
     },
     {
       "id": "ret-013",
@@ -249,8 +249,8 @@
       "expected_decision": "answered",
       "decision": "abstained",
       "match": false,
-      "latency_s": 5.64,
-      "jev_calls": 6,
+      "latency_s": 3.949,
+      "jev_calls": 1,
       "retried": false,
       "citations": null,
       "hit@5": 1.0,
@@ -261,45 +261,45 @@
       "id": "ret-014",
       "question": "What HTTP status code and error code are returned when an API request lacks an authentication token, and how should the client fix it?",
       "expected_decision": "answered",
-      "decision": "answered",
-      "match": true,
-      "latency_s": 4.309,
-      "jev_calls": 12,
-      "retried": true,
-      "citations": {
-        "correctness": 1.0,
-        "completeness": 0.25,
-        "total": 2,
-        "invalid": 0
-      },
+      "decision": "abstained",
+      "match": false,
+      "latency_s": 6.753,
+      "jev_calls": 1,
+      "retried": false,
+      "citations": null,
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "n_sources": 4
+      "n_sources": 5
     },
     {
       "id": "ret-015",
       "question": "Bagaimana alur dan langkah-langkah awal untuk membuat workspace baru di FlowDesk menurut panduan onboarding?",
       "expected_decision": "answered",
-      "decision": "abstained",
+      "decision": "escalated",
       "match": false,
-      "latency_s": 1.723,
-      "jev_calls": 12,
-      "retried": true,
+      "latency_s": 2.458,
+      "jev_calls": 1,
+      "retried": false,
       "citations": null,
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "n_sources": 1
+      "n_sources": 5
     },
     {
       "id": "ret-016",
       "question": "How can I automatically assign newly created tickets to specific agents using workflow automation?",
       "expected_decision": "answered",
-      "decision": "abstained",
-      "match": false,
-      "latency_s": 5.468,
-      "jev_calls": 6,
+      "decision": "answered",
+      "match": true,
+      "latency_s": 4.276,
+      "jev_calls": 1,
       "retried": false,
-      "citations": null,
+      "citations": {
+        "correctness": 1.0,
+        "completeness": 0.6,
+        "total": 12,
+        "invalid": 0
+      },
       "hit@5": 1.0,
       "recall@5": 1.0,
       "n_sources": 5
@@ -310,18 +310,18 @@
       "expected_decision": "answered",
       "decision": "answered",
       "match": true,
-      "latency_s": 5.043,
-      "jev_calls": 6,
+      "latency_s": 4.019,
+      "jev_calls": 1,
       "retried": false,
       "citations": {
         "correctness": 1.0,
-        "completeness": 1.0,
+        "completeness": 0.8,
         "total": 11,
         "invalid": 0
       },
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "n_sources": 4
+      "n_sources": 5
     },
     {
       "id": "ret-018",
@@ -329,13 +329,13 @@
       "expected_decision": "abstained",
       "decision": "abstained",
       "match": true,
-      "latency_s": 2.095,
-      "jev_calls": 12,
+      "latency_s": 4.779,
+      "jev_calls": 2,
       "retried": true,
       "citations": null,
       "hit@5": 0.0,
       "recall@5": 0.0,
-      "n_sources": 3
+      "n_sources": 10
     },
     {
       "id": "ret-019",
@@ -343,51 +343,51 @@
       "expected_decision": "answered",
       "decision": "answered",
       "match": true,
-      "latency_s": 4.123,
-      "jev_calls": 6,
+      "latency_s": 4.509,
+      "jev_calls": 1,
       "retried": false,
       "citations": {
         "correctness": 1.0,
-        "completeness": 0.667,
-        "total": 9,
+        "completeness": 0.4,
+        "total": 13,
         "invalid": 0
       },
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "n_sources": 3
+      "n_sources": 5
     },
     {
       "id": "ret-020",
       "question": "When making an API request to GET /v1/tickets/{ticket_id}, I receive a 404 Not Found with error code resource_not_found—what causes this and how can I resolve it?",
       "expected_decision": "answered",
-      "decision": "answered",
-      "match": true,
-      "latency_s": 4.664,
-      "jev_calls": 6,
+      "decision": "abstained",
+      "match": false,
+      "latency_s": 15.497,
+      "jev_calls": 1,
       "retried": false,
-      "citations": {
-        "correctness": 1.0,
-        "completeness": 1.0,
-        "total": 10,
-        "invalid": 0
-      },
+      "citations": null,
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "n_sources": 4
+      "n_sources": 5
     },
     {
       "id": "ret-021",
       "question": "Can support teams use custom ticket statuses like 'in_progress' or 'escalated' in FlowDesk, and how should tickets be assigned to agents?",
       "expected_decision": "answered",
-      "decision": "abstained",
-      "match": false,
-      "latency_s": 2.087,
-      "jev_calls": 12,
-      "retried": true,
-      "citations": null,
+      "decision": "answered",
+      "match": true,
+      "latency_s": 4.235,
+      "jev_calls": 1,
+      "retried": false,
+      "citations": {
+        "correctness": 1.0,
+        "completeness": 0.2,
+        "total": 1,
+        "invalid": 0
+      },
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "n_sources": 2
+      "n_sources": 5
     },
     {
       "id": "ret-022",
@@ -395,18 +395,18 @@
       "expected_decision": "answered",
       "decision": "answered",
       "match": true,
-      "latency_s": 2.285,
-      "jev_calls": 6,
+      "latency_s": 3.864,
+      "jev_calls": 1,
       "retried": false,
       "citations": {
         "correctness": 1.0,
         "completeness": 1.0,
-        "total": 1,
+        "total": 6,
         "invalid": 0
       },
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "n_sources": 1
+      "n_sources": 5
     },
     {
       "id": "ret-023",
@@ -414,13 +414,13 @@
       "expected_decision": "abstained",
       "decision": "abstained",
       "match": true,
-      "latency_s": 2.086,
-      "jev_calls": 12,
+      "latency_s": 10.364,
+      "jev_calls": 2,
       "retried": true,
       "citations": null,
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "n_sources": 2
+      "n_sources": 10
     },
     {
       "id": "ret-024",
@@ -428,13 +428,13 @@
       "expected_decision": "answered",
       "decision": "abstained",
       "match": false,
-      "latency_s": 3.11,
-      "jev_calls": 6,
+      "latency_s": 4.026,
+      "jev_calls": 1,
       "retried": false,
       "citations": null,
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "n_sources": 4
+      "n_sources": 5
     },
     {
       "id": "ret-025",
@@ -442,32 +442,37 @@
       "expected_decision": "answered",
       "decision": "answered",
       "match": true,
-      "latency_s": 1.939,
-      "jev_calls": 6,
+      "latency_s": 2.335,
+      "jev_calls": 1,
       "retried": false,
       "citations": {
         "correctness": 1.0,
-        "completeness": 1.0,
-        "total": 2,
+        "completeness": 0.2,
+        "total": 3,
         "invalid": 0
       },
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "n_sources": 1
+      "n_sources": 5
     },
     {
       "id": "ret-026",
       "question": "Saya baru upgrade ke Pro 5 hari lalu dan ingin membatalkan langganan, apakah saya berhak mendapat refund dan bagaimana akun saya berubah setelah dibatalkan?",
       "expected_decision": "abstained",
-      "decision": "abstained",
-      "match": true,
-      "latency_s": 2.161,
-      "jev_calls": 12,
+      "decision": "answered",
+      "match": false,
+      "latency_s": 11.758,
+      "jev_calls": 2,
       "retried": true,
-      "citations": null,
+      "citations": {
+        "correctness": 1.0,
+        "completeness": 0.6,
+        "total": 11,
+        "invalid": 0
+      },
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "n_sources": 4
+      "n_sources": 10
     },
     {
       "id": "ret-027",
@@ -475,18 +480,18 @@
       "expected_decision": "answered",
       "decision": "answered",
       "match": true,
-      "latency_s": 5.865,
-      "jev_calls": 12,
-      "retried": true,
+      "latency_s": 13.325,
+      "jev_calls": 1,
+      "retried": false,
       "citations": {
         "correctness": 1.0,
-        "completeness": 1.0,
+        "completeness": 0.8,
         "total": 11,
         "invalid": 0
       },
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "n_sources": 3
+      "n_sources": 5
     },
     {
       "id": "ret-028",
@@ -494,29 +499,34 @@
       "expected_decision": "answered",
       "decision": "answered",
       "match": true,
-      "latency_s": 2.886,
-      "jev_calls": 6,
+      "latency_s": 10.632,
+      "jev_calls": 1,
       "retried": false,
       "citations": {
         "correctness": 1.0,
-        "completeness": 1.0,
-        "total": 2,
+        "completeness": 0.4,
+        "total": 3,
         "invalid": 0
       },
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "n_sources": 1
+      "n_sources": 5
     },
     {
       "id": "ret-029",
       "question": "We are getting throttled during high traffic on the Pro tier—what is the exact requests per minute limit and how do we monitor the reset window?",
       "expected_decision": "answered",
-      "decision": "abstained",
-      "match": false,
-      "latency_s": 2.18,
-      "jev_calls": 12,
-      "retried": true,
-      "citations": null,
+      "decision": "answered",
+      "match": true,
+      "latency_s": 2.495,
+      "jev_calls": 1,
+      "retried": false,
+      "citations": {
+        "correctness": 1.0,
+        "completeness": 1.0,
+        "total": 8,
+        "invalid": 0
+      },
       "hit@5": 1.0,
       "recall@5": 1.0,
       "n_sources": 5
@@ -525,15 +535,20 @@
       "id": "ret-030",
       "question": "Apa perbedaan fitur pelaporan antara Standard Reporting dan Advanced Analytics, serta paket mana saja yang memiliki Advanced Analytics?",
       "expected_decision": "answered",
-      "decision": "abstained",
-      "match": false,
-      "latency_s": 2.104,
-      "jev_calls": 12,
-      "retried": true,
-      "citations": null,
+      "decision": "answered",
+      "match": true,
+      "latency_s": 7.864,
+      "jev_calls": 1,
+      "retried": false,
+      "citations": {
+        "correctness": 1.0,
+        "completeness": 0.8,
+        "total": 7,
+        "invalid": 0
+      },
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "n_sources": 2
+      "n_sources": 5
     },
     {
       "id": "G1",
@@ -541,13 +556,13 @@
       "expected_decision": "answered",
       "decision": "answered",
       "match": true,
-      "latency_s": 4.662,
-      "jev_calls": 6,
+      "latency_s": 2.947,
+      "jev_calls": 1,
       "retried": false,
       "citations": {
         "correctness": 1.0,
-        "completeness": 1.0,
-        "total": 10,
+        "completeness": 0.8,
+        "total": 4,
         "invalid": 0
       },
       "hit@5": null,
@@ -560,18 +575,18 @@
       "expected_decision": "answered",
       "decision": "answered",
       "match": true,
-      "latency_s": 3.472,
-      "jev_calls": 6,
+      "latency_s": 3.291,
+      "jev_calls": 1,
       "retried": false,
       "citations": {
         "correctness": 1.0,
         "completeness": 1.0,
-        "total": 2,
+        "total": 11,
         "invalid": 0
       },
       "hit@5": null,
       "recall@5": null,
-      "n_sources": 2
+      "n_sources": 5
     },
     {
       "id": "G3",
@@ -579,13 +594,13 @@
       "expected_decision": "abstained",
       "decision": "abstained",
       "match": true,
-      "latency_s": 2.013,
-      "jev_calls": 12,
+      "latency_s": 5.477,
+      "jev_calls": 2,
       "retried": true,
       "citations": null,
       "hit@5": null,
       "recall@5": null,
-      "n_sources": 3
+      "n_sources": 10
     },
     {
       "id": "G4",
@@ -593,27 +608,27 @@
       "expected_decision": "escalated",
       "decision": "escalated",
       "match": true,
-      "latency_s": 0.99,
-      "jev_calls": 7,
+      "latency_s": 1.68,
+      "jev_calls": 1,
       "retried": false,
       "citations": null,
       "hit@5": null,
       "recall@5": null,
-      "n_sources": 0
+      "n_sources": 5
     },
     {
       "id": "G5",
       "question": "Kenapa aplikasi mobile FlowDesk crash saat membuka attachment?",
       "expected_decision": "abstained",
-      "decision": "abstained",
-      "match": true,
-      "latency_s": 1.015,
-      "jev_calls": 7,
+      "decision": "escalated",
+      "match": false,
+      "latency_s": 1.521,
+      "jev_calls": 1,
       "retried": false,
       "citations": null,
       "hit@5": null,
       "recall@5": null,
-      "n_sources": 0
+      "n_sources": 5
     },
     {
       "id": "G6",

@@ -38,3 +38,6 @@ JEV_GATE_THRESHOLDS = {
     "evidence_min": 0.55,        # relevant & evidence >= ini -> layak include
 }
 SCOPE_NOUL_THRESHOLD = 0.50     # noul "masih soal produk FlowDesk?" >= ini -> in scope
+
+JEV_CITATION_CONF = 0.80      # conf minimum verdict citation untuk ditindak
+

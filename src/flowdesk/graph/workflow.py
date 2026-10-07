@@ -26,6 +26,8 @@ from flowdesk.rag.context_builder import build_context
 from flowdesk.rag.dedupe import dedupe_chunks
 from flowdesk.rag.generator import generate_answer
 from flowdesk.rag.output_validator import validate_output
+from flowdesk.rag.citation_verifier import verify_citations
+
 
 ABSTAIN_REPLY = ("Maaf, saya belum menemukan informasi yang cukup untuk "
                  "menjawab pertanyaan tersebut.")
@@ -131,12 +133,37 @@ def build_graph(llm, jev_client, retriever):
     def generate(state: WorkflowState) -> dict:
         raw = generate_answer(llm, state["question"], state["context"])
         out = validate_output(raw, state["sources"])
-        status = ("abstained" if (out.is_abstain or not out.answer.strip())
-                  else "answered")
+        if out.is_abstain or not out.answer.strip():
+            return {"answer": out.answer or "", "status": "abstained",
+                    "trace": state["trace"] + [
+                {"node": "generate", "status": "abstained",
+                 "invalid_citations": out.invalid_citations}]}
 
-        return {"answer": out.answer, "status": status, "trace": state["trace"] + [
+        content_by_index = {}
+        for s in state["sources"]:
+            ch = next((c for c in state["chunks"]
+                       if c["chunk_id"] == s["chunk_id"]), None)
+            if ch:
+                content_by_index[s["index"]] = ch["content"]
+
+        check = verify_citations(jev_client, out.answer,
+                                 state["sources"], content_by_index)
+        if check.contradicted:
+            # generator membuat klaim yang bertentangan dengan sumbernya ->
+            # jangan tampilkan; abstain dengan alasan tercatat
+            return {"answer": ABSTAIN_REPLY, "status": "abstained",
+                    "trace": state["trace"] + [
+                {"node": "generate", "status": "abstained",
+                 "reason": f"citation contradicted: {check.contradicted}"}]}
+
+        status = "answered"
+        return {"answer": check.verified_answer, "status": status,
+                "trace": state["trace"] + [
             {"node": "generate", "status": status,
-             "invalid_citations": out.invalid_citations}]}
+             "invalid_citations": out.invalid_citations,
+             "citation_dropped": check.dropped_markers,
+             "needs_review": check.needs_review}]}
+
 
     def abstain(state: WorkflowState) -> dict:
         return {"answer": ABSTAIN_REPLY, "status": "abstained",

@@ -84,10 +84,10 @@ def citation_metrics(answer: str, sources: list, invalid_citations):
     return correctness, completeness, len(cited), invalid
 
 
-def run_case(graph, retriever, case: dict) -> dict:
+def run_case(graph, retriever, case: dict, runner) -> dict:
     q = case["question"]
     t0 = time.perf_counter()
-    r = run_workflow(graph, q)
+    r = runner(graph, q)
     latency = time.perf_counter() - t0
 
     trace = r.get("trace", [])
@@ -246,6 +246,7 @@ def main():
         return
 
     variant = args[0] if args else "baseline"
+
     print("load embedding + DB...")
     llm = LLMClient(
         base_url=os.environ.get("LLM_BASE_URL", "https://api.openai.com/v1"),
@@ -253,13 +254,22 @@ def main():
     )
     store = VectorStore("postgresql://flowdesk:flowdesk@localhost:5432/flowdesk")
     retriever = Retriever(store, Embedder())
-    graph = build_graph(llm, JevClient(), retriever)
 
-    cases = GATE_CASES
-    print(f"menjalankan {len(cases)} kasus (ini memanggil generator + Jev asli)...")
+    if variant == "llm-judge":
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from legacy_graph import build_legacy_graph, run_legacy
+        graph = build_legacy_graph(llm, retriever)
+        runner = run_legacy
+    else:
+        graph = build_graph(llm, JevClient(), retriever)
+        runner = run_workflow
+
+    cases = json.loads(TESTSET.read_text(encoding="utf-8")) + GATE_CASES
+
+    print(f"menjalankan {len(cases)} kasus (varian: {variant})...")
     rows = []
     for c in cases:
-        row = run_case(graph, retriever, c)
+        row = run_case(graph, retriever, c, runner)
         mark = "" if row["match"] is None else ("  OK" if row["match"] else "  <-- beda ekspektasi")
         print(f"  {row['id']}: {row['decision']} ({row['latency_s']}s, "
               f"jev={row['jev_calls']}){mark}")
@@ -280,6 +290,7 @@ def main():
     write_markdown(variant, result["meta"], rows, result["aggregate"], out_md)
     print(f"\nraw      -> {out_json}")
     print(f"laporan  -> {out_md}")
+
 
 
 if __name__ == "__main__":
