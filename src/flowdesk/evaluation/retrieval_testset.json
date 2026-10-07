@@ -6,6 +6,7 @@
       "api/webhooks.md",
       "structured/pricing-plans.csv"
     ],
+    "expected_decision": "answered",
     "lang": "en",
     "type": "multi-source",
     "category": "cross-category (api + structured)"
@@ -17,6 +18,7 @@
       "structured/pricing-plans.csv",
       "api/rate-limits.md"
     ],
+    "expected_decision": "answered",
     "lang": "id",
     "type": "multi-source",
     "category": "cross-category (structured + api)"
@@ -27,6 +29,7 @@
     "expected_sources": [
       "troubleshooting/webhook-failures.md"
     ],
+    "expected_decision": "abstained",
     "lang": "en",
     "type": "paraphrased",
     "category": "troubleshooting"
@@ -37,6 +40,7 @@
     "expected_sources": [
       "api/authentication.md"
     ],
+    "expected_decision": "answered",
     "lang": "id",
     "type": "direct",
     "category": "api"
@@ -47,6 +51,7 @@
     "expected_sources": [
       "api/tickets.md"
     ],
+    "expected_decision": "answered",
     "lang": "en",
     "type": "direct",
     "category": "api"
@@ -57,6 +62,7 @@
     "expected_sources": [
       "troubleshooting/login-issues.md"
     ],
+    "expected_decision": "escalated",
     "lang": "id",
     "type": "paraphrased",
     "category": "troubleshooting"
@@ -67,6 +73,7 @@
     "expected_sources": [
       "policy/refund-policy.md"
     ],
+    "expected_decision": "answered",
     "lang": "id",
     "type": "direct",
     "category": "policy"
@@ -77,6 +84,7 @@
     "expected_sources": [
       "policy/data-retention.md"
     ],
+    "expected_decision": "answered",
     "lang": "en",
     "type": "direct",
     "category": "policy"
@@ -87,6 +95,7 @@
     "expected_sources": [
       "troubleshooting/email-not-received.md"
     ],
+    "expected_decision": "answered",
     "lang": "id",
     "type": "paraphrased",
     "category": "troubleshooting"
@@ -98,6 +107,7 @@
       "policy/security-policy.md",
       "structured/feature-comparison.csv"
     ],
+    "expected_decision": "answered",
     "lang": "en",
     "type": "multi-source",
     "category": "cross-category (policy + structured)"
@@ -109,6 +119,7 @@
       "structured/pricing-plans.csv",
       "structured/feature-comparison.csv"
     ],
+    "expected_decision": "answered",
     "lang": "id",
     "type": "multi-source",
     "category": "cross-category (structured + structured)"
@@ -119,6 +130,7 @@
     "expected_sources": [
       "api/customers.md"
     ],
+    "expected_decision": "answered",
     "lang": "en",
     "type": "direct",
     "category": "api"
@@ -129,6 +141,7 @@
     "expected_sources": [
       "troubleshooting/api-errors.md"
     ],
+    "expected_decision": "answered",
     "lang": "id",
     "type": "paraphrased",
     "category": "troubleshooting"
@@ -140,6 +153,7 @@
       "structured/error-codes.csv",
       "api/authentication.md"
     ],
+    "expected_decision": "answered",
     "lang": "en",
     "type": "multi-source",
     "category": "cross-category (structured + api)"
@@ -150,6 +164,7 @@
     "expected_sources": [
       "product/getting-started.pdf"
     ],
+    "expected_decision": "answered",
     "lang": "id",
     "type": "direct",
     "category": "product"
@@ -160,6 +175,7 @@
     "expected_sources": [
       "product/automation.pdf"
     ],
+    "expected_decision": "answered",
     "lang": "en",
     "type": "direct",
     "category": "product"
@@ -170,6 +186,7 @@
     "expected_sources": [
       "policy/refund-policy.md"
     ],
+    "expected_decision": "answered",
     "lang": "id",
     "type": "paraphrased",
     "category": "policy"
@@ -181,6 +198,7 @@
       "product/automation.pdf",
       "structured/feature-comparison.csv"
     ],
+    "expected_decision": "abstained",
     "lang": "id",
     "type": "multi-source",
     "category": "cross-category (product + structured)"
@@ -191,6 +209,7 @@
     "expected_sources": [
       "product/analytics_and_reporting.pdf"
     ],
+    "expected_decision": "answered",
     "lang": "en",
     "type": "direct",
     "category": "product"
@@ -201,6 +220,7 @@
     "expected_sources": [
       "troubleshooting/api-errors.md"
     ],
+    "expected_decision": "answered",
     "lang": "en",
     "type": "paraphrased",
     "category": "troubleshooting"
@@ -211,6 +231,7 @@
     "expected_sources": [
       "product/ticket-management.pdf"
     ],
+    "expected_decision": "answered",
     "lang": "en",
     "type": "paraphrased",
     "category": "product"
@@ -223,6 +244,7 @@
       "structured/error-codes.csv",
       "troubleshooting/webhook-failures.md"
     ],
+    "expected_decision": "answered",
     "lang": "en",
     "type": "multi-source",
     "category": "cross-category (api + structured + troubleshooting)"
@@ -233,6 +255,7 @@
     "expected_sources": [
       "product/customer-management.pdf"
     ],
+    "expected_decision": "abstained",
     "lang": "id",
     "type": "direct",
     "category": "product"
@@ -243,6 +266,7 @@
     "expected_sources": [
       "troubleshooting/login-issues.md"
     ],
+    "expected_decision": "answered",
     "lang": "id",
     "type": "paraphrased",
     "category": "troubleshooting"
@@ -254,6 +278,7 @@
       "structured/api-endpoints.json",
       "api/webhooks.md"
     ],
+    "expected_decision": "answered",
     "lang": "en",
     "type": "multi-source",
     "category": "cross-category (structured + api)"
@@ -265,6 +290,7 @@
       "policy/refund-policy.md",
       "policy/subscription-policy.md"
     ],
+    "expected_decision": "abstained",
     "lang": "id",
     "type": "multi-source",
     "category": "cross-category (policy + policy)"
@@ -275,6 +301,7 @@
     "expected_sources": [
       "product/automation.pdf"
     ],
+    "expected_decision": "answered",
     "lang": "en",
     "type": "paraphrased",
     "category": "product"
@@ -285,6 +312,7 @@
     "expected_sources": [
       "product/ticket-management.pdf"
     ],
+    "expected_decision": "answered",
     "lang": "id",
     "type": "direct",
     "category": "product"
@@ -295,6 +323,7 @@
     "expected_sources": [
       "api/rate-limits.md"
     ],
+    "expected_decision": "answered",
     "lang": "en",
     "type": "paraphrased",
     "category": "api"
@@ -306,6 +335,7 @@
       "product/analytics_and_reporting.pdf",
       "structured/feature-comparison.csv"
     ],
+    "expected_decision": "answered",
     "lang": "id",
     "type": "multi-source",
     "category": "cross-category (product + structured)"

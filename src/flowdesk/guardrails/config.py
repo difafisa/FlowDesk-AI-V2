@@ -26,3 +26,15 @@ JEV_THRESHOLDS = {
     "noul_sufficient":   0.75,   # >= ini -> sufficient  (generate)
     "noul_insufficient": 0.35,   # <= ini -> insufficient (escalate, tanpa retry)
 }   # di antara keduanya -> uncertain (retry K=10)
+
+# --- Passage gate (Tahap 3-4) ---
+GATE_WORKERS = 4              # thread paralel utk scoring per chunk (rate limit aman)
+
+# Starting point dari cookbook TypeSafe — WAJIB dikalibrasi ulang
+# dengan data benchmark lokal (baseline vs passage-gate).
+JEV_GATE_THRESHOLDS = {
+    "injection_discard": 0.70,   # noul injection > ini  -> chunk dibuang
+    "relevant_min": 0.45,        # relevant >= ini        -> dianggap relevan
+    "evidence_min": 0.55,        # relevant & evidence >= ini -> layak include
+}
+SCOPE_NOUL_THRESHOLD = 0.50     # noul "masih soal produk FlowDesk?" >= ini -> in scope
