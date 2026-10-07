@@ -13,7 +13,7 @@ load_dotenv()   # hapus baris ini jika tidak pakai python-dotenv
 
 from flowdesk.embedding.embedder import Embedder
 from flowdesk.rag.llm_client import LLMClient
-from flowdesk.rag.pipeline import run_pipeline
+from flowdesk.graph.workflow import build_graph, run_workflow
 from flowdesk.retrieval.retriever import Retriever
 from flowdesk.storage.pgvector_store import VectorStore
 
@@ -47,25 +47,30 @@ def main():
     )
     store = VectorStore("postgresql://flowdesk:flowdesk@localhost:5432/flowdesk")
     retriever = Retriever(store, Embedder())
+    graph = build_graph(llm, llm, retriever)      # ← BARU
 
     lines = [f"Phase 3 manual gate — {datetime.now():%Y-%m-%d %H:%M}",
              f"model: {llm.model}", "=" * 70]
     n_pass = 0
     for sid, name, q, expected in SCENARIOS:
         print(f"\n>>> {sid}: {name}")
-        r = run_pipeline(llm, retriever, q)
-        verdict = "PASS" if r.status == expected else f"FAIL (expected {expected})"
-        if r.status == expected:
+        result = run_workflow(graph, q)
+        verdict = "PASS" if result["status"] == expected else f"FAIL (expected {expected})"
+        if result["status"] == expected:
             n_pass += 1
-        answer_preview = r.answer[:300] + ("..." if len(r.answer) > 300 else "")
+        answer_preview = result["answer"][:300] + ("..." if len(result["answer"]) > 300 else "")
         src = ", ".join(f"[{s['index']}] {s['document']}"
-                        + (f" p.{s['page']}" if s["page"] else "")
-                        for s in r.sources) or "-"
+                        + (f" p.{s['page']}" if s.get("page") else "")
+                        for s in result.get("sources", [])) or "-"
+        jev_info = ""
+        if result.get("jev"):
+            jev_info = f"  jev    : {result['jev'].get('decision')} — {result['jev'].get('reason')}\n"
         lines += [f"\n{sid} — {name}  => {verdict}",
-                  f"  status : {r.status}",
-                  f"  answer : {answer_preview}",
+                  f"  status : {result['status']}",
+                  jev_info + f"  answer : {answer_preview}",
                   f"  sources: {src}"]
-        print(f"    [{r.status}] {verdict}")
+        print(f"    [{result['status']}] {verdict}")
+
 
     lines += ["\n" + "=" * 70,
               f"hasil: {n_pass}/{len(SCENARIOS)} skenario sesuai ekspektasi"]
