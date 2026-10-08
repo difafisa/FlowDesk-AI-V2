@@ -60,6 +60,12 @@ def print_trace(result: dict) -> str:
             detail.append(f"scored={step['scored_this_wave']}")
         if "after_dedupe" in step:
             detail.append(f"after_dedupe={step['after_dedupe']}")
+
+        if "citation_dropped" in step:
+            detail.append(f"dropped={step['citation_dropped']}")
+        if "needs_review" in step and step["needs_review"]:
+            detail.append(f"needs_review={len(step['needs_review'])}")
+
         if "invalid_citations" in step:
             detail.append(f"invalid_citations={step['invalid_citations']}")
         lines.append("    node: " + node + ("  [" + ", ".join(detail) + "]" if detail else ""))

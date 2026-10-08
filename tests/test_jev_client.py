@@ -87,3 +87,21 @@ def test_model_comes_from_config_not_hardcode():
     fc = FakeClient({"in_scope": FakeAnswer(0.9)})
     JevClient(inner=fc).scope_check("q")
     assert fc.captured["model"] == JEV_MODEL
+# --- Fail-safe fallback 
+
+def test_scope_check_falls_back_to_true_on_api_error():
+    from flowdesk.jev.client import JevClient
+    c = JevClient(inner=FakeClient(error=TimeoutError()))
+    assert c.scope_check("q") is True          # default aman: abstain, bukan escalate
+
+
+def test_check_completeness_falls_back_to_zero_on_api_error():
+    from flowdesk.jev.client import JevClient
+    c = JevClient(inner=FakeClient(error=TimeoutError()))
+    assert c.check_completeness("q", "ctx") == 0.0   # memaksa uncertain (posisi aman)
+
+
+def test_verify_claims_returns_none_on_api_error():
+    from flowdesk.jev.client import JevClient
+    c = JevClient(inner=FakeClient(error=TimeoutError()))
+    assert c.verify_claims("passage", {"c0": {}}) is None   # lapisan 2 dilewati

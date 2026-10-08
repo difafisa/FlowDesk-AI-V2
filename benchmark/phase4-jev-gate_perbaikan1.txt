@@ -1,4 +1,4 @@
-Phase 4 Jev gate demo — 2026-10-08 12:19
+Phase 4 Jev gate demo — 2026-10-08 10:24
 generator: deepseek/deepseek-v4.1-flash | jev: jev-1.13.0 (noul thresholds 0.75/0.35)
 top-K=5, retry K=10, max retry=1
 ======================================================================
@@ -6,24 +6,22 @@ top-K=5, retry K=10, max retry=1
 G1 — Normal: evidence jelas -> harus dijawab
   Q       : Apakah paket Pro mendukung webhook?
   status  : answered
-  answer  : Ya, paket Pro mendukung webhook. Webhook tersedia pada paket Pro dan Enterprise, sedangkan paket Free tidak memiliki akses webhook [1][4].
+  answer  : Ya, paket Pro mendukung webhook [1][2][3][4][5]. Webhook tersedia pada paket Pro dan Enterprise, sedangkan paket Free tidak memiliki akses webhook [1][2][3][5].
     node: retrieve  [k=5, chunks=5]
     node: rerank  [after_dedupe=5]
     node: jev_gate  [scored=5]
     node: jev  [decision=sufficient, reason='included=5, relevant_only=0, discarded=0 ({})', included=5]
-    node: generate  [dropped=0, invalid_citations=[]]
+    node: generate  [invalid_citations=[]]
 
 G2 — Multi-source CSV: dua record dari dokumen sama harus sama-sama selamat
   Q       : Berapa rate limit API paket Pro dan paket Enterprise?
   status  : answered
-  answer  : Rate limit API:
-- Paket Pro: 60 permintaan/menit [1]
-- Paket Enterprise: 300 permintaan/menit [1]
+  answer  : Paket Pro: **60 requests/menit**. Paket Enterprise: **300 requests/menit** [1][2].
     node: retrieve  [k=5, chunks=5]
     node: rerank  [after_dedupe=5]
     node: jev_gate  [scored=5]
     node: jev  [decision=sufficient, reason='included=2, relevant_only=3, discarded=0 ({})', included=2]
-    node: generate  [dropped=0, invalid_citations=[]]
+    node: generate  [invalid_citations=[]]
 
 G3 — Multi-intent (ret-018): evidence parsial -> uncertain/abstain
   Q       : Bagaimana cara kerja aksi send_webhook pada automasi FlowDesk dan paket langganan minimal apa yang d

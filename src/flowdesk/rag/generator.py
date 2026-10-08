@@ -17,7 +17,9 @@ Rules:
    "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut."
 4. Never use outside knowledge. Never invent features, prices, or limits.
 5. Answer in the same language as the user's question.
-6. Be concise and actionable — this is customer support, not an essay."""
+6. Be concise and actionable — this is customer support, not an essay.
+7. Cite at most 1–2 sources per claim — the most specific ones. Do not stack citations.
+"""
 
 
 def generate_answer(llm: LLMClient, question: str, context: str) -> str:

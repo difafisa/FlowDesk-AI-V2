@@ -55,3 +55,36 @@ def test_low_confidence_needs_review_only():
 def test_unknown_index_skipped_safely():
     check = verify_citations(FakeJev(), "Klaim [9].", _sources(), {})
     assert check.checked == 0 and check.verified_answer == "Klaim [9]."
+
+def test_multiple_markers_in_one_sentence_all_checked():
+    """Regresi B1: kalimat dengan >1 marker — SEMUA marker diverifikasi.
+    Bug lama: setelah marker pertama dibuang, pencarian verdict marker
+    berikutnya memakai kalimat yang sudah berubah -> tidak ketemu -> spam lolos."""
+    class Mixed(FakeJev):
+        def verify_claims(self, passage, questions):
+            class A:
+                def __init__(s, c): s.choice, s.confidence = c, 0.9
+            verdict = "says_nothing" if "SPAM" in passage else "supports"
+            return {k: A(verdict) for k in questions}
+
+    check = verify_citations(Mixed(), "Pro mendukung webhook [1][2][3].",
+                             _sources(1, 2, 3),
+                             {1: "teks SPAM", 2: "teks SPAM", 3: "teks wajar"})
+    assert check.dropped_markers == 2              # [1] DAN [2] dibuang, bukan cuma [1]
+    assert check.verified_answer == "Pro mendukung webhook [3]."
+    assert check.checked == 3                      # ketiganya benar-benar diverifikasi
+
+
+
+def test_contradicts_on_second_marker_is_caught():
+    """Regresi B1 (kasus berbahaya): contradicts di marker KEDUA tidak
+    boleh terlewat hanya karena marker pertama sudah diproses."""
+    class SecondContradicts(FakeJev):
+        def verify_claims(self, passage, questions):
+            class A:
+                def __init__(s, c): s.choice, s.confidence = c, 0.9
+            return {k: A("contradicts") for k in questions}
+
+    check = verify_citations(SecondContradicts(), "Harga Pro $49 [1][2].",
+                             _sources(1, 2), {1: "teks a", 2: "teks b"})
+    assert len(check.contradicted) == 2            # [1] DAN [2] keduanya tertangkap
