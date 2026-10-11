@@ -104,4 +104,14 @@ def test_check_completeness_falls_back_to_zero_on_api_error():
 def test_verify_claims_returns_none_on_api_error():
     from flowdesk.jev.client import JevClient
     c = JevClient(inner=FakeClient(error=TimeoutError()))
-    assert c.verify_claims("passage", {"c0": {}}) is None   # lapisan 2 dilewati
+    assert c.verify_claims("passage", {"c0": {}}) is None   
+
+def test_judge_returns_answers_on_success():
+    fc = FakeClient({"x": FakeAnswer(0.7)})
+    assert JevClient(inner=fc).judge({"a": "b"}, {"x": {}})["x"].noul == 0.7
+
+
+def test_judge_returns_none_on_api_error():
+    fc = FakeClient(error=TimeoutError())
+    assert JevClient(inner=fc).judge({"a": "b"}, {"x": {}}) is None
+

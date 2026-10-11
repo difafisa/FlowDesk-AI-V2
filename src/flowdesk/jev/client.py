@@ -256,3 +256,14 @@ class JevClient:
             # jangan membuat keputusan citation berdasarkan
             # response yang tidak tersedia.
             return None
+
+    def judge(self, state: dict, questions: dict) -> dict | None:
+        """Generic multi-question request (dipakai evaluation scorer).
+        Boleh campur tipe (Noul + Choice) dalam satu request.
+        API gagal -> None (pemanggil mengecualikan kasus dari metrik)."""
+        try:
+            resp = self.inner.system_one(
+                state=state, model=JEV_MODEL, questions=questions)
+            return resp.answers
+        except Exception:
+            return None

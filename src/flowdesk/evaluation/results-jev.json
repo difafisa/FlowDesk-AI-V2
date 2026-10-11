@@ -1,0 +1,198 @@
+{
+  "variant": "jev",
+  "meta": {
+    "timestamp": "2026-10-10T09:29:00",
+    "generator": "deepseek/deepseek-v4.1-flash",
+    "jev_model": "jev-latest"
+  },
+  "aggregate": {
+    "n_cases": 6,
+    "decision_accuracy": 0.833,
+    "abstention_accuracy": 1.0,
+    "escalation_accuracy": 0.0,
+    "answered_accuracy": 1.0,
+    "hit_rate_5": 0.833,
+    "recall_5": 0.833,
+    "groundedness_mean": 0.852,
+    "n_scored": 6,
+    "correctness": {
+      "correct": 4
+    },
+    "retry_rate": 0.333,
+    "avg_jev_calls": 8,
+    "scorer_calls": 6,
+    "p50_latency": 3.036,
+    "p95_latency": 26.892
+  },
+  "per_category": {
+    "api": {
+      "n": 2,
+      "decision_accuracy": 1.0,
+      "abstention": null,
+      "groundedness": 0.795,
+      "hit_rate_5": 0.5
+    },
+    "simple_factual": {
+      "n": 1,
+      "decision_accuracy": 1.0,
+      "abstention": null,
+      "groundedness": 0.97,
+      "hit_rate_5": 1.0
+    },
+    "structured_data": {
+      "n": 1,
+      "decision_accuracy": 1.0,
+      "abstention": null,
+      "groundedness": 0.94,
+      "hit_rate_5": 1.0
+    },
+    "troubleshooting": {
+      "n": 2,
+      "decision_accuracy": 0.5,
+      "abstention": 1.0,
+      "groundedness": 0.805,
+      "hit_rate_5": 1.0
+    }
+  },
+  "rows": [
+    {
+      "id": "ds-001",
+      "category": "api",
+      "lang": "en",
+      "question": "Does the Pro plan support webhooks for ticket.created?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 26.892,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 3,
+        "distinct_valid": 3,
+        "invalid": 0,
+        "completeness": 0.6
+      },
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "groundedness": 0.94,
+      "correctness": "correct",
+      "answer": "Yes. Webhooks are available on Pro and Enterprise plans, and `ticket.created` is a supported webhook event [1][2]. Webhook requests are sent via HTTPS POST, and failed deliveries are retried up to 3 times [5]."
+    },
+    {
+      "id": "ds-002",
+      "category": "structured_data",
+      "lang": "id",
+      "question": "Apakah paket Pro mendukung webhook dan berapa batas request API per menitnya?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 3.036,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 6,
+        "distinct_valid": 2,
+        "invalid": 0,
+        "completeness": 1.0
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.94,
+      "correctness": "correct",
+      "answer": "Ya. Paket Pro mendukung webhook, dan batas request API-nya adalah 60 request per menit [1][2].\n\n- Webhook: tersedia di Pro (tidak tersedia di Free) [1][2].\n- API rate limit Pro: 60 requests per minute [1][2]."
+    },
+    {
+      "id": "ds-003",
+      "category": "troubleshooting",
+      "lang": "en",
+      "question": "Why am I not getting webhook deliveries to my configured server endpoint?",
+      "expected_decision": "abstained",
+      "decision": "abstained",
+      "match": true,
+      "latency_s": 2.234,
+      "jev_calls": 12,
+      "scorer_calls": 1,
+      "retried": true,
+      "citations": null,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.69,
+      "correctness": null,
+      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut."
+    },
+    {
+      "id": "ds-004",
+      "category": "api",
+      "lang": "id",
+      "question": "Bagaimana cara melakukan autentikasi pada FlowDesk API dan format header apa yang wajib disertakan?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 7.133,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 4,
+        "distinct_valid": 3,
+        "invalid": 0,
+        "completeness": 0.6
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.65,
+      "correctness": "correct",
+      "answer": "Untuk autentikasi FlowDesk API, gunakan **Bearer Token authentication** dengan menyertakan token pada header `Authorization`:\n\n```http\nAuthorization: Bearer <API_TOKEN>\n```\n\nFormat ini wajib digunakan pada setiap request API [1][2].\n\nHeader yang perlu diperhatikan:\n- `Authorization` — **wajib**, ber"
+    },
+    {
+      "id": "ds-005",
+      "category": "simple_factual",
+      "lang": "en",
+      "question": "What are the four supported ticket statuses and four ticket priorities in FlowDesk Ticket API?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 2.464,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 2,
+        "distinct_valid": 1,
+        "invalid": 0,
+        "completeness": 1.0
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.97,
+      "correctness": "correct",
+      "answer": "The FlowDesk Ticket API supports four ticket statuses: `open`, `pending`, `resolved`, and `closed` [1].\n\nIt also supports four ticket priorities: `low`, `medium`, `high`, and `urgent` [1]."
+    },
+    {
+      "id": "ds-006",
+      "category": "troubleshooting",
+      "lang": "id",
+      "question": "Kenapa akun FlowDesk saya tiba-tiba terkunci dan apa yang harus saya lakukan untuk membukanya kembali?",
+      "expected_decision": "escalated",
+      "decision": "answered",
+      "match": false,
+      "latency_s": 5.335,
+      "jev_calls": 12,
+      "scorer_calls": 1,
+      "retried": true,
+      "citations": {
+        "total": 11,
+        "distinct_valid": 2,
+        "invalid": 0,
+        "completeness": 1.0
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.92,
+      "correctness": null,
+      "answer": "**Penyebab:** Akun terkunci sementara karena beberapa kali percobaan login yang gagal memicu pembatasan keamanan sementara [1][2].\n\n**Yang harus dilakukan:**\n\n1. Hentikan percobaan login tambahan [1].\n2. Perhatikan instruksi yang ditampilkan FlowDesk [1].\n3. Tunggu hingga pembatasan sementara terseb"
+    }
+  ]
+}
