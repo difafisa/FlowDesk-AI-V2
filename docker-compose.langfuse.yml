@@ -1,0 +1,26 @@
+# docker-compose.langfuse.yml — jalankan: docker compose -f docker-compose.langfuse.yml up -d
+services:
+  langfuse-db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: langfuse
+      POSTGRES_PASSWORD: langfuse
+      POSTGRES_DB: langfuse
+    volumes:
+      - langfuse_pgdata:/var/lib/postgresql/data
+
+  langfuse:
+    image: langfuse/langfuse:2
+    depends_on:
+      - langfuse-db
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://langfuse:langfuse@langfuse-db:5432/langfuse
+      NEXTAUTH_SECRET: ganti-dengan-string-acak-panjang
+      SALT: ganti-dengan-string-acak-lain
+      NEXTAUTH_URL: http://localhost:3000
+      TELEMETRY_ENABLED: "false"
+
+volumes:
+  langfuse_pgdata:

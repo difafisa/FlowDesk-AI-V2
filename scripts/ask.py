@@ -6,6 +6,7 @@ Mode satu-perintah:  python scripts/ask.py "pertanyaan"
 """
 import os
 import sys
+import uuid
 from dotenv import load_dotenv
 load_dotenv()
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
@@ -16,6 +17,8 @@ from flowdesk.jev.client import JevClient
 from flowdesk.rag.llm_client import LLMClient
 from flowdesk.retrieval.retriever import Retriever
 from flowdesk.storage.pgvector_store import VectorStore
+from flowdesk.observability.langfuse_export import with_langfuse
+from flowdesk.observability.feedback import FeedbackStore
 
 
 def make_graph():
@@ -37,20 +40,43 @@ def print_result(r: dict):
     if r.get("jev"):
         print(f"jev: {r['jev'].get('decision')} — {r['jev'].get('reason')}")
 
+def ask_feedback(store: FeedbackStore, r: dict):
+    """T3 — prompt 👍/👎 setelah jawaban; skip dengan Enter."""
+    try:
+        fb = input("   Apakah jawaban ini membantu? [y=ya, n=tidak, Enter=lewati]: ").strip().lower()
+        if fb not in ("y", "n"):
+            return
+        comment = None
+        if fb == "n":
+            comment = input("   Komentar (opsional, Enter=skip): ").strip() or None
+        if store.submit(r.get("run_id"), helpful=(fb == "y"), comment=comment):
+            print("   ✓ feedback tercatat")
+        else:
+            print("   ✗ feedback gagal disimpan (lihat log)")
+    except (EOFError, KeyboardInterrupt):
+        return
+
 
 def main():
     graph = make_graph()
+    run_query = with_langfuse(run_workflow,
+                              session_id=f"cli-{uuid.uuid4().hex[:12]}")
+    feedback_store = FeedbackStore()
     print("FlowDesk Phase 4 demo (LangGraph + Jev asli) — ketik pertanyaan, kosongkan untuk keluar.")
     while True:
         q = input("\nQ: ").strip()
         if not q:
             break
-        print_result(run_workflow(graph, q))
+        r = run_query(graph, q)
+        print_result(r)
+        ask_feedback(feedback_store, r)
+        
 
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:          # mode satu-perintah
         question = " ".join(sys.argv[1:])
-        print_result(run_workflow(make_graph(), question))
+        print_result(with_langfuse(run_workflow)(make_graph(), question)) 
     else:
         main()                     # mode interaktif
+
