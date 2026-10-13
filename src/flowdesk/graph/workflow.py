@@ -25,7 +25,7 @@ from flowdesk.jev.passage_gate import score_passages
 from flowdesk.rag.context_builder import build_context
 from flowdesk.rag.dedupe import dedupe_chunks
 from flowdesk.rag.generator import generate_answer
-from flowdesk.rag.output_validator import validate_output
+from flowdesk.rag.output_validator import validate_output, looks_truncated
 from flowdesk.rag.citation_verifier import verify_citations
 
 
@@ -123,6 +123,7 @@ def build_graph(llm, jev_client, retriever):
                         "in_scope": in_scope},
                 "trace": state["trace"] + [
             {"node": "jev", "decision": d, "reason": reason,
+             "completeness": completeness,
              "included": out["included"],
              "discarded": out["discard_reasons"]}]}
 
@@ -162,7 +163,8 @@ def build_graph(llm, jev_client, retriever):
             {"node": "generate", "status": status,
              "invalid_citations": out.invalid_citations,
              "citation_dropped": check.dropped_markers,
-             "needs_review": check.needs_review}]}
+             "needs_review": check.needs_review,
+             "possibly_truncated": looks_truncated(out.answer)}]}
 
 
     def abstain(state: WorkflowState) -> dict:

@@ -38,3 +38,18 @@ def validate_output(raw_answer: str, sources: list[dict]) -> OutputCheck:
         invalid_citations=invalid,
         has_citation=bool(set(cited) & valid_idx),
     )
+
+def looks_truncated(answer: str) -> bool:
+    """True bila jawaban terindikasi terpotong mid-generation.
+
+    Heuristik sederhana (deterministik, tanpa API):
+    - berakhir di tengah kata (huruf/angka langsung EOF tanpa spasi/tanda baca
+      sesudahnya), atau
+    - berakhir tanpa penutup kalimat/punctuation sama sekali.
+    False positive mungkin (mis. list berakhir di nomor) — status ini
+    'perlu dicek', bukan vonis.
+    """
+    if not answer or not answer.strip():
+        return False
+    tail = answer.rstrip()[-1:]
+    return tail.isalnum()

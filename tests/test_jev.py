@@ -89,3 +89,36 @@ def test_generate_receives_only_included_chunks():
     assert ids == ["layak"], f"context bocor: {ids}"
     assert "tidak relevan" not in r["context"]
     assert "ignore previous" not in r["context"]
+
+
+def test_generate_answered_jalur_penuh_dan_truncation_flag():
+    """Regression: jalur answered node generate harus tuntas sampai payload
+    (pernah NameError looks_truncated — import terlewat — tanpa ada test gagal)."""
+    from flowdesk.graph.workflow import build_graph, run_workflow
+
+    class FakeJev:
+        def score_chunk(self, q, p):
+            return {"is_relevant": 0.9, "contains_answer_evidence": 0.9,
+                    "contains_prompt_injection": 0.0}
+        def check_completeness(self, q, ctx):
+            return 0.95
+        def scope_check(self, q):
+            return True
+        def verify_claims(self, passage, questions):
+            return None              # fail-safe asli: Layer 2 dilewati
+
+    class FakeLLM:
+        def generate(self, s, u):
+            return "Rate limit API Pro adalah 60 request per menit [1]."
+
+    class FakeRetriever:
+        def retrieve(self, q, k=5):
+            return [{"chunk_id": "c1", "document": "api/rate-limits.md",
+                     "content": "Pro plan: 60 requests per minute."}]
+
+    graph = build_graph(FakeLLM(), FakeJev(), FakeRetriever())
+    r = run_workflow(graph, "Berapa rate limit API Pro?")
+    assert r["status"] == "answered"
+    gen = [t for t in r["trace"] if t["node"] == "generate"][-1]
+    assert gen["possibly_truncated"] is False
+

@@ -99,6 +99,8 @@ def run_case(graph, retriever, jev_client, case: dict, runner,
     retried = any(s.get("node") == "retry" for s in trace)
     invalid = next((s.get("invalid_citations") for s in trace
                     if s.get("node") == "generate"), None)
+    jev_entry = next((s for s in reversed(trace) if s.get("node") == "jev"),
+                     None)
 
     # citation metrics (logika benchmark Phase 4)
     answer = r.get("answer", "")
@@ -139,6 +141,10 @@ def run_case(graph, retriever, jev_client, case: dict, runner,
         "hit@5": hit, "recall@5": recall,
         "groundedness": gen["groundedness"], "correctness": gen["correctness"],
         "answer": answer[:300],
+        "gate_scores": r.get("scores"),            
+        "completeness": (jev_entry or {}).get("completeness"),
+        "included": (jev_entry or {}).get("included"),
+
     }
 
 
@@ -238,6 +244,26 @@ def write_report(variant, meta, agg, cats, rows, path: Path):
     path.write_text("\n".join(L) + "\n", encoding="utf-8")
 
 
+def preflight_jev(jev_client) -> bool:
+    """Satu panggilan score_chunk sebelum evaluasi dimulai.
+
+    Fail-safe di produksi BOLEH menelan error API (-> abstain), tapi data
+    evaluasi TIDAK BOLEH: bila API mati, seluruh kasus varian jev jadi
+    score_error dan metrik menjadi sampah tanpa error yang terlihat.
+    """
+    try:
+        s = jev_client.score_chunk("Does the Pro plan include API access?",
+                                   "Pro plan: $49/mo, includes API access.")
+        ok = 0.0 <= s["is_relevant"] <= 1.0
+        print(f"preflight Jev: {'OK' if ok else 'nilai tidak wajar: ' + str(s)}")
+        return ok
+    except Exception as e:
+        print(f"preflight Jev GAGAL: {type(e).__name__}: {e}")
+        print("Perbaiki dulu (key/kuota TypeSafe) — evaluasi dibatalkan.")
+        return False
+
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("variant", nargs="?", default="jev",
@@ -247,14 +273,31 @@ def main():
                          "expected_decision terwakili (murah utk smoke test)")
 
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument(
+        "--offset",
+        type=int,
+        default=0,
+        help="Jumlah kasus yang dilewati sebelum evaluasi",
+    )
+    ap.add_argument(
+        "--batch",
+        action="store_true",
+        help="Gabungkan hasil batch dengan hasil evaluasi sebelumnya",
+    )
     ap.add_argument("--no-scorer", action="store_true")
     args = ap.parse_args()
 
     cases = json.loads(DATASET.read_text(encoding="utf-8"))
     if args.sample:
         cases = stratified_sample(cases, args.sample)
-    elif args.limit:
-        cases = cases[:args.limit]
+    else:
+        if args.offset < 0:
+            ap.error("--offset tidak boleh negatif")
+
+        if args.limit:
+            cases = cases[args.offset:args.offset + args.limit]
+        else:
+            cases = cases[args.offset:]
 
     print("load embedding + DB...")
     llm = LLMClient(
@@ -264,21 +307,28 @@ def main():
     store = VectorStore("postgresql://flowdesk:flowdesk@localhost:5432/flowdesk")
     retriever = Retriever(store, Embedder())
 
+    jev_client = JevClient()      # dipakai graph (varian jev) DAN scorer
     if args.variant == "llm-judge":
         sys.path.insert(0, str(ROOT / "scripts"))
         from legacy_graph import build_legacy_graph, run_legacy
         graph, runner = build_legacy_graph(llm, retriever), run_legacy
-        jev_client = None
     else:
-        jev_client = JevClient()
         graph, runner = build_graph(llm, jev_client, retriever), run_workflow
 
-    use_scorer = (not args.no_scorer) and args.variant == "jev"
+    # B2: jangan evaluasi di atas API yang mati — insiden 403 (2026-10-11)
+    # membuat seluruh run varian jev mem-abstain diam-diam (score_error)
+    # dan menghasilkan decision_accuracy yang menyesatkan.
+    if not preflight_jev(jev_client):
+        sys.exit(1)
+
+    # B1: scorer = penilai pihak ketiga, jalankan untuk KEDUA varian.
+    use_scorer = not args.no_scorer
+
     print(f"menjalankan {len(cases)} kasus (varian: {args.variant}, "
           f"scorer: {use_scorer})...")
 
     from concurrent.futures import ThreadPoolExecutor, as_completed
-    max_workers = int(os.environ.get("EVAL_WORKERS", "4"))
+    max_workers = int(os.environ.get("EVAL_WORKERS", "2"))
     print(f"eksekusi paralel ({max_workers} workers)...")
     rows = []
     with ThreadPoolExecutor(max_workers=max_workers) as pool:
@@ -311,19 +361,81 @@ def main():
 
 
 
-    agg, cats = aggregate(rows), by_category(rows)
-    stamp = datetime.now().strftime("%Y%m%d-%H%M")
-    meta = {"timestamp": datetime.now().isoformat(timespec="seconds"),
-            "generator": llm.model,
-            "jev_model": os.environ.get("JEV_MODEL", "jev-latest")}
-    result = {"variant": args.variant, "meta": meta,
-              "aggregate": agg, "per_category": cats, "rows": rows}
-    (ROOT / "evaluation" / f"results-{args.variant}.json").write_text(
-        json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
-    write_report(args.variant, meta, agg, cats, rows,
-                 ROOT / "evaluation" / f"report-{args.variant}.md")
-    print(f"\nraw    -> evaluation/results-{args.variant}.json")
-    print(f"report -> evaluation/report-{args.variant}.md")
+    # Lokasi hasil evaluasi
+    eval_dir = ROOT / "evaluation"
+    eval_dir.mkdir(parents=True, exist_ok=True)
+
+    json_path = eval_dir / f"results-{args.variant}.json"
+    report_path = eval_dir / f"report-{args.variant}.md"
+
+    meta = {
+        "timestamp": datetime.now().isoformat(timespec="seconds"),
+        "generator": llm.model,
+        "jev_model": os.environ.get("JEV_MODEL", "jev-latest"),
+    }
+
+    # Jika mode batch aktif, gabungkan dengan hasil sebelumnya.
+    if args.batch and json_path.exists():
+        previous = json.loads(json_path.read_text(encoding="utf-8"))
+
+        # Pastikan hasil sebelumnya berasal dari varian yang sama.
+        if previous.get("variant") != args.variant:
+            ap.error("Varian hasil sebelumnya tidak cocok.")
+
+        # Gunakan ID kasus sebagai kunci agar tidak ada duplikasi.
+        merged = {
+            row["id"]: row
+            for row in previous.get("rows", [])
+        }
+
+        # Hasil baru memperbarui ID yang sama atau menambahkan ID baru.
+        for row in rows:
+            merged[row["id"]] = row
+
+        rows = sorted(merged.values(), key=lambda row: row["id"])
+
+        print(
+            f"Menggabungkan hasil: {len(previous.get('rows', []))} "
+            f"kasus sebelumnya + {len(rows)} kasus unik setelah penggabungan."
+        )
+
+    # Hitung ulang metrik dari seluruh kasus yang tersimpan.
+    agg = aggregate(rows)
+    cats = by_category(rows)
+
+    # Simpan hasil gabungan.
+    result = {
+        "variant": args.variant,
+        "meta": meta,
+        "aggregate": agg,
+        "per_category": cats,
+        "rows": rows,
+    }
+
+    json_path.write_text(
+        json.dumps(result, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    write_report(
+        args.variant,
+        meta,
+        agg,
+        cats,
+        rows,
+        report_path,
+    )
+
+    print(f"\nraw    -> {json_path.relative_to(ROOT)}")
+    print(f"report -> {report_path.relative_to(ROOT)}")
+    print(f"total kasus tersimpan: {len(rows)}")
+    print(
+        f"\nglobal: decision={agg['decision_accuracy']} "
+        f"abstention={agg['abstention_accuracy']} "
+        f"escalation={agg['escalation_accuracy']} "
+        f"groundedness={agg['groundedness_mean']}"
+    )
+
     print(f"\nglobal: decision={agg['decision_accuracy']} "
           f"abstention={agg['abstention_accuracy']} "
           f"escalation={agg['escalation_accuracy']} "

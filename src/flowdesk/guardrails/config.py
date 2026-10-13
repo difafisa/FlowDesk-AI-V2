@@ -7,7 +7,7 @@ MAX_INPUT_TOKENS = 512        # di atas ini: moderate (minta user meringkas)
 HARD_INPUT_LIMIT = 4000       # di atas ini: hard reject 
 
 # --- Output (PRD 3.5) ---
-MAX_OUTPUT_TOKENS = 512       # jawaban support harus concise & actionable
+MAX_OUTPUT_TOKENS = 800       # jawaban support harus concise & actionable
 
 # --- Context (PRD 3.3) ---
 CONTEXT_TOKEN_BUDGET = 1500   # total token context yang boleh masuk ke LLM
