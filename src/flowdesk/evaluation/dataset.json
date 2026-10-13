@@ -72,12 +72,12 @@
     "lang": "id",
     "question": "Kenapa akun FlowDesk saya tiba-tiba terkunci dan apa yang harus saya lakukan untuk membukanya kembali?",
     "type": "paraphrased",
-    "expected_decision": "escalated",
+    "expected_decision": "answered",
     "expected_sources": [
       "troubleshooting/login-issues.md"
     ],
     "expected_answer": "",
-    "rationale": "Kasus di-flag untuk kalibrasi: KB mendokumentasikan kunci sementara akibat percobaan gagal (rekomendasi tunggu/reset), namun dipertahankan escalated sesuai label benchmark historis jika restriksi berlanjut."
+    "rationale": "Relabel 2026-10-13: KB mendokumentasikan penyebab (percobaan login gagal) dan langkah pemulihan secara lengkap — menjawab dari KB adalah perilaku benar; label 'escalated' warisan benchmark historis tidak lagi mencerminkan KB. Tutup backlog S5 untuk kasus ini."
   },
   {
     "id": "ds-007",

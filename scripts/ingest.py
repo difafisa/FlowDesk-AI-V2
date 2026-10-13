@@ -53,6 +53,12 @@ def main():
              "subsection": c.subsection, "page": c.page, "source_type": c.source_type,
              "content": c.content, "embedding": v}
             for c, v in zip(all_chunks, embedder.embed_passages([c.content for c in all_chunks]))]
+    # hulu-fix 2026-10-13: chunk_id berubah (merge H3 + tabel utuh) —
+    # hapus chunk lama per dokumen supaya index tidak dobel.
+    for doc in sorted({c.document for c in all_chunks}):
+        n = store.delete_by_document(doc)
+        if n:
+            print(f"  ganti {n} chunk lama: {doc}")
     store.upsert_chunks(rows)
     print(f"upserted {len(rows)} chunks ke pgvector")
 

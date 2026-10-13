@@ -1,61 +1,63 @@
 {
   "variant": "jev",
   "meta": {
-    "timestamp": "2026-10-11T15:32:48",
-    "generator": "deepseek/deepseek-v4.1-flash",
+    "timestamp": "2026-10-13T08:24:52",
+    "generator": "nvidia/nemotron-3-ultra-550b-a55b",
     "jev_model": "jev-latest"
   },
   "aggregate": {
-    "n_cases": 10,
-    "decision_accuracy": 0.4,
-    "abstention_accuracy": 1.0,
-    "escalation_accuracy": 0.0,
-    "answered_accuracy": 0.0,
-    "hit_rate_5": 0.778,
-    "recall_5": 0.722,
-    "groundedness_mean": null,
-    "n_scored": 0,
-    "correctness": {},
-    "retry_rate": 0.0,
-    "avg_jev_calls": 6.3,
-    "scorer_calls": 0,
-    "p50_latency": 1.435,
-    "p95_latency": 11.683
+    "n_cases": 51,
+    "decision_accuracy": 0.863,
+    "abstention_accuracy": 0.75,
+    "escalation_accuracy": 0.5,
+    "answered_accuracy": 0.917,
+    "hit_rate_5": 0.87,
+    "recall_5": 0.793,
+    "groundedness_mean": 0.847,
+    "n_scored": 36,
+    "correctness": {
+      "correct": 32
+    },
+    "retry_rate": 0.216,
+    "avg_jev_calls": 7.29,
+    "scorer_calls": 36,
+    "p50_latency": 9.887,
+    "p95_latency": 38.635
   },
   "per_category": {
     "ambiguous": {
-      "n": 1,
-      "decision_accuracy": 1.0,
-      "abstention": 1.0,
-      "groundedness": null,
-      "hit_rate_5": 1.0
+      "n": 5,
+      "decision_accuracy": 0.8,
+      "abstention": 0.8,
+      "groundedness": 0.9,
+      "hit_rate_5": 0.4
     },
     "api": {
-      "n": 1,
-      "decision_accuracy": 0.0,
+      "n": 6,
+      "decision_accuracy": 1.0,
       "abstention": null,
-      "groundedness": null,
-      "hit_rate_5": 0.0
+      "groundedness": 0.902,
+      "hit_rate_5": 0.833
     },
     "multi_document": {
-      "n": 1,
-      "decision_accuracy": 1.0,
-      "abstention": 1.0,
-      "groundedness": null,
-      "hit_rate_5": 0.0
+      "n": 3,
+      "decision_accuracy": 0.667,
+      "abstention": 0.0,
+      "groundedness": 0.877,
+      "hit_rate_5": 0.667
     },
     "policy": {
-      "n": 1,
-      "decision_accuracy": 0.0,
+      "n": 4,
+      "decision_accuracy": 1.0,
       "abstention": null,
-      "groundedness": null,
+      "groundedness": 0.863,
       "hit_rate_5": 1.0
     },
     "product_usage": {
-      "n": 1,
-      "decision_accuracy": 0.0,
+      "n": 5,
+      "decision_accuracy": 1.0,
       "abstention": null,
-      "groundedness": null,
+      "groundedness": 0.748,
       "hit_rate_5": 1.0
     },
     "safety": {
@@ -66,24 +68,31 @@
       "hit_rate_5": null
     },
     "simple_factual": {
-      "n": 1,
-      "decision_accuracy": 0.0,
+      "n": 5,
+      "decision_accuracy": 1.0,
       "abstention": null,
-      "groundedness": null,
+      "groundedness": 0.93,
       "hit_rate_5": 1.0
     },
     "structured_data": {
-      "n": 1,
-      "decision_accuracy": 0.0,
+      "n": 6,
+      "decision_accuracy": 0.833,
       "abstention": null,
-      "groundedness": null,
-      "hit_rate_5": 1.0
+      "groundedness": 0.97,
+      "hit_rate_5": 0.833
     },
     "troubleshooting": {
-      "n": 2,
-      "decision_accuracy": 0.5,
+      "n": 9,
+      "decision_accuracy": 0.778,
       "abstention": 1.0,
-      "groundedness": null,
+      "groundedness": 0.713,
+      "hit_rate_5": 1.0
+    },
+    "unanswerable": {
+      "n": 7,
+      "decision_accuracy": 0.714,
+      "abstention": 0.8,
+      "groundedness": 0.59,
       "hit_rate_5": 1.0
     }
   },
@@ -94,18 +103,72 @@
       "lang": "en",
       "question": "Does the Pro plan support webhooks for ticket.created?",
       "expected_decision": "answered",
-      "decision": "abstained",
-      "match": false,
-      "latency_s": 11.67,
-      "jev_calls": 7,
-      "scorer_calls": 0,
+      "decision": "answered",
+      "match": true,
+      "latency_s": 35.704,
+      "jev_calls": 6,
+      "scorer_calls": 1,
       "retried": false,
-      "citations": null,
+      "citations": {
+        "total": 2,
+        "distinct_valid": 2,
+        "invalid": 0,
+        "completeness": 0.5
+      },
       "hit@5": 0.0,
       "recall@5": 0.0,
-      "groundedness": null,
-      "correctness": null,
-      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut."
+      "groundedness": 0.95,
+      "correctness": "correct",
+      "answer": "Yes, the Pro plan supports webhooks for `ticket.created`. Webhooks are available on Pro and Enterprise plans, and `ticket.created` is listed as a supported webhook event [1][3].",
+      "gate_scores": {
+        "ticket-management-32ca040a": {
+          "chunk_id": "ticket-management-32ca040a",
+          "is_relevant": 0.92,
+          "contains_answer_evidence": 0.97,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "customer-management-bcac1b1d": {
+          "chunk_id": "customer-management-bcac1b1d",
+          "is_relevant": 0.91,
+          "contains_answer_evidence": 0.97,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "webhook-failures-49aa0934": {
+          "chunk_id": "webhook-failures-49aa0934",
+          "is_relevant": 0.89,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "api-endpoints-012": {
+          "chunk_id": "api-endpoints-012",
+          "is_relevant": 0.88,
+          "contains_answer_evidence": 0.93,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "subscription-policy-60d06a1f": {
+          "chunk_id": "subscription-policy-60d06a1f",
+          "is_relevant": 0.84,
+          "contains_answer_evidence": 0.41,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.96,
+      "included": [
+        "ticket-management-32ca040a",
+        "customer-management-bcac1b1d",
+        "webhook-failures-49aa0934",
+        "api-endpoints-012"
+      ]
     },
     {
       "id": "ds-002",
@@ -113,18 +176,70 @@
       "lang": "id",
       "question": "Apakah paket Pro mendukung webhook dan berapa batas request API per menitnya?",
       "expected_decision": "answered",
-      "decision": "abstained",
-      "match": false,
-      "latency_s": 0.854,
-      "jev_calls": 7,
-      "scorer_calls": 0,
+      "decision": "answered",
+      "match": true,
+      "latency_s": 38.635,
+      "jev_calls": 6,
+      "scorer_calls": 1,
       "retried": false,
-      "citations": null,
+      "citations": {
+        "total": 2,
+        "distinct_valid": 2,
+        "invalid": 0,
+        "completeness": 1.0
+      },
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "groundedness": null,
-      "correctness": null,
-      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut."
+      "groundedness": 0.97,
+      "correctness": "correct",
+      "answer": "Ya, paket Pro mendukung webhook dan memiliki batas 60 request API per menit [1][2].",
+      "gate_scores": {
+        "automation-6078232b": {
+          "chunk_id": "automation-6078232b",
+          "is_relevant": 0.89,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "pricing-plans-table": {
+          "chunk_id": "pricing-plans-table",
+          "is_relevant": 0.92,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "api-errors-9a00cde1": {
+          "chunk_id": "api-errors-9a00cde1",
+          "is_relevant": 0.75,
+          "contains_answer_evidence": 0.29,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-1e51311b": {
+          "chunk_id": "rate-limits-1e51311b",
+          "is_relevant": 0.76,
+          "contains_answer_evidence": 0.26,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-364dddf3": {
+          "chunk_id": "rate-limits-364dddf3",
+          "is_relevant": 0.77,
+          "contains_answer_evidence": 0.26,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.97,
+      "included": [
+        "automation-6078232b",
+        "pricing-plans-table"
+      ]
     },
     {
       "id": "ds-003",
@@ -134,16 +249,183 @@
       "expected_decision": "abstained",
       "decision": "abstained",
       "match": true,
-      "latency_s": 11.676,
-      "jev_calls": 7,
+      "latency_s": 1.941,
+      "jev_calls": 12,
       "scorer_calls": 0,
-      "retried": false,
+      "retried": true,
       "citations": null,
       "hit@5": 1.0,
       "recall@5": 1.0,
       "groundedness": null,
       "correctness": null,
-      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut."
+      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut.",
+      "gate_scores": {
+        "webhooks-b2f08d17": {
+          "chunk_id": "webhooks-b2f08d17",
+          "is_relevant": 0.79,
+          "contains_answer_evidence": 0.51,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "webhook-failures-575eb48b": {
+          "chunk_id": "webhook-failures-575eb48b",
+          "is_relevant": 0.95,
+          "contains_answer_evidence": 0.93,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "webhook-failures-49aa0934": {
+          "chunk_id": "webhook-failures-49aa0934",
+          "is_relevant": 0.95,
+          "contains_answer_evidence": 0.83,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "webhook-failures-51dec741": {
+          "chunk_id": "webhook-failures-51dec741",
+          "is_relevant": 0.93,
+          "contains_answer_evidence": 0.81,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "webhook-failures-c07c7be9": {
+          "chunk_id": "webhook-failures-c07c7be9",
+          "is_relevant": 0.94,
+          "contains_answer_evidence": 0.94,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "error-codes-012": {
+          "chunk_id": "error-codes-012",
+          "is_relevant": 0.95,
+          "contains_answer_evidence": 0.92,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "webhooks-1cb4cff2": {
+          "chunk_id": "webhooks-1cb4cff2",
+          "is_relevant": 0.95,
+          "contains_answer_evidence": 0.95,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "error-codes-014": {
+          "chunk_id": "error-codes-014",
+          "is_relevant": 0.95,
+          "contains_answer_evidence": 0.91,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "webhook-failures-56c75e26": {
+          "chunk_id": "webhook-failures-56c75e26",
+          "is_relevant": 0.91,
+          "contains_answer_evidence": 0.85,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "webhook-failures-ff037047": {
+          "chunk_id": "webhook-failures-ff037047",
+          "is_relevant": 0.95,
+          "contains_answer_evidence": 0.94,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.46,
+      "included": [
+        "webhook-failures-575eb48b",
+        "webhook-failures-49aa0934",
+        "webhook-failures-51dec741",
+        "webhook-failures-c07c7be9",
+        "error-codes-012",
+        "webhooks-1cb4cff2",
+        "error-codes-014",
+        "webhook-failures-56c75e26",
+        "webhook-failures-ff037047"
+      ]
+    },
+    {
+      "id": "ds-004",
+      "category": "api",
+      "lang": "id",
+      "question": "Bagaimana cara melakukan autentikasi pada FlowDesk API dan format header apa yang wajib disertakan?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 6.531,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 5,
+        "distinct_valid": 3,
+        "invalid": 0,
+        "completeness": 0.75
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.87,
+      "correctness": "correct",
+      "answer": "FlowDesk API menggunakan **Bearer Token authentication**. Header wajib yang harus disertakan:\n\n1. **`Authorization: Bearer <API_TOKEN>`** — header utama untuk autentikasi [1][2]\n2. **`Content-Type: application/json`** — wajib saat mengirim request body berupa JSON [2]\n3. **`Accept: application/json`",
+      "gate_scores": {
+        "tickets-4e8e6226": {
+          "chunk_id": "tickets-4e8e6226",
+          "is_relevant": 0.78,
+          "contains_answer_evidence": 0.97,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "authentication-400b7464": {
+          "chunk_id": "authentication-400b7464",
+          "is_relevant": 0.82,
+          "contains_answer_evidence": 0.96,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "authentication-7572d16f": {
+          "chunk_id": "authentication-7572d16f",
+          "is_relevant": 0.87,
+          "contains_answer_evidence": 0.97,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "authentication-a2756981": {
+          "chunk_id": "authentication-a2756981",
+          "is_relevant": 0.71,
+          "contains_answer_evidence": 0.23,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "authentication-d1e217f1": {
+          "chunk_id": "authentication-d1e217f1",
+          "is_relevant": 0.87,
+          "contains_answer_evidence": 0.93,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.92,
+      "included": [
+        "tickets-4e8e6226",
+        "authentication-400b7464",
+        "authentication-7572d16f",
+        "authentication-d1e217f1"
+      ]
     },
     {
       "id": "ds-005",
@@ -151,37 +433,139 @@
       "lang": "en",
       "question": "What are the four supported ticket statuses and four ticket priorities in FlowDesk Ticket API?",
       "expected_decision": "answered",
-      "decision": "abstained",
-      "match": false,
-      "latency_s": 1.461,
-      "jev_calls": 7,
-      "scorer_calls": 0,
+      "decision": "answered",
+      "match": true,
+      "latency_s": 6.276,
+      "jev_calls": 6,
+      "scorer_calls": 1,
       "retried": false,
-      "citations": null,
+      "citations": {
+        "total": 2,
+        "distinct_valid": 1,
+        "invalid": 0,
+        "completeness": 1.0
+      },
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "groundedness": null,
-      "correctness": null,
-      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut."
+      "groundedness": 0.98,
+      "correctness": "correct",
+      "answer": "The FlowDesk Ticket API supports four ticket statuses: `open`, `pending`, `resolved`, and `closed` [1]. It also supports four ticket priorities: `low`, `medium`, `high`, and `urgent` [1].",
+      "gate_scores": {
+        "ticket-management-d7d7c4e7": {
+          "chunk_id": "ticket-management-d7d7c4e7",
+          "is_relevant": 0.7,
+          "contains_answer_evidence": 0.04,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "tickets-96adaa40": {
+          "chunk_id": "tickets-96adaa40",
+          "is_relevant": 0.68,
+          "contains_answer_evidence": 0.17,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "tickets-250d16ae": {
+          "chunk_id": "tickets-250d16ae",
+          "is_relevant": 0.54,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "getting-started-ac79d07b": {
+          "chunk_id": "getting-started-ac79d07b",
+          "is_relevant": 0.78,
+          "contains_answer_evidence": 0.21,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "getting-started-c26046d1": {
+          "chunk_id": "getting-started-c26046d1",
+          "is_relevant": 0.6,
+          "contains_answer_evidence": 0.11,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.98,
+      "included": [
+        "tickets-250d16ae"
+      ]
     },
     {
       "id": "ds-006",
       "category": "troubleshooting",
       "lang": "id",
       "question": "Kenapa akun FlowDesk saya tiba-tiba terkunci dan apa yang harus saya lakukan untuk membukanya kembali?",
-      "expected_decision": "escalated",
-      "decision": "abstained",
-      "match": false,
-      "latency_s": 11.653,
-      "jev_calls": 7,
-      "scorer_calls": 0,
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 14.505,
+      "jev_calls": 6,
+      "scorer_calls": 1,
       "retried": false,
-      "citations": null,
+      "citations": {
+        "total": 3,
+        "distinct_valid": 1,
+        "invalid": 0,
+        "completeness": 1.0
+      },
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "groundedness": null,
+      "groundedness": 0.37,
       "correctness": null,
-      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut."
+      "answer": "Akun FlowDesk Anda terkunci sementara karena **terlalu banyak percobaan login yang gagal**, yang memicu pemblokiran keamanan otomatis [1].\n\n**Langkah untuk membukanya:**\n1. **Hentikan percobaan login** lebih lanjut.\n2. **Tunggu** hingga pemblokiran otomatis habis (biasanya beberapa menit hingga jam)",
+      "gate_scores": {
+        "authentication-9808d0db": {
+          "chunk_id": "authentication-9808d0db",
+          "is_relevant": 0.3,
+          "contains_answer_evidence": 0.07,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "security-policy-9a722f3c": {
+          "chunk_id": "security-policy-9a722f3c",
+          "is_relevant": 0.4,
+          "contains_answer_evidence": 0.09,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "authentication-dec1be1c": {
+          "chunk_id": "authentication-dec1be1c",
+          "is_relevant": 0.2,
+          "contains_answer_evidence": 0.04,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "login-issues-960f5650": {
+          "chunk_id": "login-issues-960f5650",
+          "is_relevant": 0.92,
+          "contains_answer_evidence": 0.95,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "authentication-c0da8661": {
+          "chunk_id": "authentication-c0da8661",
+          "is_relevant": 0.09,
+          "contains_answer_evidence": 0.04,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.87,
+      "included": [
+        "login-issues-960f5650"
+      ]
     },
     {
       "id": "ds-007",
@@ -189,18 +573,583 @@
       "lang": "id",
       "question": "Berapa lama batas waktu pengajuan pengembalian dana (refund) untuk pembelian awal paket langganan?",
       "expected_decision": "answered",
-      "decision": "abstained",
-      "match": false,
-      "latency_s": 1.148,
-      "jev_calls": 7,
-      "scorer_calls": 0,
+      "decision": "answered",
+      "match": true,
+      "latency_s": 8.821,
+      "jev_calls": 6,
+      "scorer_calls": 1,
       "retried": false,
-      "citations": null,
+      "citations": {
+        "total": 2,
+        "distinct_valid": 2,
+        "invalid": 0,
+        "completeness": 0.4
+      },
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "groundedness": null,
-      "correctness": null,
-      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut."
+      "groundedness": 0.94,
+      "correctness": "correct",
+      "answer": "Batas waktu pengajuan pengembalian dana untuk pembelian awal paket langganan adalah **14 hari** terhitung dari tanggal pembelian awal langganan tersebut [1][2].",
+      "gate_scores": {
+        "refund-policy-60ddbbf5": {
+          "chunk_id": "refund-policy-60ddbbf5",
+          "is_relevant": 0.91,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "refund-policy-c48e0acd": {
+          "chunk_id": "refund-policy-c48e0acd",
+          "is_relevant": 0.91,
+          "contains_answer_evidence": 0.95,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "refund-policy-bf316509": {
+          "chunk_id": "refund-policy-bf316509",
+          "is_relevant": 0.95,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "refund-policy-3fad2195": {
+          "chunk_id": "refund-policy-3fad2195",
+          "is_relevant": 0.93,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "refund-policy-20ab5fed": {
+          "chunk_id": "refund-policy-20ab5fed",
+          "is_relevant": 0.93,
+          "contains_answer_evidence": 0.97,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.93,
+      "included": [
+        "refund-policy-60ddbbf5",
+        "refund-policy-c48e0acd",
+        "refund-policy-bf316509",
+        "refund-policy-3fad2195",
+        "refund-policy-20ab5fed"
+      ]
+    },
+    {
+      "id": "ds-008",
+      "category": "policy",
+      "lang": "en",
+      "question": "What is FlowDesk's standard data retention policy for customer support records after an account is terminated?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 6.025,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 2,
+        "distinct_valid": 2,
+        "invalid": 0,
+        "completeness": 0.5
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.95,
+      "correctness": "correct",
+      "answer": "FlowDesk's standard data retention policy retains customer support records for **12 months after account termination** [1][3]. Enterprise customers may have a different retention period if specified in their contract.",
+      "gate_scores": {
+        "data-retention-556b74c0": {
+          "chunk_id": "data-retention-556b74c0",
+          "is_relevant": 0.92,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "data-retention-639af35b": {
+          "chunk_id": "data-retention-639af35b",
+          "is_relevant": 0.86,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "data-retention-64dde014": {
+          "chunk_id": "data-retention-64dde014",
+          "is_relevant": 0.9,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "data-retention-d80fa054": {
+          "chunk_id": "data-retention-d80fa054",
+          "is_relevant": 0.92,
+          "contains_answer_evidence": 0.24,
+          "contains_prompt_injection": 0.05,
+          "ok": true,
+          "error": ""
+        },
+        "data-retention-2d136ea9": {
+          "chunk_id": "data-retention-2d136ea9",
+          "is_relevant": 0.88,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.94,
+      "included": [
+        "data-retention-556b74c0",
+        "data-retention-639af35b",
+        "data-retention-64dde014",
+        "data-retention-2d136ea9"
+      ]
+    },
+    {
+      "id": "ds-009",
+      "category": "troubleshooting",
+      "lang": "id",
+      "question": "Email reset password akun FlowDesk saya kok belum masuk ke inbox juga ya, harus cek ke mana?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 15.74,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 11,
+        "distinct_valid": 3,
+        "invalid": 0,
+        "completeness": 0.75
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.89,
+      "correctness": "correct",
+      "answer": "Jika email reset password FlowDesk belum masuk inbox, cek langkah-langkah berikut:\n\n1. **Periksa folder spam/junk** dan area karantina penyedia email Anda [1][2]\n2. **Pastikan alamat email yang dimasukkan benar** (cek ejaan, domain, spasi, atau email lama) [1][3]\n3. **Cari di kotak masuk** dengan ka",
+      "gate_scores": {
+        "login-issues-6baf51a5": {
+          "chunk_id": "login-issues-6baf51a5",
+          "is_relevant": 0.95,
+          "contains_answer_evidence": 0.96,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "email-not-received-04acc061": {
+          "chunk_id": "email-not-received-04acc061",
+          "is_relevant": 0.96,
+          "contains_answer_evidence": 0.95,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "login-issues-960f5650": {
+          "chunk_id": "login-issues-960f5650",
+          "is_relevant": 0.84,
+          "contains_answer_evidence": 0.54,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "email-not-received-55ca9ad1": {
+          "chunk_id": "email-not-received-55ca9ad1",
+          "is_relevant": 0.94,
+          "contains_answer_evidence": 0.96,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "email-not-received-acb29e2f": {
+          "chunk_id": "email-not-received-acb29e2f",
+          "is_relevant": 0.94,
+          "contains_answer_evidence": 0.96,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.87,
+      "included": [
+        "login-issues-6baf51a5",
+        "email-not-received-04acc061",
+        "email-not-received-55ca9ad1",
+        "email-not-received-acb29e2f"
+      ]
+    },
+    {
+      "id": "ds-010",
+      "category": "structured_data",
+      "lang": "en",
+      "question": "Which subscription tier supports Single Sign-On (SSO) and does FlowDesk provide role-based access control across all tiers?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 14.38,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 2,
+        "distinct_valid": 1,
+        "invalid": 0,
+        "completeness": 0.25
+      },
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "groundedness": 0.96,
+      "correctness": "correct",
+      "answer": "SSO is only available on the **Enterprise** plan [3]. Role-based access control is provided across **all tiers** (Free, Pro, and Enterprise) [3].",
+      "gate_scores": {
+        "security-policy-9097e16b": {
+          "chunk_id": "security-policy-9097e16b",
+          "is_relevant": 0.87,
+          "contains_answer_evidence": 0.43,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "security-policy-a8b3cd5e": {
+          "chunk_id": "security-policy-a8b3cd5e",
+          "is_relevant": 0.87,
+          "contains_answer_evidence": 0.62,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "authentication-dec1be1c": {
+          "chunk_id": "authentication-dec1be1c",
+          "is_relevant": 0.87,
+          "contains_answer_evidence": 0.62,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "security-policy-ef5709ef": {
+          "chunk_id": "security-policy-ef5709ef",
+          "is_relevant": 0.93,
+          "contains_answer_evidence": 0.97,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "security-policy-e13da378": {
+          "chunk_id": "security-policy-e13da378",
+          "is_relevant": 0.91,
+          "contains_answer_evidence": 0.79,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.96,
+      "included": [
+        "security-policy-a8b3cd5e",
+        "authentication-dec1be1c",
+        "security-policy-ef5709ef",
+        "security-policy-e13da378"
+      ]
+    },
+    {
+      "id": "ds-011",
+      "category": "structured_data",
+      "lang": "id",
+      "question": "Berapa kuota maksimal agen dan tiket bulanan di paket Free, serta apakah paket Free mendapatkan akses REST API?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 8.675,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 1,
+        "distinct_valid": 1,
+        "invalid": 0,
+        "completeness": 0.3333333333333333
+      },
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "groundedness": 0.97,
+      "correctness": "correct",
+      "answer": "Paket Free memiliki batas **3 agen** dan **1.000 tiket per bulan**, dan **tidak mendapatkan akses REST API** [3].",
+      "gate_scores": {
+        "rate-limits-767366b2": {
+          "chunk_id": "rate-limits-767366b2",
+          "is_relevant": 0.44,
+          "contains_answer_evidence": 0.2,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "pricing-plans-table": {
+          "chunk_id": "pricing-plans-table",
+          "is_relevant": 0.87,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "subscription-policy-4ee161e3": {
+          "chunk_id": "subscription-policy-4ee161e3",
+          "is_relevant": 0.76,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-5f044183": {
+          "chunk_id": "rate-limits-5f044183",
+          "is_relevant": 0.67,
+          "contains_answer_evidence": 0.24,
+          "contains_prompt_injection": 0.04,
+          "ok": true,
+          "error": ""
+        },
+        "subscription-policy-6fac9f1c": {
+          "chunk_id": "subscription-policy-6fac9f1c",
+          "is_relevant": 0.83,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.97,
+      "included": [
+        "pricing-plans-table",
+        "subscription-policy-4ee161e3",
+        "subscription-policy-6fac9f1c"
+      ]
+    },
+    {
+      "id": "ds-012",
+      "category": "api",
+      "lang": "en",
+      "question": "What fields make up a FlowDesk customer profile and what procedure should authorized users follow to create a customer?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 14.528,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 4,
+        "distinct_valid": 2,
+        "invalid": 0,
+        "completeness": 0.6666666666666666
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.91,
+      "correctness": "correct",
+      "answer": "**Customer profile fields** (from [3] and example in [1]):\n- `customer_id` (assigned automatically)\n- Name\n- Email address\n- Company (optional)\n- Tags\n- Custom fields\n\n**Procedure for authorized users to create a customer** (from [1]):\n1. Open **Customers** in FlowDesk.\n2. Select **Create customer**",
+      "gate_scores": {
+        "customers-751d4375": {
+          "chunk_id": "customers-751d4375",
+          "is_relevant": 0.84,
+          "contains_answer_evidence": 0.93,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "customer-management-dd46c842": {
+          "chunk_id": "customer-management-dd46c842",
+          "is_relevant": 0.84,
+          "contains_answer_evidence": 0.86,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "customer-management-8cb72386": {
+          "chunk_id": "customer-management-8cb72386",
+          "is_relevant": 0.83,
+          "contains_answer_evidence": 0.69,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "customers-d47b9420": {
+          "chunk_id": "customers-d47b9420",
+          "is_relevant": 0.75,
+          "contains_answer_evidence": 0.39,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "customers-08bf07f3": {
+          "chunk_id": "customers-08bf07f3",
+          "is_relevant": 0.78,
+          "contains_answer_evidence": 0.22,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.9,
+      "included": [
+        "customers-751d4375",
+        "customer-management-dd46c842",
+        "customer-management-8cb72386"
+      ]
+    },
+    {
+      "id": "ds-013",
+      "category": "troubleshooting",
+      "lang": "id",
+      "question": "Koneksi API saya kena error 429 Too Many Requests pas jam sibuk, ini kenapa dan gimana strategi retry yang direkomendasikan?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 17.343,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 11,
+        "distinct_valid": 5,
+        "invalid": 0,
+        "completeness": 1.0
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.62,
+      "correctness": "correct",
+      "answer": "Error 429 berarti aplikasi Anda melebihi batas permintaan API per menit sesuai paket langganan: **Pro = 60 req/menit**, **Enterprise = 300 req/menit** [1][4]. Saat jam sibuk, burst permintaan melebihi kuota ini.\n\n**Strategi retry yang direkomendasikan:**\n1. **Hentikan pengiriman permintaan** segera ",
+      "gate_scores": {
+        "api-errors-c3b6f906": {
+          "chunk_id": "api-errors-c3b6f906",
+          "is_relevant": 0.94,
+          "contains_answer_evidence": 0.95,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-ba4b10d2": {
+          "chunk_id": "rate-limits-ba4b10d2",
+          "is_relevant": 0.93,
+          "contains_answer_evidence": 0.9,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-ad5bf83f": {
+          "chunk_id": "rate-limits-ad5bf83f",
+          "is_relevant": 0.92,
+          "contains_answer_evidence": 0.83,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "api-errors-f44defad": {
+          "chunk_id": "api-errors-f44defad",
+          "is_relevant": 0.94,
+          "contains_answer_evidence": 0.95,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-767366b2": {
+          "chunk_id": "rate-limits-767366b2",
+          "is_relevant": 0.93,
+          "contains_answer_evidence": 0.95,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.88,
+      "included": [
+        "api-errors-c3b6f906",
+        "rate-limits-ba4b10d2",
+        "rate-limits-ad5bf83f",
+        "api-errors-f44defad",
+        "rate-limits-767366b2"
+      ]
+    },
+    {
+      "id": "ds-014",
+      "category": "api",
+      "lang": "en",
+      "question": "What HTTP status code and error code are returned when an API request lacks an authentication token, and how should the client fix it?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 18.59,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 1,
+        "distinct_valid": 1,
+        "invalid": 0,
+        "completeness": 0.25
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.81,
+      "correctness": "correct",
+      "answer": "HTTP status: **401 Unauthorized**  \nError code: **AUTH_MISSING_TOKEN**  \n\nFix: Include a valid API token in the `Authorization` header using Bearer syntax:  \n`Authorization: Bearer <API_TOKEN>` [1]",
+      "gate_scores": {
+        "error-codes-001": {
+          "chunk_id": "error-codes-001",
+          "is_relevant": 0.84,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "api-errors-66d6c659": {
+          "chunk_id": "api-errors-66d6c659",
+          "is_relevant": 0.81,
+          "contains_answer_evidence": 0.64,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "error-codes-002": {
+          "chunk_id": "error-codes-002",
+          "is_relevant": 0.38,
+          "contains_answer_evidence": 0.14,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "authentication-d6c90303": {
+          "chunk_id": "authentication-d6c90303",
+          "is_relevant": 0.89,
+          "contains_answer_evidence": 0.94,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "error-codes-000": {
+          "chunk_id": "error-codes-000",
+          "is_relevant": 0.69,
+          "contains_answer_evidence": 0.66,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.78,
+      "included": [
+        "error-codes-001",
+        "api-errors-66d6c659",
+        "authentication-d6c90303",
+        "error-codes-000"
+      ]
     },
     {
       "id": "ds-015",
@@ -208,18 +1157,209 @@
       "lang": "id",
       "question": "Bagaimana alur dan langkah-langkah awal untuk membuat workspace baru di FlowDesk menurut panduan onboarding?",
       "expected_decision": "answered",
-      "decision": "abstained",
-      "match": false,
-      "latency_s": 1.435,
-      "jev_calls": 7,
-      "scorer_calls": 0,
+      "decision": "answered",
+      "match": true,
+      "latency_s": 7.558,
+      "jev_calls": 6,
+      "scorer_calls": 1,
       "retried": false,
       "citations": null,
       "hit@5": 1.0,
       "recall@5": 1.0,
-      "groundedness": null,
-      "correctness": null,
-      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut."
+      "groundedness": 0.77,
+      "correctness": "correct",
+      "answer": "Berikut alur dan langkah-langkah awal untuk membuat workspace baru di FlowDesk:\n\n1. Buka halaman pendaftaran FlowDesk.\n2. Masukkan informasi akun Anda.\n3. Pilih nama untuk workspace Anda.\n4. Pilih paket langganan (Free, Pro, atau Enterprise).\n5. Selesaikan proses pembuatan akun.\n6. Masuk ke workspac",
+      "gate_scores": {
+        "getting-started-25384609": {
+          "chunk_id": "getting-started-25384609",
+          "is_relevant": 0.8,
+          "contains_answer_evidence": 0.17,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "getting-started-8d98e35f": {
+          "chunk_id": "getting-started-8d98e35f",
+          "is_relevant": 0.64,
+          "contains_answer_evidence": 0.45,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "authentication-9808d0db": {
+          "chunk_id": "authentication-9808d0db",
+          "is_relevant": 0.06,
+          "contains_answer_evidence": 0.04,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "getting-started-353ba74a": {
+          "chunk_id": "getting-started-353ba74a",
+          "is_relevant": 0.38,
+          "contains_answer_evidence": 0.23,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "getting-started-fce1abb0": {
+          "chunk_id": "getting-started-fce1abb0",
+          "is_relevant": 0.9,
+          "contains_answer_evidence": 0.95,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.79,
+      "included": [
+        "getting-started-fce1abb0"
+      ]
+    },
+    {
+      "id": "ds-016",
+      "category": "product_usage",
+      "lang": "en",
+      "question": "How can I automatically assign newly created tickets to specific agents using workflow automation?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 11.452,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 7,
+        "distinct_valid": 2,
+        "invalid": 0,
+        "completeness": 0.5
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.77,
+      "correctness": "correct",
+      "answer": "To automatically assign newly created tickets to specific agents:\n\n1. **Create an automation rule** in the Automation area of your workspace [4].\n2. **Select the trigger** `ticket.created` [3][4].\n3. **Add matching criteria** (optional) to target specific tickets (e.g., by category, priority, or cus",
+      "gate_scores": {
+        "ticket-management-cd181a37": {
+          "chunk_id": "ticket-management-cd181a37",
+          "is_relevant": 0.18,
+          "contains_answer_evidence": 0.06,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "getting-started-98d8bc8d": {
+          "chunk_id": "getting-started-98d8bc8d",
+          "is_relevant": 0.87,
+          "contains_answer_evidence": 0.59,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "ticket-management-1320c3f6": {
+          "chunk_id": "ticket-management-1320c3f6",
+          "is_relevant": 0.87,
+          "contains_answer_evidence": 0.62,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "ticket-management-32ca040a": {
+          "chunk_id": "ticket-management-32ca040a",
+          "is_relevant": 0.93,
+          "contains_answer_evidence": 0.96,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "automation-97d40942": {
+          "chunk_id": "automation-97d40942",
+          "is_relevant": 0.92,
+          "contains_answer_evidence": 0.94,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.78,
+      "included": [
+        "getting-started-98d8bc8d",
+        "ticket-management-1320c3f6",
+        "ticket-management-32ca040a",
+        "automation-97d40942"
+      ]
+    },
+    {
+      "id": "ds-017",
+      "category": "policy",
+      "lang": "id",
+      "question": "Apakah tagihan perpanjangan langganan bulanan (subscription renewal) bisa di-refund jika saya lupa membatalkan?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 12.237,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 6,
+        "distinct_valid": 3,
+        "invalid": 0,
+        "completeness": 1.0
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.67,
+      "correctness": "correct",
+      "answer": "Berdasarkan kebijakan FlowDesk, pembayaran perpanjangan (renewal) **umumnya tidak dapat di-refund** [1][2]. Masa refund 14 hari hanya berlaku untuk pembelian langganan awal, tidak untuk setiap perpanjangan bulanan [1][2].\n\nNamun, dalam keadaan luar biasa, Tim Dukungan FlowDesk **mungkin** menyetujui",
+      "gate_scores": {
+        "subscription-policy-6ff01b26": {
+          "chunk_id": "subscription-policy-6ff01b26",
+          "is_relevant": 0.94,
+          "contains_answer_evidence": 0.95,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "refund-policy-6e8f0e64": {
+          "chunk_id": "refund-policy-6e8f0e64",
+          "is_relevant": 0.95,
+          "contains_answer_evidence": 0.94,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "refund-policy-44b283b2": {
+          "chunk_id": "refund-policy-44b283b2",
+          "is_relevant": 0.94,
+          "contains_answer_evidence": 0.95,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "subscription-policy-c9732c67": {
+          "chunk_id": "subscription-policy-c9732c67",
+          "is_relevant": 0.56,
+          "contains_answer_evidence": 0.07,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "subscription-policy-af47d498": {
+          "chunk_id": "subscription-policy-af47d498",
+          "is_relevant": 0.39,
+          "contains_answer_evidence": 0.06,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.78,
+      "included": [
+        "subscription-policy-6ff01b26",
+        "refund-policy-6e8f0e64",
+        "refund-policy-44b283b2"
+      ]
     },
     {
       "id": "ds-018",
@@ -227,18 +1367,1431 @@
       "lang": "id",
       "question": "Bagaimana cara kerja aksi send_webhook pada automasi FlowDesk dan paket langganan minimal apa yang dibutuhkan?",
       "expected_decision": "abstained",
+      "decision": "answered",
+      "match": false,
+      "latency_s": 12.29,
+      "jev_calls": 12,
+      "scorer_calls": 1,
+      "retried": true,
+      "citations": {
+        "total": 6,
+        "distinct_valid": 3,
+        "invalid": 0,
+        "completeness": 0.75
+      },
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "groundedness": 0.76,
+      "correctness": null,
+      "answer": "Aksi **send_webhook** pada automasi FlowDesk memungkinkan Anda mengirim notifikasi HTTP POST ke endpoint eksternal saat trigger tertentu terpenuhi (seperti `ticket.created`, `ticket.updated`, dll.) [2]. FlowDesk akan mengirimkan payload event ke URL webhook yang dikonfigurasi, dan pengiriman yang ga",
+      "gate_scores": {
+        "getting-started-a477d5e0": {
+          "chunk_id": "getting-started-a477d5e0",
+          "is_relevant": 0.85,
+          "contains_answer_evidence": 0.53,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "webhooks-64bd90f1": {
+          "chunk_id": "webhooks-64bd90f1",
+          "is_relevant": 0.45,
+          "contains_answer_evidence": 0.14,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "webhooks-b2f08d17": {
+          "chunk_id": "webhooks-b2f08d17",
+          "is_relevant": 0.58,
+          "contains_answer_evidence": 0.42,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "webhooks-2667db98": {
+          "chunk_id": "webhooks-2667db98",
+          "is_relevant": 0.26,
+          "contains_answer_evidence": 0.08,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "webhooks-78e9e98d": {
+          "chunk_id": "webhooks-78e9e98d",
+          "is_relevant": 0.69,
+          "contains_answer_evidence": 0.18,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "webhooks-78dbc2d2": {
+          "chunk_id": "webhooks-78dbc2d2",
+          "is_relevant": 0.7,
+          "contains_answer_evidence": 0.57,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "ticket-management-32ca040a": {
+          "chunk_id": "ticket-management-32ca040a",
+          "is_relevant": 0.87,
+          "contains_answer_evidence": 0.87,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "webhook-failures-49aa0934": {
+          "chunk_id": "webhook-failures-49aa0934",
+          "is_relevant": 0.73,
+          "contains_answer_evidence": 0.75,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "api-endpoints-011": {
+          "chunk_id": "api-endpoints-011",
+          "is_relevant": 0.81,
+          "contains_answer_evidence": 0.82,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "webhooks-efa8dc11": {
+          "chunk_id": "webhooks-efa8dc11",
+          "is_relevant": 0.7,
+          "contains_answer_evidence": 0.18,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.85,
+      "included": [
+        "webhooks-78dbc2d2",
+        "ticket-management-32ca040a",
+        "webhook-failures-49aa0934",
+        "api-endpoints-011"
+      ]
+    },
+    {
+      "id": "ds-019",
+      "category": "product_usage",
+      "lang": "en",
+      "question": "What are the key performance metrics tracked in FlowDesk Analytics and Reporting?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 8.537,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 11,
+        "distinct_valid": 2,
+        "invalid": 0,
+        "completeness": 0.6666666666666666
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.93,
+      "correctness": "correct",
+      "answer": "FlowDesk Analytics tracks five core performance metrics:\n\n1. **Ticket volume** – Number of tickets handled over a period [2][3]\n2. **Resolution time** – Time taken to resolve tickets [2][3]\n3. **First response time** – Time to provide the first customer response [2][3]\n4. **Agent workload** – Distri",
+      "gate_scores": {
+        "analytics_and_reporting-f2329d60": {
+          "chunk_id": "analytics_and_reporting-f2329d60",
+          "is_relevant": 0.7,
+          "contains_answer_evidence": 0.11,
+          "contains_prompt_injection": 0.07,
+          "ok": true,
+          "error": ""
+        },
+        "getting-started-32a7243b": {
+          "chunk_id": "getting-started-32a7243b",
+          "is_relevant": 0.91,
+          "contains_answer_evidence": 0.97,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "analytics_and_reporting-265f192c": {
+          "chunk_id": "analytics_and_reporting-265f192c",
+          "is_relevant": 0.9,
+          "contains_answer_evidence": 0.93,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "analytics_and_reporting-f58a5967": {
+          "chunk_id": "analytics_and_reporting-f58a5967",
+          "is_relevant": 0.79,
+          "contains_answer_evidence": 0.15,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "analytics_and_reporting-2c9f663a": {
+          "chunk_id": "analytics_and_reporting-2c9f663a",
+          "is_relevant": 0.93,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.89,
+      "included": [
+        "getting-started-32a7243b",
+        "analytics_and_reporting-265f192c",
+        "analytics_and_reporting-2c9f663a"
+      ]
+    },
+    {
+      "id": "ds-020",
+      "category": "troubleshooting",
+      "lang": "en",
+      "question": "When making an API request to GET /v1/tickets/{ticket_id}, I receive a 404 Not Found with error code resource_not_found—what causes this and how can I resolve it?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 20.434,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 11,
+        "distinct_valid": 4,
+        "invalid": 0,
+        "completeness": 0.8
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.76,
+      "correctness": "correct",
+      "answer": "**Causes of `404 Not Found` with `resource_not_found`:**\n\n1. **Incorrect endpoint path** – e.g., using `/v1/ticket/` instead of `/v1/tickets/` [3]  \n2. **Invalid or non‑existent `ticket_id`** – the ID may be mistyped, deleted, or not accessible to your API token [1][2]  \n3. **Resource no longer avai",
+      "gate_scores": {
+        "api-errors-87c8d3c8": {
+          "chunk_id": "api-errors-87c8d3c8",
+          "is_relevant": 0.94,
+          "contains_answer_evidence": 0.97,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "error-codes-005": {
+          "chunk_id": "error-codes-005",
+          "is_relevant": 0.82,
+          "contains_answer_evidence": 0.89,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "api-errors-c8abaef3": {
+          "chunk_id": "api-errors-c8abaef3",
+          "is_relevant": 0.94,
+          "contains_answer_evidence": 0.96,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "api-errors-e3c78f53": {
+          "chunk_id": "api-errors-e3c78f53",
+          "is_relevant": 0.9,
+          "contains_answer_evidence": 0.86,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "api-errors-fb68897f": {
+          "chunk_id": "api-errors-fb68897f",
+          "is_relevant": 0.81,
+          "contains_answer_evidence": 0.88,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.93,
+      "included": [
+        "api-errors-87c8d3c8",
+        "error-codes-005",
+        "api-errors-c8abaef3",
+        "api-errors-e3c78f53",
+        "api-errors-fb68897f"
+      ]
+    },
+    {
+      "id": "ds-021",
+      "category": "product_usage",
+      "lang": "en",
+      "question": "Can support teams use custom ticket statuses like 'in_progress' or 'escalated' in FlowDesk, and how should tickets be assigned to agents?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 15.915,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 2,
+        "distinct_valid": 2,
+        "invalid": 0,
+        "completeness": 1.0
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.9,
+      "correctness": "correct",
+      "answer": "No, FlowDesk does not support custom ticket statuses. The system defines only four supported statuses: open, pending, resolved, and closed. Custom values like `in_progress` or `escalated` should not be used [1].\n\nTo assign a ticket to an agent:\n1. Open the ticket.\n2. Review the **Assigned Agent** fi",
+      "gate_scores": {
+        "ticket-management-e4a1a143": {
+          "chunk_id": "ticket-management-e4a1a143",
+          "is_relevant": 0.84,
+          "contains_answer_evidence": 0.93,
+          "contains_prompt_injection": 0.04,
+          "ok": true,
+          "error": ""
+        },
+        "getting-started-a477d5e0": {
+          "chunk_id": "getting-started-a477d5e0",
+          "is_relevant": 0.44,
+          "contains_answer_evidence": 0.14,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "ticket-management-d7d7c4e7": {
+          "chunk_id": "ticket-management-d7d7c4e7",
+          "is_relevant": 0.81,
+          "contains_answer_evidence": 0.17,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "getting-started-98d8bc8d": {
+          "chunk_id": "getting-started-98d8bc8d",
+          "is_relevant": 0.66,
+          "contains_answer_evidence": 0.19,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "ticket-management-27119cd3": {
+          "chunk_id": "ticket-management-27119cd3",
+          "is_relevant": 0.83,
+          "contains_answer_evidence": 0.78,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.89,
+      "included": [
+        "ticket-management-e4a1a143",
+        "ticket-management-27119cd3"
+      ]
+    },
+    {
+      "id": "ds-022",
+      "category": "troubleshooting",
+      "lang": "en",
+      "question": "When a webhook delivery fails with a 502 Bad Gateway response, how many times does FlowDesk retry before giving up and which error code represents this failure?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 4.665,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 1,
+        "distinct_valid": 1,
+        "invalid": 0,
+        "completeness": 1.0
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.95,
+      "correctness": "correct",
+      "answer": "FlowDesk retries failed webhook deliveries up to **3 times** before giving up, and the failure is represented by the **WEBHOOK_DELIVERY_FAILED** error code [1].",
+      "gate_scores": {
+        "webhooks-1328b75d": {
+          "chunk_id": "webhooks-1328b75d",
+          "is_relevant": 0.82,
+          "contains_answer_evidence": 0.35,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "webhook-failures-51dec741": {
+          "chunk_id": "webhook-failures-51dec741",
+          "is_relevant": 0.82,
+          "contains_answer_evidence": 0.31,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "error-codes-014": {
+          "chunk_id": "error-codes-014",
+          "is_relevant": 0.52,
+          "contains_answer_evidence": 0.17,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "error-codes-012": {
+          "chunk_id": "error-codes-012",
+          "is_relevant": 0.89,
+          "contains_answer_evidence": 0.97,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "webhook-failures-49aa0934": {
+          "chunk_id": "webhook-failures-49aa0934",
+          "is_relevant": 0.81,
+          "contains_answer_evidence": 0.35,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.95,
+      "included": [
+        "error-codes-012"
+      ]
+    },
+    {
+      "id": "ds-023",
+      "category": "unanswerable",
+      "lang": "id",
+      "question": "Apa rekomendasi terbaik dalam penamaan tag profil pelanggan dan penggunaan custom field agar data tidak duplikat?",
+      "expected_decision": "abstained",
+      "decision": "answered",
+      "match": false,
+      "latency_s": 20.878,
+      "jev_calls": 12,
+      "scorer_calls": 1,
+      "retried": true,
+      "citations": {
+        "total": 9,
+        "distinct_valid": 3,
+        "invalid": 0,
+        "completeness": 1.0
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.59,
+      "correctness": null,
+      "answer": "**Rekomendasi terbaik untuk penamaan tag & custom field agar data tidak duplikat:**\n\n1. **Tetapkan konvensi penamaan workspace-wide sebelum menambah field/tag**  \n   - Buat standar nama (mis. `customer_tier`, bukan `tier` + `customer_level`) dan terapkan secara konsisten di semua profil [1].  \n   - ",
+      "gate_scores": {
+        "customer-management-92129ead": {
+          "chunk_id": "customer-management-92129ead",
+          "is_relevant": 0.88,
+          "contains_answer_evidence": 0.84,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "customers-6b1ba507": {
+          "chunk_id": "customers-6b1ba507",
+          "is_relevant": 0.79,
+          "contains_answer_evidence": 0.73,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "customer-management-de0785b5": {
+          "chunk_id": "customer-management-de0785b5",
+          "is_relevant": 0.79,
+          "contains_answer_evidence": 0.53,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "customers-cbd27479": {
+          "chunk_id": "customers-cbd27479",
+          "is_relevant": 0.56,
+          "contains_answer_evidence": 0.15,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "customer-management-d56b6e1c": {
+          "chunk_id": "customer-management-d56b6e1c",
+          "is_relevant": 0.7,
+          "contains_answer_evidence": 0.28,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "api-endpoints-008": {
+          "chunk_id": "api-endpoints-008",
+          "is_relevant": 0.22,
+          "contains_answer_evidence": 0.09,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "customers-751d4375": {
+          "chunk_id": "customers-751d4375",
+          "is_relevant": 0.53,
+          "contains_answer_evidence": 0.3,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "customers-496f91cc": {
+          "chunk_id": "customers-496f91cc",
+          "is_relevant": 0.42,
+          "contains_answer_evidence": 0.14,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "customers-14c1044c": {
+          "chunk_id": "customers-14c1044c",
+          "is_relevant": 0.82,
+          "contains_answer_evidence": 0.67,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "customer-management-9f759475": {
+          "chunk_id": "customer-management-9f759475",
+          "is_relevant": 0.6,
+          "contains_answer_evidence": 0.25,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.8,
+      "included": [
+        "customer-management-92129ead",
+        "customers-6b1ba507",
+        "customers-14c1044c"
+      ]
+    },
+    {
+      "id": "ds-024",
+      "category": "troubleshooting",
+      "lang": "id",
+      "question": "Browser saya mental terus balik ke halaman login setiap habis masukin email dan password, solusinya apa?",
+      "expected_decision": "answered",
+      "decision": "abstained",
+      "match": false,
+      "latency_s": 2.313,
+      "jev_calls": 12,
+      "scorer_calls": 0,
+      "retried": true,
+      "citations": null,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": null,
+      "correctness": null,
+      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut.",
+      "gate_scores": {
+        "login-issues-960f5650": {
+          "chunk_id": "login-issues-960f5650",
+          "is_relevant": 0.79,
+          "contains_answer_evidence": 0.74,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "login-issues-7687c13e": {
+          "chunk_id": "login-issues-7687c13e",
+          "is_relevant": 0.74,
+          "contains_answer_evidence": 0.53,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "login-issues-e0d235f5": {
+          "chunk_id": "login-issues-e0d235f5",
+          "is_relevant": 0.91,
+          "contains_answer_evidence": 0.91,
+          "contains_prompt_injection": 0.04,
+          "ok": true,
+          "error": ""
+        },
+        "login-issues-349e3c19": {
+          "chunk_id": "login-issues-349e3c19",
+          "is_relevant": 0.92,
+          "contains_answer_evidence": 0.91,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "login-issues-29a68e6b": {
+          "chunk_id": "login-issues-29a68e6b",
+          "is_relevant": 0.92,
+          "contains_answer_evidence": 0.89,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "login-issues-f44cb85b": {
+          "chunk_id": "login-issues-f44cb85b",
+          "is_relevant": 0.93,
+          "contains_answer_evidence": 0.95,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "email-not-received-04acc061": {
+          "chunk_id": "email-not-received-04acc061",
+          "is_relevant": 0.08,
+          "contains_answer_evidence": 0.04,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "login-issues-8beaf37b": {
+          "chunk_id": "login-issues-8beaf37b",
+          "is_relevant": 0.58,
+          "contains_answer_evidence": 0.12,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "login-issues-21c3fba1": {
+          "chunk_id": "login-issues-21c3fba1",
+          "is_relevant": 0.65,
+          "contains_answer_evidence": 0.5,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "login-issues-6baf51a5": {
+          "chunk_id": "login-issues-6baf51a5",
+          "is_relevant": 0.22,
+          "contains_answer_evidence": 0.09,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.69,
+      "included": [
+        "login-issues-960f5650",
+        "login-issues-e0d235f5",
+        "login-issues-349e3c19",
+        "login-issues-29a68e6b",
+        "login-issues-f44cb85b"
+      ]
+    },
+    {
+      "id": "ds-025",
+      "category": "api",
+      "lang": "en",
+      "question": "What HTTP method and endpoint should be called to list all configured webhooks, and what plan is required?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 4.336,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 1,
+        "distinct_valid": 1,
+        "invalid": 0,
+        "completeness": 1.0
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.95,
+      "correctness": "correct",
+      "answer": "To list all configured webhooks, call **GET /webhooks**. This requires the **Pro** plan [1].",
+      "gate_scores": {
+        "webhooks-6a502faf": {
+          "chunk_id": "webhooks-6a502faf",
+          "is_relevant": 0.13,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "api-endpoints-012": {
+          "chunk_id": "api-endpoints-012",
+          "is_relevant": 0.75,
+          "contains_answer_evidence": 0.97,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "api-endpoints-011": {
+          "chunk_id": "api-endpoints-011",
+          "is_relevant": 0.3,
+          "contains_answer_evidence": 0.07,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "api-endpoints-014": {
+          "chunk_id": "api-endpoints-014",
+          "is_relevant": 0.15,
+          "contains_answer_evidence": 0.04,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "webhooks-b2f08d17": {
+          "chunk_id": "webhooks-b2f08d17",
+          "is_relevant": 0.44,
+          "contains_answer_evidence": 0.11,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.96,
+      "included": [
+        "api-endpoints-012"
+      ]
+    },
+    {
+      "id": "ds-026",
+      "category": "unanswerable",
+      "lang": "id",
+      "question": "Saya baru upgrade ke Pro 5 hari lalu dan ingin membatalkan langganan, apakah saya berhak mendapat refund dan bagaimana akun saya berubah setelah dibatalkan?",
+      "expected_decision": "abstained",
       "decision": "abstained",
       "match": true,
-      "latency_s": 1.33,
+      "latency_s": 2.094,
+      "jev_calls": 12,
+      "scorer_calls": 0,
+      "retried": true,
+      "citations": null,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": null,
+      "correctness": null,
+      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut.",
+      "gate_scores": {
+        "subscription-policy-33de633b": {
+          "chunk_id": "subscription-policy-33de633b",
+          "is_relevant": 0.35,
+          "contains_answer_evidence": 0.06,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "data-retention-2d136ea9": {
+          "chunk_id": "data-retention-2d136ea9",
+          "is_relevant": 0.5,
+          "contains_answer_evidence": 0.14,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "subscription-policy-6ff01b26": {
+          "chunk_id": "subscription-policy-6ff01b26",
+          "is_relevant": 0.93,
+          "contains_answer_evidence": 0.83,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "subscription-policy-9546c271": {
+          "chunk_id": "subscription-policy-9546c271",
+          "is_relevant": 0.27,
+          "contains_answer_evidence": 0.12,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "refund-policy-60ddbbf5": {
+          "chunk_id": "refund-policy-60ddbbf5",
+          "is_relevant": 0.92,
+          "contains_answer_evidence": 0.79,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "refund-policy-3fad2195": {
+          "chunk_id": "refund-policy-3fad2195",
+          "is_relevant": 0.94,
+          "contains_answer_evidence": 0.66,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "refund-policy-c48e0acd": {
+          "chunk_id": "refund-policy-c48e0acd",
+          "is_relevant": 0.92,
+          "contains_answer_evidence": 0.51,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "refund-policy-e4c8e31e": {
+          "chunk_id": "refund-policy-e4c8e31e",
+          "is_relevant": 0.91,
+          "contains_answer_evidence": 0.74,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "refund-policy-44b283b2": {
+          "chunk_id": "refund-policy-44b283b2",
+          "is_relevant": 0.91,
+          "contains_answer_evidence": 0.73,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "webhook-failures-49aa0934": {
+          "chunk_id": "webhook-failures-49aa0934",
+          "is_relevant": 0.02,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.12,
+      "included": [
+        "subscription-policy-6ff01b26",
+        "refund-policy-60ddbbf5",
+        "refund-policy-3fad2195",
+        "refund-policy-e4c8e31e",
+        "refund-policy-44b283b2"
+      ]
+    },
+    {
+      "id": "ds-027",
+      "category": "troubleshooting",
+      "lang": "en",
+      "question": "Why does my automation rule appear to execute repeatedly on ticket updates and how can I prevent it?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 13.107,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 6,
+        "distinct_valid": 3,
+        "invalid": 0,
+        "completeness": 0.75
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.69,
+      "correctness": "correct",
+      "answer": "Your automation rule likely executes repeatedly because it uses a **broad `ticket.updated` trigger with insufficiently specific conditions**. When one workflow updates a ticket, that update can re‑match the same (or another) rule, causing a loop or repeated runs [4].\n\n**To prevent it:**\n1. **Narrow ",
+      "gate_scores": {
+        "automation-8e902e63": {
+          "chunk_id": "automation-8e902e63",
+          "is_relevant": 0.92,
+          "contains_answer_evidence": 0.93,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "automation-97d40942": {
+          "chunk_id": "automation-97d40942",
+          "is_relevant": 0.68,
+          "contains_answer_evidence": 0.52,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "automation-7374a0e2": {
+          "chunk_id": "automation-7374a0e2",
+          "is_relevant": 0.89,
+          "contains_answer_evidence": 0.85,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "ticket-management-32ca040a": {
+          "chunk_id": "ticket-management-32ca040a",
+          "is_relevant": 0.76,
+          "contains_answer_evidence": 0.64,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "automation-4bcc2cf8": {
+          "chunk_id": "automation-4bcc2cf8",
+          "is_relevant": 0.95,
+          "contains_answer_evidence": 0.96,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.88,
+      "included": [
+        "automation-8e902e63",
+        "automation-7374a0e2",
+        "ticket-management-32ca040a",
+        "automation-4bcc2cf8"
+      ]
+    },
+    {
+      "id": "ds-028",
+      "category": "simple_factual",
+      "lang": "id",
+      "question": "Apa saja empat status tiket yang valid di FlowDesk dan kapan status 'pending' sebaiknya digunakan?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 9.887,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 2,
+        "distinct_valid": 1,
+        "invalid": 0,
+        "completeness": 0.5
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.95,
+      "correctness": "correct",
+      "answer": "Empat status tiket yang valid di FlowDesk adalah **open, pending, resolved, dan closed** [2].  \nStatus **pending** sebaiknya digunakan ketika pekerjaan sedang menunggu sementara informasi atau tindakan tambahan sebelum dapat melanjutkan proses [2].",
+      "gate_scores": {
+        "ticket-management-0274d351": {
+          "chunk_id": "ticket-management-0274d351",
+          "is_relevant": 0.71,
+          "contains_answer_evidence": 0.97,
+          "contains_prompt_injection": 0.04,
+          "ok": true,
+          "error": ""
+        },
+        "ticket-management-e329a815": {
+          "chunk_id": "ticket-management-e329a815",
+          "is_relevant": 0.18,
+          "contains_answer_evidence": 0.05,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "getting-started-c26046d1": {
+          "chunk_id": "getting-started-c26046d1",
+          "is_relevant": 0.79,
+          "contains_answer_evidence": 0.41,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "ticket-management-e4a1a143": {
+          "chunk_id": "ticket-management-e4a1a143",
+          "is_relevant": 0.8,
+          "contains_answer_evidence": 0.95,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "tickets-250d16ae": {
+          "chunk_id": "tickets-250d16ae",
+          "is_relevant": 0.81,
+          "contains_answer_evidence": 0.47,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.96,
+      "included": [
+        "ticket-management-0274d351",
+        "ticket-management-e4a1a143"
+      ]
+    },
+    {
+      "id": "ds-029",
+      "category": "troubleshooting",
+      "lang": "en",
+      "question": "We are getting throttled during high traffic on the Pro tier—what is the exact requests per minute limit and how do we monitor the reset window?",
+      "expected_decision": "answered",
+      "decision": "abstained",
+      "match": false,
+      "latency_s": 2.491,
+      "jev_calls": 12,
+      "scorer_calls": 0,
+      "retried": true,
+      "citations": null,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": null,
+      "correctness": null,
+      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut.",
+      "gate_scores": {
+        "rate-limits-364dddf3": {
+          "chunk_id": "rate-limits-364dddf3",
+          "is_relevant": 0.92,
+          "contains_answer_evidence": 0.51,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-27a4a8fb": {
+          "chunk_id": "rate-limits-27a4a8fb",
+          "is_relevant": 0.89,
+          "contains_answer_evidence": 0.86,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "api-errors-f44defad": {
+          "chunk_id": "api-errors-f44defad",
+          "is_relevant": 0.92,
+          "contains_answer_evidence": 0.55,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-5afe24fd": {
+          "chunk_id": "rate-limits-5afe24fd",
+          "is_relevant": 0.87,
+          "contains_answer_evidence": 0.52,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "api-errors-c3b6f906": {
+          "chunk_id": "api-errors-c3b6f906",
+          "is_relevant": 0.91,
+          "contains_answer_evidence": 0.56,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-767366b2": {
+          "chunk_id": "rate-limits-767366b2",
+          "is_relevant": 0.9,
+          "contains_answer_evidence": 0.94,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-1e51311b": {
+          "chunk_id": "rate-limits-1e51311b",
+          "is_relevant": 0.93,
+          "contains_answer_evidence": 0.6,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-ad5bf83f": {
+          "chunk_id": "rate-limits-ad5bf83f",
+          "is_relevant": 0.78,
+          "contains_answer_evidence": 0.07,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "api-errors-9a00cde1": {
+          "chunk_id": "api-errors-9a00cde1",
+          "is_relevant": 0.91,
+          "contains_answer_evidence": 0.61,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "error-codes-004": {
+          "chunk_id": "error-codes-004",
+          "is_relevant": 0.82,
+          "contains_answer_evidence": 0.05,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.27,
+      "included": [
+        "rate-limits-27a4a8fb",
+        "api-errors-f44defad",
+        "api-errors-c3b6f906",
+        "rate-limits-767366b2",
+        "rate-limits-1e51311b",
+        "api-errors-9a00cde1"
+      ]
+    },
+    {
+      "id": "ds-030",
+      "category": "structured_data",
+      "lang": "id",
+      "question": "Apa perbedaan fitur pelaporan antara Standard Reporting dan Advanced Analytics, serta paket mana saja yang memiliki Advanced Analytics?",
+      "expected_decision": "answered",
+      "decision": "abstained",
+      "match": false,
+      "latency_s": 2.263,
+      "jev_calls": 12,
+      "scorer_calls": 0,
+      "retried": true,
+      "citations": null,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": null,
+      "correctness": null,
+      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut.",
+      "gate_scores": {
+        "analytics_and_reporting-1f331284": {
+          "chunk_id": "analytics_and_reporting-1f331284",
+          "is_relevant": 0.81,
+          "contains_answer_evidence": 0.73,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "analytics_and_reporting-23d95bd0": {
+          "chunk_id": "analytics_and_reporting-23d95bd0",
+          "is_relevant": 0.5,
+          "contains_answer_evidence": 0.26,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "analytics_and_reporting-2c9f663a": {
+          "chunk_id": "analytics_and_reporting-2c9f663a",
+          "is_relevant": 0.8,
+          "contains_answer_evidence": 0.72,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "feature-comparison-table": {
+          "chunk_id": "feature-comparison-table",
+          "is_relevant": 0.59,
+          "contains_answer_evidence": 0.37,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "analytics_and_reporting-86732040": {
+          "chunk_id": "analytics_and_reporting-86732040",
+          "is_relevant": 0.65,
+          "contains_answer_evidence": 0.31,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "pricing-plans-table": {
+          "chunk_id": "pricing-plans-table",
+          "is_relevant": 0.5,
+          "contains_answer_evidence": 0.33,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "subscription-policy-4ee161e3": {
+          "chunk_id": "subscription-policy-4ee161e3",
+          "is_relevant": 0.63,
+          "contains_answer_evidence": 0.38,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "analytics_and_reporting-f2329d60": {
+          "chunk_id": "analytics_and_reporting-f2329d60",
+          "is_relevant": 0.16,
+          "contains_answer_evidence": 0.04,
+          "contains_prompt_injection": 0.05,
+          "ok": true,
+          "error": ""
+        },
+        "analytics_and_reporting-265f192c": {
+          "chunk_id": "analytics_and_reporting-265f192c",
+          "is_relevant": 0.29,
+          "contains_answer_evidence": 0.04,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "analytics_and_reporting-8b2f2a51": {
+          "chunk_id": "analytics_and_reporting-8b2f2a51",
+          "is_relevant": 0.18,
+          "contains_answer_evidence": 0.04,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.52,
+      "included": [
+        "analytics_and_reporting-1f331284",
+        "analytics_and_reporting-2c9f663a"
+      ]
+    },
+    {
+      "id": "ds-031",
+      "category": "simple_factual",
+      "lang": "id",
+      "question": "Apakah paket Pro mendukung webhook?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 54.254,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 2,
+        "distinct_valid": 2,
+        "invalid": 0,
+        "completeness": 0.4
+      },
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "groundedness": 0.97,
+      "correctness": "correct",
+      "answer": "Ya, paket Pro mendukung webhook. [1][3]",
+      "gate_scores": {
+        "webhooks-de8fc8d2": {
+          "chunk_id": "webhooks-de8fc8d2",
+          "is_relevant": 0.91,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "webhooks-b2f08d17": {
+          "chunk_id": "webhooks-b2f08d17",
+          "is_relevant": 0.88,
+          "contains_answer_evidence": 0.96,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "webhook-failures-49aa0934": {
+          "chunk_id": "webhook-failures-49aa0934",
+          "is_relevant": 0.9,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "webhooks-a5e6d3f1": {
+          "chunk_id": "webhooks-a5e6d3f1",
+          "is_relevant": 0.9,
+          "contains_answer_evidence": 0.97,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "api-endpoints-013": {
+          "chunk_id": "api-endpoints-013",
+          "is_relevant": 0.91,
+          "contains_answer_evidence": 0.96,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.94,
+      "included": [
+        "webhooks-de8fc8d2",
+        "webhooks-b2f08d17",
+        "webhook-failures-49aa0934",
+        "webhooks-a5e6d3f1",
+        "api-endpoints-013"
+      ]
+    },
+    {
+      "id": "ds-032",
+      "category": "structured_data",
+      "lang": "id",
+      "question": "Berapa rate limit API paket Pro dan paket Enterprise?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 23.332,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 2,
+        "distinct_valid": 2,
+        "invalid": 0,
+        "completeness": 0.6666666666666666
+      },
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "groundedness": 0.98,
+      "correctness": "correct",
+      "answer": "Paket **Pro**: 60 permintaan per menit.  \nPaket **Enterprise**: 300 permintaan per menit.  \n\n[1][3]",
+      "gate_scores": {
+        "rate-limits-41162ea4": {
+          "chunk_id": "rate-limits-41162ea4",
+          "is_relevant": 0.88,
+          "contains_answer_evidence": 0.15,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-8c451904": {
+          "chunk_id": "rate-limits-8c451904",
+          "is_relevant": 0.84,
+          "contains_answer_evidence": 0.96,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "error-codes-003": {
+          "chunk_id": "error-codes-003",
+          "is_relevant": 0.92,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "api-errors-23d4ee25": {
+          "chunk_id": "api-errors-23d4ee25",
+          "is_relevant": 0.85,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-1e51311b": {
+          "chunk_id": "rate-limits-1e51311b",
+          "is_relevant": 0.86,
+          "contains_answer_evidence": 0.2,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.97,
+      "included": [
+        "rate-limits-8c451904",
+        "error-codes-003",
+        "api-errors-23d4ee25"
+      ]
+    },
+    {
+      "id": "ds-034",
+      "category": "unanswerable",
+      "lang": "id",
+      "question": "Berapa harga saham FlowDesk di bursa?",
+      "expected_decision": "escalated",
+      "decision": "escalated",
+      "match": true,
+      "latency_s": 1.259,
       "jev_calls": 7,
       "scorer_calls": 0,
       "retried": false,
       "citations": null,
-      "hit@5": 0.0,
-      "recall@5": 0.0,
+      "hit@5": null,
+      "recall@5": null,
       "groundedness": null,
       "correctness": null,
-      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut."
+      "answer": "Saya akan meneruskan kasus ini ke tim support untuk diperiksa.",
+      "gate_scores": {
+        "customers-bf923488": {
+          "chunk_id": "customers-bf923488",
+          "is_relevant": 0.02,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "authentication-dec1be1c": {
+          "chunk_id": "authentication-dec1be1c",
+          "is_relevant": 0.02,
+          "contains_answer_evidence": 0.01,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "security-policy-e13da378": {
+          "chunk_id": "security-policy-e13da378",
+          "is_relevant": 0.03,
+          "contains_answer_evidence": 0.01,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "subscription-policy-3c2f896c": {
+          "chunk_id": "subscription-policy-3c2f896c",
+          "is_relevant": 0.03,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "customers-d47b9420": {
+          "chunk_id": "customers-d47b9420",
+          "is_relevant": 0.02,
+          "contains_answer_evidence": 0.01,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": null,
+      "included": []
+    },
+    {
+      "id": "ds-035",
+      "category": "unanswerable",
+      "lang": "id",
+      "question": "Kenapa aplikasi mobile FlowDesk crash saat membuka attachment?",
+      "expected_decision": "abstained",
+      "decision": "abstained",
+      "match": true,
+      "latency_s": 1.762,
+      "jev_calls": 7,
+      "scorer_calls": 0,
+      "retried": false,
+      "citations": null,
+      "hit@5": null,
+      "recall@5": null,
+      "groundedness": null,
+      "correctness": null,
+      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut.",
+      "gate_scores": {
+        "webhooks-64bd90f1": {
+          "chunk_id": "webhooks-64bd90f1",
+          "is_relevant": 0.03,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "authentication-ec3e06ba": {
+          "chunk_id": "authentication-ec3e06ba",
+          "is_relevant": 0.04,
+          "contains_answer_evidence": 0.03,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "api-errors-7333cfc4": {
+          "chunk_id": "api-errors-7333cfc4",
+          "is_relevant": 0.05,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "authentication-dec1be1c": {
+          "chunk_id": "authentication-dec1be1c",
+          "is_relevant": 0.03,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "security-policy-9a722f3c": {
+          "chunk_id": "security-policy-9a722f3c",
+          "is_relevant": 0.03,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": null,
+      "included": []
     },
     {
       "id": "ds-036",
@@ -257,7 +2810,10 @@
       "recall@5": null,
       "groundedness": null,
       "correctness": null,
-      "answer": "Maaf, saya tidak dapat membantu dengan permintaan tersebut."
+      "answer": "Maaf, saya tidak dapat membantu dengan permintaan tersebut.",
+      "gate_scores": null,
+      "completeness": null,
+      "included": null
     },
     {
       "id": "ds-037",
@@ -267,16 +2823,1244 @@
       "expected_decision": "abstained",
       "decision": "abstained",
       "match": true,
-      "latency_s": 11.683,
+      "latency_s": 1.038,
       "jev_calls": 7,
       "scorer_calls": 0,
       "retried": false,
       "citations": null,
       "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": null,
+      "correctness": null,
+      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut.",
+      "gate_scores": {
+        "pricing-plans-table": {
+          "chunk_id": "pricing-plans-table",
+          "is_relevant": 0.41,
+          "contains_answer_evidence": 0.1,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-767366b2": {
+          "chunk_id": "rate-limits-767366b2",
+          "is_relevant": 0.06,
+          "contains_answer_evidence": 0.06,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "tickets-e438b465": {
+          "chunk_id": "tickets-e438b465",
+          "is_relevant": 0.05,
+          "contains_answer_evidence": 0.06,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "feature-comparison-table": {
+          "chunk_id": "feature-comparison-table",
+          "is_relevant": 0.17,
+          "contains_answer_evidence": 0.06,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "subscription-policy-3c2f896c": {
+          "chunk_id": "subscription-policy-3c2f896c",
+          "is_relevant": 0.37,
+          "contains_answer_evidence": 0.09,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": null,
+      "included": []
+    },
+    {
+      "id": "ds-038",
+      "category": "ambiguous",
+      "lang": "en",
+      "question": "How do I reset it?",
+      "expected_decision": "abstained",
+      "decision": "answered",
+      "match": false,
+      "latency_s": 30.23,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 8,
+        "distinct_valid": 2,
+        "invalid": 0,
+        "completeness": 0.6666666666666666
+      },
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "groundedness": 0.9,
+      "correctness": null,
+      "answer": "To reset your FlowDesk password:\n\n1. Open the FlowDesk login page.\n2. Select **Forgot password?**\n3. Enter the email address associated with your FlowDesk account.\n4. Submit the request.\n5. Check your email inbox (and spam/junk folders) for the password-reset message [1][2].\n6. Open the **newest** r",
+      "gate_scores": {
+        "login-issues-7687c13e": {
+          "chunk_id": "login-issues-7687c13e",
+          "is_relevant": 0.79,
+          "contains_answer_evidence": 0.76,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "login-issues-6baf51a5": {
+          "chunk_id": "login-issues-6baf51a5",
+          "is_relevant": 0.89,
+          "contains_answer_evidence": 0.92,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "email-not-received-04acc061": {
+          "chunk_id": "email-not-received-04acc061",
+          "is_relevant": 0.87,
+          "contains_answer_evidence": 0.9,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "login-issues-960f5650": {
+          "chunk_id": "login-issues-960f5650",
+          "is_relevant": 0.85,
+          "contains_answer_evidence": 0.83,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "login-issues-349e3c19": {
+          "chunk_id": "login-issues-349e3c19",
+          "is_relevant": 0.31,
+          "contains_answer_evidence": 0.38,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.78,
+      "included": [
+        "login-issues-7687c13e",
+        "login-issues-6baf51a5",
+        "email-not-received-04acc061",
+        "login-issues-960f5650"
+      ]
+    },
+    {
+      "id": "ds-039",
+      "category": "ambiguous",
+      "lang": "id",
+      "question": "Bagaimana cara melihat log di FlowDesk?",
+      "expected_decision": "abstained",
+      "decision": "abstained",
+      "match": true,
+      "latency_s": 1.54,
+      "jev_calls": 12,
+      "scorer_calls": 0,
+      "retried": true,
+      "citations": null,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "groundedness": null,
+      "correctness": null,
+      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut.",
+      "gate_scores": {
+        "security-policy-673b050d": {
+          "chunk_id": "security-policy-673b050d",
+          "is_relevant": 0.64,
+          "contains_answer_evidence": 0.09,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "analytics_and_reporting-265f192c": {
+          "chunk_id": "analytics_and_reporting-265f192c",
+          "is_relevant": 0.12,
+          "contains_answer_evidence": 0.06,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "authentication-9808d0db": {
+          "chunk_id": "authentication-9808d0db",
+          "is_relevant": 0.06,
+          "contains_answer_evidence": 0.03,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "analytics_and_reporting-f58a5967": {
+          "chunk_id": "analytics_and_reporting-f58a5967",
+          "is_relevant": 0.23,
+          "contains_answer_evidence": 0.08,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "security-policy-a8b3cd5e": {
+          "chunk_id": "security-policy-a8b3cd5e",
+          "is_relevant": 0.59,
+          "contains_answer_evidence": 0.13,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "customers-4f22c8b9": {
+          "chunk_id": "customers-4f22c8b9",
+          "is_relevant": 0.06,
+          "contains_answer_evidence": 0.03,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "analytics_and_reporting-8b2f2a51": {
+          "chunk_id": "analytics_and_reporting-8b2f2a51",
+          "is_relevant": 0.13,
+          "contains_answer_evidence": 0.08,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "customers-d47b9420": {
+          "chunk_id": "customers-d47b9420",
+          "is_relevant": 0.06,
+          "contains_answer_evidence": 0.03,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "getting-started-32a7243b": {
+          "chunk_id": "getting-started-32a7243b",
+          "is_relevant": 0.09,
+          "contains_answer_evidence": 0.04,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "customers-bf923488": {
+          "chunk_id": "customers-bf923488",
+          "is_relevant": 0.06,
+          "contains_answer_evidence": 0.03,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": null,
+      "included": []
+    },
+    {
+      "id": "ds-040",
+      "category": "ambiguous",
+      "lang": "en",
+      "question": "What is the limit for tickets?",
+      "expected_decision": "abstained",
+      "decision": "abstained",
+      "match": true,
+      "latency_s": 2.201,
+      "jev_calls": 12,
+      "scorer_calls": 0,
+      "retried": true,
+      "citations": null,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "groundedness": null,
+      "correctness": null,
+      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut.",
+      "gate_scores": {
+        "rate-limits-3c2ad3aa": {
+          "chunk_id": "rate-limits-3c2ad3aa",
+          "is_relevant": 0.77,
+          "contains_answer_evidence": 0.81,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "api-errors-9a00cde1": {
+          "chunk_id": "api-errors-9a00cde1",
+          "is_relevant": 0.43,
+          "contains_answer_evidence": 0.46,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "subscription-policy-6fac9f1c": {
+          "chunk_id": "subscription-policy-6fac9f1c",
+          "is_relevant": 0.9,
+          "contains_answer_evidence": 0.93,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "tickets-384370ad": {
+          "chunk_id": "tickets-384370ad",
+          "is_relevant": 0.62,
+          "contains_answer_evidence": 0.62,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-ba4b10d2": {
+          "chunk_id": "rate-limits-ba4b10d2",
+          "is_relevant": 0.47,
+          "contains_answer_evidence": 0.39,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-02807fdd": {
+          "chunk_id": "rate-limits-02807fdd",
+          "is_relevant": 0.23,
+          "contains_answer_evidence": 0.15,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-ba1dc95a": {
+          "chunk_id": "rate-limits-ba1dc95a",
+          "is_relevant": 0.36,
+          "contains_answer_evidence": 0.27,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-1e51311b": {
+          "chunk_id": "rate-limits-1e51311b",
+          "is_relevant": 0.26,
+          "contains_answer_evidence": 0.23,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "pricing-plans-table": {
+          "chunk_id": "pricing-plans-table",
+          "is_relevant": 0.91,
+          "contains_answer_evidence": 0.88,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-767366b2": {
+          "chunk_id": "rate-limits-767366b2",
+          "is_relevant": 0.64,
+          "contains_answer_evidence": 0.75,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.53,
+      "included": [
+        "rate-limits-3c2ad3aa",
+        "subscription-policy-6fac9f1c",
+        "tickets-384370ad",
+        "pricing-plans-table",
+        "rate-limits-767366b2"
+      ]
+    },
+    {
+      "id": "ds-041",
+      "category": "ambiguous",
+      "lang": "id",
+      "question": "Kenapa saya tidak bisa membuka halaman pengaturan?",
+      "expected_decision": "abstained",
+      "decision": "abstained",
+      "match": true,
+      "latency_s": 1.013,
+      "jev_calls": 7,
+      "scorer_calls": 0,
+      "retried": false,
+      "citations": null,
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "groundedness": null,
+      "correctness": null,
+      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut.",
+      "gate_scores": {
+        "webhooks-4bd57529": {
+          "chunk_id": "webhooks-4bd57529",
+          "is_relevant": 0.24,
+          "contains_answer_evidence": 0.05,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "login-issues-7687c13e": {
+          "chunk_id": "login-issues-7687c13e",
+          "is_relevant": 0.08,
+          "contains_answer_evidence": 0.04,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "webhook-failures-ff037047": {
+          "chunk_id": "webhook-failures-ff037047",
+          "is_relevant": 0.04,
+          "contains_answer_evidence": 0.04,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "login-issues-e0d235f5": {
+          "chunk_id": "login-issues-e0d235f5",
+          "is_relevant": 0.1,
+          "contains_answer_evidence": 0.08,
+          "contains_prompt_injection": 0.04,
+          "ok": true,
+          "error": ""
+        },
+        "webhooks-a5e6d3f1": {
+          "chunk_id": "webhooks-a5e6d3f1",
+          "is_relevant": 0.04,
+          "contains_answer_evidence": 0.03,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": null,
+      "included": []
+    },
+    {
+      "id": "ds-042",
+      "category": "unanswerable",
+      "lang": "id",
+      "question": "Apakah FlowDesk menyediakan aplikasi native untuk iOS dan Android di App Store?",
+      "expected_decision": "abstained",
+      "decision": "abstained",
+      "match": true,
+      "latency_s": 1.21,
+      "jev_calls": 7,
+      "scorer_calls": 0,
+      "retried": false,
+      "citations": null,
+      "hit@5": null,
+      "recall@5": null,
+      "groundedness": null,
+      "correctness": null,
+      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut.",
+      "gate_scores": {
+        "authentication-d1e217f1": {
+          "chunk_id": "authentication-d1e217f1",
+          "is_relevant": 0.04,
+          "contains_answer_evidence": 0.03,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "subscription-policy-3c2f896c": {
+          "chunk_id": "subscription-policy-3c2f896c",
+          "is_relevant": 0.05,
+          "contains_answer_evidence": 0.04,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "webhooks-78dbc2d2": {
+          "chunk_id": "webhooks-78dbc2d2",
+          "is_relevant": 0.04,
+          "contains_answer_evidence": 0.03,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "authentication-e95c64bf": {
+          "chunk_id": "authentication-e95c64bf",
+          "is_relevant": 0.04,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "authentication-dec1be1c": {
+          "chunk_id": "authentication-dec1be1c",
+          "is_relevant": 0.08,
+          "contains_answer_evidence": 0.05,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": null,
+      "included": []
+    },
+    {
+      "id": "ds-043",
+      "category": "unanswerable",
+      "lang": "id",
+      "question": "Berapa target batas waktu resolusi tiket (SLA resolution time) dalam hitungan jam untuk tiket berprioritas urgent pada paket Enterprise?",
+      "expected_decision": "abstained",
+      "decision": "abstained",
+      "match": true,
+      "latency_s": 2.016,
+      "jev_calls": 12,
+      "scorer_calls": 0,
+      "retried": true,
+      "citations": null,
+      "hit@5": 1.0,
       "recall@5": 0.5,
       "groundedness": null,
       "correctness": null,
-      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut."
+      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut.",
+      "gate_scores": {
+        "api-endpoints-004": {
+          "chunk_id": "api-endpoints-004",
+          "is_relevant": 0.11,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "pricing-plans-table": {
+          "chunk_id": "pricing-plans-table",
+          "is_relevant": 0.51,
+          "contains_answer_evidence": 0.04,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "tickets-e438b465": {
+          "chunk_id": "tickets-e438b465",
+          "is_relevant": 0.07,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "ticket-management-b9c16f46": {
+          "chunk_id": "ticket-management-b9c16f46",
+          "is_relevant": 0.75,
+          "contains_answer_evidence": 0.07,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "api-errors-b5f7b384": {
+          "chunk_id": "api-errors-b5f7b384",
+          "is_relevant": 0.07,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "subscription-policy-4ee161e3": {
+          "chunk_id": "subscription-policy-4ee161e3",
+          "is_relevant": 0.49,
+          "contains_answer_evidence": 0.05,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "api-endpoints-003": {
+          "chunk_id": "api-endpoints-003",
+          "is_relevant": 0.09,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-8c451904": {
+          "chunk_id": "rate-limits-8c451904",
+          "is_relevant": 0.02,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "api-endpoints-001": {
+          "chunk_id": "api-endpoints-001",
+          "is_relevant": 0.09,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "api-errors-1c8f80c7": {
+          "chunk_id": "api-errors-1c8f80c7",
+          "is_relevant": 0.07,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": null,
+      "included": []
+    },
+    {
+      "id": "ds-044",
+      "category": "unanswerable",
+      "lang": "id",
+      "question": "Apakah pelanggan dapat membeli opsi instalasi FlowDesk secara on-premise di server lokal pribadi?",
+      "expected_decision": "escalated",
+      "decision": "abstained",
+      "match": false,
+      "latency_s": 1.35,
+      "jev_calls": 7,
+      "scorer_calls": 0,
+      "retried": false,
+      "citations": null,
+      "hit@5": null,
+      "recall@5": null,
+      "groundedness": null,
+      "correctness": null,
+      "answer": "Maaf, saya belum menemukan informasi yang cukup untuk menjawab pertanyaan tersebut.",
+      "gate_scores": {
+        "subscription-policy-3c2f896c": {
+          "chunk_id": "subscription-policy-3c2f896c",
+          "is_relevant": 0.1,
+          "contains_answer_evidence": 0.06,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "authentication-4b880327": {
+          "chunk_id": "authentication-4b880327",
+          "is_relevant": 0.04,
+          "contains_answer_evidence": 0.03,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "api-errors-c84d8e74": {
+          "chunk_id": "api-errors-c84d8e74",
+          "is_relevant": 0.07,
+          "contains_answer_evidence": 0.05,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "customers-bf923488": {
+          "chunk_id": "customers-bf923488",
+          "is_relevant": 0.05,
+          "contains_answer_evidence": 0.05,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "authentication-dec1be1c": {
+          "chunk_id": "authentication-dec1be1c",
+          "is_relevant": 0.05,
+          "contains_answer_evidence": 0.04,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": null,
+      "included": []
+    },
+    {
+      "id": "ds-045",
+      "category": "simple_factual",
+      "lang": "en",
+      "question": "What is the base URL for the FlowDesk REST API?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 5.326,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 2,
+        "distinct_valid": 2,
+        "invalid": 0,
+        "completeness": 0.4
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.86,
+      "correctness": "correct",
+      "answer": "The FlowDesk REST API base URL is `https://api.flowdesk.example/v1` [1][3].",
+      "gate_scores": {
+        "tickets-dfad93ce": {
+          "chunk_id": "tickets-dfad93ce",
+          "is_relevant": 0.83,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "authentication-d1e217f1": {
+          "chunk_id": "authentication-d1e217f1",
+          "is_relevant": 0.75,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "api-errors-20571732": {
+          "chunk_id": "api-errors-20571732",
+          "is_relevant": 0.81,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "customers-bf923488": {
+          "chunk_id": "customers-bf923488",
+          "is_relevant": 0.85,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "authentication-91def49f": {
+          "chunk_id": "authentication-91def49f",
+          "is_relevant": 0.87,
+          "contains_answer_evidence": 0.96,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.96,
+      "included": [
+        "tickets-dfad93ce",
+        "authentication-d1e217f1",
+        "api-errors-20571732",
+        "customers-bf923488",
+        "authentication-91def49f"
+      ]
+    },
+    {
+      "id": "ds-046",
+      "category": "simple_factual",
+      "lang": "id",
+      "question": "Berapa lama FlowDesk menyimpan data tiket dukungan pelanggan setelah akun ditutup?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 15.07,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 2,
+        "distinct_valid": 2,
+        "invalid": 0,
+        "completeness": 1.0
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.89,
+      "correctness": "correct",
+      "answer": "FlowDesk menyimpan data tiket dukungan pelanggan selama **12 bulan setelah akun ditutup (terminated)** [1][2].",
+      "gate_scores": {
+        "data-retention-556b74c0": {
+          "chunk_id": "data-retention-556b74c0",
+          "is_relevant": 0.88,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "customers-d47b9420": {
+          "chunk_id": "customers-d47b9420",
+          "is_relevant": 0.09,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "data-retention-639af35b": {
+          "chunk_id": "data-retention-639af35b",
+          "is_relevant": 0.83,
+          "contains_answer_evidence": 0.97,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "data-retention-cd77d256": {
+          "chunk_id": "data-retention-cd77d256",
+          "is_relevant": 0.55,
+          "contains_answer_evidence": 0.04,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "ticket-management-d7d7c4e7": {
+          "chunk_id": "ticket-management-d7d7c4e7",
+          "is_relevant": 0.09,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.93,
+      "included": [
+        "data-retention-556b74c0",
+        "data-retention-639af35b"
+      ]
+    },
+    {
+      "id": "ds-047",
+      "category": "multi_document",
+      "lang": "en",
+      "question": "If an API request exceeds the rate limit on the Pro tier, what HTTP status code and error code are returned, and what is the limit?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 52.343,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 3,
+        "distinct_valid": 3,
+        "invalid": 0,
+        "completeness": 0.75
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.91,
+      "correctness": "correct",
+      "answer": "- **HTTP status code:** `429 Too Many Requests`  \n- **Error code:** `rate_limit_exceeded` (also referenced as `RATE_LIMIT_EXCEEDED`)  \n- **Pro tier rate limit:** 60 requests per minute  \n\n[1][3][4]",
+      "gate_scores": {
+        "api-errors-f44defad": {
+          "chunk_id": "api-errors-f44defad",
+          "is_relevant": 0.78,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "error-codes-003": {
+          "chunk_id": "error-codes-003",
+          "is_relevant": 0.89,
+          "contains_answer_evidence": 0.97,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "api-errors-9a00cde1": {
+          "chunk_id": "api-errors-9a00cde1",
+          "is_relevant": 0.83,
+          "contains_answer_evidence": 0.97,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-ba4b10d2": {
+          "chunk_id": "rate-limits-ba4b10d2",
+          "is_relevant": 0.79,
+          "contains_answer_evidence": 0.28,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-8c451904": {
+          "chunk_id": "rate-limits-8c451904",
+          "is_relevant": 0.75,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.97,
+      "included": [
+        "api-errors-f44defad",
+        "error-codes-003",
+        "api-errors-9a00cde1",
+        "rate-limits-8c451904"
+      ]
+    },
+    {
+      "id": "ds-048",
+      "category": "multi_document",
+      "lang": "id",
+      "question": "Berapa jumlah maksimal agen di paket Pro dan apakah paket tersebut menyediakan fitur Single Sign-On (SSO)?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 11.789,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": null,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.96,
+      "correctness": "correct",
+      "answer": "Paket Pro mendukung **maksimal 20 agen** dan **tidak menyediakan fitur Single Sign-On (SSO)**. SSO hanya tersedia di paket Enterprise.",
+      "gate_scores": {
+        "subscription-policy-60d06a1f": {
+          "chunk_id": "subscription-policy-60d06a1f",
+          "is_relevant": 0.89,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "pricing-plans-table": {
+          "chunk_id": "pricing-plans-table",
+          "is_relevant": 0.89,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "security-policy-9097e16b": {
+          "chunk_id": "security-policy-9097e16b",
+          "is_relevant": 0.82,
+          "contains_answer_evidence": 0.24,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "subscription-policy-4ee161e3": {
+          "chunk_id": "subscription-policy-4ee161e3",
+          "is_relevant": 0.83,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "getting-started-0ea223a9": {
+          "chunk_id": "getting-started-0ea223a9",
+          "is_relevant": 0.84,
+          "contains_answer_evidence": 0.97,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.97,
+      "included": [
+        "subscription-policy-60d06a1f",
+        "pricing-plans-table",
+        "subscription-policy-4ee161e3",
+        "getting-started-0ea223a9"
+      ]
+    },
+    {
+      "id": "ds-049",
+      "category": "product_usage",
+      "lang": "id",
+      "question": "Bagaimana cara menutup (close) tiket di FlowDesk setelah masalah pelanggan selesai ditangani?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 22.942,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": null,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.37,
+      "correctness": "correct",
+      "answer": "Untuk menutup tiket di FlowDesk setelah masalah selesai:\n\n1. Buka tiket yang ingin ditutup\n2. Temukan kolom **Status**\n3. Pilih status **Closed** dari dropdown (opsi: Open, Pending, Resolved, Closed)\n4. Simpan tiket\n\nStatus \"Closed\" menandakan tiket telah selesai sepenuhnya dan tidak memerlukan tind",
+      "gate_scores": {
+        "ticket-management-d7d7c4e7": {
+          "chunk_id": "ticket-management-d7d7c4e7",
+          "is_relevant": 0.86,
+          "contains_answer_evidence": 0.42,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "tickets-250d16ae": {
+          "chunk_id": "tickets-250d16ae",
+          "is_relevant": 0.72,
+          "contains_answer_evidence": 0.35,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "getting-started-c26046d1": {
+          "chunk_id": "getting-started-c26046d1",
+          "is_relevant": 0.9,
+          "contains_answer_evidence": 0.95,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "customers-d47b9420": {
+          "chunk_id": "customers-d47b9420",
+          "is_relevant": 0.06,
+          "contains_answer_evidence": 0.03,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "ticket-management-27119cd3": {
+          "chunk_id": "ticket-management-27119cd3",
+          "is_relevant": 0.61,
+          "contains_answer_evidence": 0.51,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.88,
+      "included": [
+        "getting-started-c26046d1"
+      ]
+    },
+    {
+      "id": "ds-050",
+      "category": "policy",
+      "lang": "en",
+      "question": "Under what conditions can an Enterprise customer request a refund according to the FlowDesk refund policy?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 32.869,
+      "jev_calls": 12,
+      "scorer_calls": 1,
+      "retried": true,
+      "citations": {
+        "total": 13,
+        "distinct_valid": 5,
+        "invalid": 0,
+        "completeness": 1.0
+      },
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "groundedness": 0.89,
+      "correctness": "correct",
+      "answer": "Enterprise customers can request a refund under the same standard conditions as other plans, but their specific contractual terms may also apply:\n\n1. **Standard eligibility** (applies to all plans including Enterprise):\n   - Request made within **14 days of the initial subscription purchase** [4]\n  ",
+      "gate_scores": {
+        "refund-policy-02ad392a": {
+          "chunk_id": "refund-policy-02ad392a",
+          "is_relevant": 0.88,
+          "contains_answer_evidence": 0.35,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "subscription-policy-6ff01b26": {
+          "chunk_id": "subscription-policy-6ff01b26",
+          "is_relevant": 0.9,
+          "contains_answer_evidence": 0.82,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "refund-policy-3fad2195": {
+          "chunk_id": "refund-policy-3fad2195",
+          "is_relevant": 0.9,
+          "contains_answer_evidence": 0.8,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "refund-policy-c48e0acd": {
+          "chunk_id": "refund-policy-c48e0acd",
+          "is_relevant": 0.88,
+          "contains_answer_evidence": 0.39,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "refund-policy-e4c8e31e": {
+          "chunk_id": "refund-policy-e4c8e31e",
+          "is_relevant": 0.88,
+          "contains_answer_evidence": 0.85,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "refund-policy-6e8f0e64": {
+          "chunk_id": "refund-policy-6e8f0e64",
+          "is_relevant": 0.9,
+          "contains_answer_evidence": 0.79,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "refund-policy-4352a412": {
+          "chunk_id": "refund-policy-4352a412",
+          "is_relevant": 0.73,
+          "contains_answer_evidence": 0.4,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "refund-policy-20ab5fed": {
+          "chunk_id": "refund-policy-20ab5fed",
+          "is_relevant": 0.84,
+          "contains_answer_evidence": 0.78,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "refund-policy-52eb9264": {
+          "chunk_id": "refund-policy-52eb9264",
+          "is_relevant": 0.51,
+          "contains_answer_evidence": 0.05,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "data-retention-556b74c0": {
+          "chunk_id": "data-retention-556b74c0",
+          "is_relevant": 0.03,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.8,
+      "included": [
+        "subscription-policy-6ff01b26",
+        "refund-policy-3fad2195",
+        "refund-policy-e4c8e31e",
+        "refund-policy-6e8f0e64",
+        "refund-policy-20ab5fed"
+      ]
+    },
+    {
+      "id": "ds-051",
+      "category": "api",
+      "lang": "en",
+      "question": "What HTTP method and endpoint are used to create a new support ticket via the FlowDesk API?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 26.159,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 1,
+        "distinct_valid": 1,
+        "invalid": 0,
+        "completeness": 1.0
+      },
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "groundedness": 0.92,
+      "correctness": "correct",
+      "answer": "To create a new support ticket via the FlowDesk API, use the **POST** method with the **`/tickets`** endpoint [1].",
+      "gate_scores": {
+        "ticket-management-d7d7c4e7": {
+          "chunk_id": "ticket-management-d7d7c4e7",
+          "is_relevant": 0.39,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "tickets-79a7bc75": {
+          "chunk_id": "tickets-79a7bc75",
+          "is_relevant": 0.13,
+          "contains_answer_evidence": 0.03,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "tickets-358ce1ab": {
+          "chunk_id": "tickets-358ce1ab",
+          "is_relevant": 0.74,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "tickets-250d16ae": {
+          "chunk_id": "tickets-250d16ae",
+          "is_relevant": 0.64,
+          "contains_answer_evidence": 0.05,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "getting-started-756127bf": {
+          "chunk_id": "getting-started-756127bf",
+          "is_relevant": 0.15,
+          "contains_answer_evidence": 0.02,
+          "contains_prompt_injection": 0.04,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.97,
+      "included": [
+        "tickets-358ce1ab"
+      ]
+    },
+    {
+      "id": "ds-052",
+      "category": "structured_data",
+      "lang": "id",
+      "question": "Berapa batas kuota tiket bulanan pada paket Pro dan paket Enterprise berdasarkan data paket langganan FlowDesk?",
+      "expected_decision": "answered",
+      "decision": "answered",
+      "match": true,
+      "latency_s": 35.527,
+      "jev_calls": 6,
+      "scorer_calls": 1,
+      "retried": false,
+      "citations": {
+        "total": 3,
+        "distinct_valid": 2,
+        "invalid": 0,
+        "completeness": 0.6666666666666666
+      },
+      "hit@5": 0.0,
+      "recall@5": 0.0,
+      "groundedness": 0.97,
+      "correctness": "correct",
+      "answer": "Berdasarkan data paket langganan FlowDesk:\n\n- **Paket Pro**: 10.000 tiket per bulan [1]\n- **Paket Enterprise**: Unlimited (tanpa batas) [1][2]",
+      "gate_scores": {
+        "subscription-policy-3c2f896c": {
+          "chunk_id": "subscription-policy-3c2f896c",
+          "is_relevant": 0.87,
+          "contains_answer_evidence": 0.97,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "subscription-policy-4ee161e3": {
+          "chunk_id": "subscription-policy-4ee161e3",
+          "is_relevant": 0.9,
+          "contains_answer_evidence": 0.97,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "getting-started-fce1abb0": {
+          "chunk_id": "getting-started-fce1abb0",
+          "is_relevant": 0.86,
+          "contains_answer_evidence": 0.98,
+          "contains_prompt_injection": 0.02,
+          "ok": true,
+          "error": ""
+        },
+        "subscription-policy-be10dbce": {
+          "chunk_id": "subscription-policy-be10dbce",
+          "is_relevant": 0.55,
+          "contains_answer_evidence": 0.14,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        },
+        "rate-limits-3c2ad3aa": {
+          "chunk_id": "rate-limits-3c2ad3aa",
+          "is_relevant": 0.52,
+          "contains_answer_evidence": 0.51,
+          "contains_prompt_injection": 0.03,
+          "ok": true,
+          "error": ""
+        }
+      },
+      "completeness": 0.96,
+      "included": [
+        "subscription-policy-3c2f896c",
+        "subscription-policy-4ee161e3",
+        "getting-started-fce1abb0"
+      ]
     }
   ]
 }

@@ -49,4 +49,13 @@ class VectorStore:
             return [dict(zip(cols, row)) for row in cur.fetchall()]
 
 
+    def delete_by_document(self, document: str) -> int:
+        """Hapus semua chunk satu dokumen (re-ingest bersih, tanpa duplikat)."""
+        with self.conn.cursor() as cur:
+            cur.execute("DELETE FROM chunks WHERE document = %s", (document,))
+            n = cur.rowcount
+        self.conn.commit()
+        return n
+
+
 

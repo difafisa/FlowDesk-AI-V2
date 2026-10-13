@@ -11,7 +11,8 @@ from pathlib import Path
 
 CHUNK_SIZE = 700
 OVERLAP = 70
-
+TABLE_MERGE_TOKENS = 600    # tabel <= ini di-chunk jadi SATU tabel utuh (hulu-fix ds-030)
+ 
 
 @dataclass
 class Chunk:
@@ -300,22 +301,17 @@ def chunk_markdown(
             text = block["text"]
             tokens = _approx_tokens(text)
 
-            # H3 menjadi boundary chunk.
-            if block["type"] == "h3":
+            # Hulu-fix 2026-10-13 (debug-cases ds-049/ds-015): H3 bukan lagi
+            # boundary keras — sibling kecil di-merge selama total <= CHUNK_SIZE.
+            # Fragment H3 mungil (mis. "### Closed" 2 kalimat) membuat skor
+            # evidence per chunk rendah -> dibuang gate -> abstain padahal
+            # evidence ada. Boundary kini: UKURAN (atomic block tetap utuh).
+            if group_tokens + tokens > CHUNK_SIZE and group:
                 flush_group()
 
                 group = [block]
                 group_tokens = tokens
                 group_page = block.get("page")
-
-            # Jika melewati batas chunk, flush chunk sebelumnya.
-            elif group_tokens + tokens > CHUNK_SIZE and group:
-                flush_group()
-
-                group = [block]
-                group_tokens = tokens
-                group_page = block.get("page")
-
             else:
                 if group_page is None:
                     group_page = block.get("page")
@@ -422,22 +418,44 @@ def _emit(
 def chunk_structured(
     records: list[dict],
     source_name: str,
+    merge_small_table: bool = True,
 ) -> list[Chunk]:
-    """Satu record structured = satu chunk (PRD 2.2c)."""
+    """Tabel kecil = SATU chunk utuh (hulu-fix ds-030, 2026-10-13).
 
-    from flowdesk.normalization.structured_normalize import (
-        record_to_text,
-    )
+    Dulu: 1 record = 1 chunk (PRD 2.2c). Masalah: baris tunggal ~15 token
+    kalah bersaing di top-K embedding — baris "Advanced Analytics" tidak
+    pernah ter-retrieve walau dokumennya hit (miss tersembunyi di balik
+    hit@5 level dokumen). Tabel kecil (<= TABLE_MERGE_TOKENS) kini menjadi
+    satu chunk berisi seluruh baris + nama kolom. Tabel besar: per record.
+    """
+    from flowdesk.normalization.structured_normalize import record_to_text
+
+    stem = Path(source_name).stem
+
+    if merge_small_table and records:
+        texts = [record_to_text(r) for r in records]
+        if sum(_approx_tokens(t) for t in texts) <= TABLE_MERGE_TOKENS:
+            cols = list(records[0]["data"].keys())
+            lines = [f"[{r['record_id'].rsplit('-', 1)[-1]}] {t}"
+                     for r, t in zip(records, texts)]
+            content = (f"Table: {stem}\n"
+                       f"Columns: {'; '.join(cols)}\n" + "\n".join(lines))
+            return [Chunk(
+                chunk_id=f"{stem}-table",
+                document=source_name,
+                section="structured",
+                subsection="table",
+                page=None,
+                source_type="structured",
+                content=content,
+            )]
 
     return [
         Chunk(
             chunk_id=record["record_id"],
             document=source_name,
             section="structured",
-            subsection=record["data"].get(
-                "endpoint",
-                "",
-            ),
+            subsection=record["data"].get("endpoint", ""),
             page=None,
             source_type="structured",
             content=record_to_text(record),
