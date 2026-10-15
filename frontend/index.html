@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlowDesk — AI Support Assistant</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">FD</span>
+    <div>
+      <h1>FlowDesk Support</h1>
+      <p>AI assistant berbasis knowledge base — dengan citation &amp; keputusan evidence</p>
+    </div>
+  </div>
+  <label class="debug-toggle"
+         title="Tampilkan jejak node workflow (LangGraph + Jev) pada jawaban berikutnya">
+    <input type="checkbox" id="debug-toggle"> trace
+  </label>
+</header>
+
+<main id="chat" aria-live="polite">
+  <div class="msg assistant">
+    <div class="bubble">
+      <p>Halo! Tanya apa saja tentang FlowDesk — harga, API, troubleshooting,
+      kebijakan refund. Kalau informasinya tidak ada di knowledge base,
+      saya akan bilang jujur.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="composer">
+    <textarea id="input" rows="1" autofocus
+      placeholder="Tulis pertanyaan… (Enter kirim, Shift+Enter baris baru)"></textarea>
+    <button id="send" aria-label="Kirim pertanyaan">Kirim</button>
+  </div>
+  <p class="hint">Jawaban bisa memakan 10–40 detik: sistem menilai tiap evidence
+     dulu (Jev) sebelum memutuskan menjawab.</p>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
