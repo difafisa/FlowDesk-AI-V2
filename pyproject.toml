@@ -12,3 +12,6 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+markers = [
+    "integration: test yang butuh service eksternal (mis. PostgreSQL Docker) — dipakai mulai Tahap 7.3",
+]
