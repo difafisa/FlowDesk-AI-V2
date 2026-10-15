@@ -15,7 +15,7 @@ def load_records(path: Path) -> list[dict]:
             records = [{"data": row} for row in csv.DictReader(f)]
     for i, r in enumerate(records):
         r["record_id"] = f"{path.stem}-{i:03d}"
-        r["source"] = str(path.relative_to(path.parents[2]))
+        r["source"] = path.relative_to(path.parents[2]).as_posix()
     return records
 
 def record_to_text(record: dict) -> str:
