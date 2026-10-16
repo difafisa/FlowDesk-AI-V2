@@ -1,6 +1,6 @@
 /* Phase 7 (PRD) — Frontend chat: /ask, /feedback, badge status, sources, trace. */
 
-const API_TIMEOUT_MS = 120_000;  // P95 workflow ~38s; gelombang retry bisa lebih — beri margin
+const API_TIMEOUT_MS = 300_000; 
 
 /* --- session: satu tab = satu sesi di panel Sessions Langfuse --- */
 let sessionId = sessionStorage.getItem("flowdesk_session");
