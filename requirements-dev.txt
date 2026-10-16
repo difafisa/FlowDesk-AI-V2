@@ -1,0 +1,4 @@
+# Dev & test — dipasang di host: pip install -r requirements-dev.txt
+-r requirements.txt
+pytest==9.1.1
+psutil==7.2.2          # scripts/measure_ram.py (benchmark RAM saat eval)

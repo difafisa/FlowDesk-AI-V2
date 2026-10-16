@@ -1,6 +1,6 @@
 """Orkestrasi Phase 2: normalize -> chunk -> embed -> pgvector.
 Kontrak: field 'document' = path relatif dari data/raw (ekstensi asli)."""
-import sys, json
+import os, sys, json
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
@@ -18,6 +18,20 @@ PROCESSED = ROOT / "data" / "processed"
 
 def main():
     all_chunks = []
+
+    # 7.5: DSN via env — di jaringan compose host-nya `db`, bukan localhost.
+    dsn = os.getenv("FLOWDESK_PG_DSN",
+                    "postgresql://flowdesk:flowdesk@localhost:5432/flowdesk")
+    store = VectorStore(dsn)
+
+    # 7.5: guard — `docker compose up` berulang tidak re-embed semuanya.
+    # Paksa re-ingest (mis. KB berubah): INGEST_FORCE=1
+    if os.getenv("INGEST_FORCE") != "1":
+        with store.conn.cursor() as cur:
+            cur.execute("SELECT COUNT(*) FROM chunks")
+            if cur.fetchone()[0]:
+                print("index sudah terisi — skip (set INGEST_FORCE=1 untuk re-ingest)")
+                return
 
     # 1) PDF -> normalized md (cache di processed) -> chunks
     for pdf in sorted(RAW.glob("product/*.pdf")):
@@ -48,7 +62,6 @@ def main():
     # 5) embed + upsert
     embedder = Embedder()
     print(f"embedding dim: {embedder.dim}")
-    store = VectorStore("postgresql://flowdesk:flowdesk@localhost:5432/flowdesk")
     rows = [{"chunk_id": c.chunk_id, "document": c.document, "section": c.section,
              "subsection": c.subsection, "page": c.page, "source_type": c.source_type,
              "content": c.content, "embedding": v}

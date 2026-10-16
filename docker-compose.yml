@@ -1,3 +1,5 @@
+# FlowDesk v2 — Phase 7 (PRD): docker compose up = Frontend + Backend + PostgreSQL.
+
 services:
   db:
     image: pgvector/pgvector:pg16
@@ -5,7 +7,60 @@ services:
       POSTGRES_USER: flowdesk
       POSTGRES_PASSWORD: flowdesk
       POSTGRES_DB: flowdesk
-    ports: ["5432:5432"]
+    ports: ["5432:5432"]        # tetap terbuka utk dev dari host (scripts/ingest.py)
     volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U flowdesk -d flowdesk"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  ingest:
+    build: .
+    image: flowdesk-v2-api:latest
+    command: python scripts/ingest.py
+    environment:
+      FLOWDESK_PG_DSN: postgresql://flowdesk:flowdesk@db:5432/flowdesk
+    volumes:
+      - ./data:/app/data        # KB dari host; cache md tertulis ke data/processed
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"               # one-shot: Exited(0) = sukses
+
+  api:
+    build: .
+    image: flowdesk-v2-api:latest
+    env_file: .env              # LLM_API_KEY, TYPESAFE_API_KEY, LANGFUSE_*
+    environment:
+      FLOWDESK_PG_DSN: postgresql://flowdesk:flowdesk@db:5432/flowdesk
+      FEEDBACK_PG_DSN: postgresql://flowdesk:flowdesk@db:5432/flowdesk
+    ports: ["8000:8000"]        # akses langsung / docs (matikan server dev host dulu!)
+    depends_on:
+      db:
+        condition: service_healthy
+      ingest:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/docs', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 10          
+      start_period: 180s   
+    restart: unless-stopped
+
+  frontend:
+    image: nginx:1.27-alpine
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+      - ./frontend/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    ports: ["8080:80"]
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
 volumes:
   pgdata:
