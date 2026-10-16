@@ -20,30 +20,44 @@ DSN = os.getenv("FLOWDESK_PG_DSN",
 pytestmark = pytest.mark.integration
 
 
-def _db_ready() -> tuple[bool, str]:
-    try:
-        import psycopg
-        with psycopg.connect(DSN, connect_timeout=3) as conn:
-            with conn.cursor() as cur:
-                cur.execute("SELECT COUNT(*) FROM chunks")
-                n = cur.fetchone()[0]
-    except Exception as exc:
-        return False, (f"PostgreSQL tidak terjangkau ({type(exc).__name__}) — "
-                       "jalankan: docker compose up -d db")
-    if n == 0:
-        return False, "tabel chunks kosong — jalankan: python scripts/ingest.py"
-    return True, ""
+def _db_ready(retries: int = 3, wait_s: float = 2.0) -> tuple[bool, str]:
+    import time
+    for attempt in range(1, retries + 1):
+        try:
+            import psycopg
+            with psycopg.connect(DSN, connect_timeout=3) as conn:
+                with conn.cursor() as cur:
+                    cur.execute("SELECT COUNT(*) FROM chunks")
+                    n = cur.fetchone()[0]
+            if n == 0:
+                return False, "tabel chunks kosong — jalankan: python scripts/ingest.py"
+            return True, ""
+        except Exception as exc:
+            if attempt == retries:
+                return False, (f"PostgreSQL tidak terjangkau ({type(exc).__name__}) — "
+                               "jalankan: docker compose up -d db")
+            time.sleep(wait_s)
 
 
 @pytest.fixture(scope="module")
-def retriever():
+def embedder():
+    """Model e5-base dimuat SEKALI per modul (mahal)."""
     ok, why = _db_ready()
     if not ok:
         pytest.skip(why)
     from flowdesk.embedding.embedder import Embedder
+    return Embedder()
+
+
+@pytest.fixture()
+def retriever(embedder):
+    """Koneksi SEGAR per test — pelajaran insiden 2026-10-16: koneksi psycopg
+    yang dibunuh di tengah modul (DB crash/OOM) tidak boleh meruntuhkan
+    test berikutnya. Koneksi baru murah; model tetap di-share."""
     from flowdesk.retrieval.retriever import Retriever
     from flowdesk.storage.pgvector_store import VectorStore
-    return Retriever(VectorStore(DSN), Embedder())
+    return Retriever(VectorStore(DSN), embedder)
+
 
 
 def test_embedder_dim_matches_store(retriever):
