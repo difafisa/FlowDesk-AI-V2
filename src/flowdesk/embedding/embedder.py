@@ -1,8 +1,12 @@
-"""Multilingual embedding dengan BAAI/bge-m3 (1024 dim, dense).
-bge-m3 TIDAK butuh prefix 'query:'/'passage:' — jangan ditambahkan."""
+"""Multilingual embedding dengan intfloat/multilingual-e5-base (768 dim, dense).
+e5 WAJIB prefix 'query:'/'passage:' — keduanya sudah diterapkan di bawah.
+(BAAI/bge-m3, 1024d tanpa prefix, adalah kandidat alternatif Phase 2 yang
+kalah pada eval retrieval — dipertahankan sebagai catatan eksperimen.)"""
+
 from sentence_transformers import SentenceTransformer
 
-MODEL = "intfloat/multilingual-e5-base"          # alternatif baseline: intfloat/multilingual-e5-base (768d)
+MODEL = "intfloat/multilingual-e5-base"   # baseline terpilih Phase 2 (768d);
+                                          # alternatif teruji: BAAI/bge-m3 (1024d, tanpa prefix)
 
 class Embedder:
     def __init__(self, model_name: str = MODEL):
