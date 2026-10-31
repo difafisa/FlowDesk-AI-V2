@@ -32,6 +32,7 @@ def main():
             if cur.fetchone()[0]:
                 print("index sudah terisi — skip (set INGEST_FORCE=1 untuk re-ingest)")
                 return
+    store.conn.close()  
 
     # 1) PDF -> normalized md (cache di processed) -> chunks
     for pdf in sorted(RAW.glob("product/*.pdf")):
@@ -66,8 +67,8 @@ def main():
              "subsection": c.subsection, "page": c.page, "source_type": c.source_type,
              "content": c.content, "embedding": v}
             for c, v in zip(all_chunks, embedder.embed_passages([c.content for c in all_chunks]))]
-    # hulu-fix 2026-10-13: chunk_id berubah (merge H3 + tabel utuh) —
-    # hapus chunk lama per dokumen supaya index tidak dobel.
+    # Buka koneksi baru yang segar setelah proses embedding selesai
+    store = VectorStore(dsn)
     for doc in sorted({c.document for c in all_chunks}):
         n = store.delete_by_document(doc)
         if n:
