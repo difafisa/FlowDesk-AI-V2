@@ -73,7 +73,8 @@ function renderFeedback(runId) {
 function renderAnswer(d) {
   const badge = `<span class="badge ${esc(d.status)}">${esc(d.status)}</span>`;
   const body  = `<p>${withCitations(esc(d.answer || "(tidak ada jawaban)"))}</p>`;
-  return badge + body + renderSources(d.sources) + renderMeta(d)
+  const srcs  = d.status === "answered" ? renderSources(d.sources) : "";
+  return badge + body + srcs + renderMeta(d)
        + (d.trace ? renderTrace(d.trace) : "") + renderFeedback(d.run_id);
 }
 

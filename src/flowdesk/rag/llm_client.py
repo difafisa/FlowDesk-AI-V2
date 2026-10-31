@@ -15,9 +15,13 @@ from flowdesk.guardrails.config import MAX_OUTPUT_TOKENS
 
 class LLMClient:
     def __init__(self, api_key: str | None = None, base_url: str = "https://api.openai.com/v1",
-                 model: str = "gpt-4o-mini"):
-        self.model = model                       # ← TAMBAHKAN baris ini
-        self.client = OpenAI(api_key=api_key or os.environ["LLM_API_KEY"], base_url=base_url)
+                 model: str = "gpt-4o-mini", timeout: float = 45.0):
+        self.model = model
+        self.client = OpenAI(
+            api_key=api_key or os.environ["LLM_API_KEY"],
+            base_url=base_url,
+            timeout=timeout,
+        )
 
 
     def generate(self, system_prompt: str, user_prompt: str) -> str:

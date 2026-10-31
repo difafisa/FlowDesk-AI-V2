@@ -44,7 +44,8 @@ class FeedbackStore:
         else:
             import psycopg                   # import lokal: opsional saat test
             self.conn = psycopg.connect(dsn or os.getenv("FEEDBACK_PG_DSN",
-                                                         DEFAULT_DSN))
+                                                         DEFAULT_DSN),
+                                        autocommit=True)
             self._owns_conn = True
         self.conn.execute(DDL)
         if self._owns_conn:

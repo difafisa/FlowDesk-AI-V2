@@ -21,7 +21,7 @@ CREATE INDEX IF NOT EXISTS chunks_hnsw
 
 class VectorStore:
     def __init__(self, dsn: str):
-        self.conn = psycopg.connect(dsn)
+        self.conn = psycopg.connect(dsn, autocommit=True)
         self.conn.execute(DDL)
         register_vector(self.conn)
 
